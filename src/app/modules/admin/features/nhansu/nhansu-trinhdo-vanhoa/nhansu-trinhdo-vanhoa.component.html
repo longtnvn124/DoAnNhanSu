@@ -1,0 +1,66 @@
+<div class="p-card intro-y">
+  <div class="danh-sach-ho-so__head p-3 ">
+
+    <button pButton pRipple class="p-button-outlined" label="Thêm trình độ văn hoá " styleClass="p-button-link"
+      icon="pi pi-plus" (click)="btnAdd()"></button>
+
+  </div>
+  <div class="danh-sach-ho-so__body">
+    <p-table [value]="dataTrinhdoVanhoa">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">Trình độ văn hoá </th>
+          <th class="text-center" style="width: 10rem;">Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-NsTrinhdoVanhoa>
+        <tr>
+
+          <td class="text-center">{{NsTrinhdoVanhoa.ten_trinhdo_vanhoa}}</td>
+          <td class="text-center">
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+              (click)="btnEdit(NsTrinhdoVanhoa)">
+
+            </button>
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+              (click)="btnDelete(NsTrinhdoVanhoa)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
+<ng-template #nsFormEdit let-c="close">
+  <div class="model-header container mt-3">
+    <h4 class="modal-title">Sửa thông tin nhân sự</h4>
+
+  </div>
+  <div class="modal-body ovic-modal-body">
+    <form [formGroup]="formData">
+      <div class="card" style="padding: 20px;">
+        <div class=" row mb-2">
+
+          <div class="col">
+            <label class="txt-label" for="">Trình độ văn hoá:</label>
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="trinhdo"
+              formControlName="ten_trinhdo_vanhoa" [style]="{'minWidth':'50%'}">
+
+            </p-dropdown>
+          </div>
+
+        </div>
+        <br>
+        <div class="flex ">
+          <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
+            class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
+          <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
+            (click)="formCancel()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

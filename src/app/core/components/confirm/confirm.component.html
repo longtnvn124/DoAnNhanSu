@@ -1,0 +1,12 @@
+<div class="modal-header" *ngIf="head">
+    <h4 class="modal-title">{{head}}</h4>
+    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <div class="modal-body-content" [innerHTML]="body | appSafeHtml"></div>
+</div>
+<div class="modal-footer" *ngIf="buttons && buttons.length">
+    <ng-container *ngFor="let btn of buttons">
+        <button pButton pRipple type="button" [label]="'buttons.'+btn.name | translate " [class]="btn.class" [icon]="btn.icon" (click)="confirmAction(btn)"></button>
+    </ng-container>
+</div>

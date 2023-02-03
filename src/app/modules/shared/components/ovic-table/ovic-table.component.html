@@ -1,0 +1,169 @@
+<div class="content-section implementation ovic-table-component__content-section" (contextmenu)="disableContextMenu($event)">
+    <p-table #dt [value]="data" [dataKey]="dataKey" [styleClass]="tblClass" [rowHover]="rowHover" [rows]="rows" [showCurrentPageReport]="true" [paginator]="enablePaginator" [filterDelay]="0" [globalFilterFields]="globalFilterFields">
+        <ng-template pTemplate="caption" *ngIf="tableName || enableSearch ">
+            <h3 class="tbl-title" [class.addRow]="addRow" [innerHTML]="tableName | safeHtml"></h3>
+            <div class="search-block ui-table-globalfilter-container" [class.addRow]="addRow">
+                <input pInputText type="text" *ngIf="enableSearch && enableSearchLocal" (input)="dt.filterGlobal($event.target['value'], 'contains')" placeholder="Tìm kiếm thông tin"/>
+                <input pInputText type="text" class="input-search-locally" [ngClass]=" searchCircle ? 'ovic-input-rounded' : ''" *ngIf="enableSearch && !enableSearchLocal" (keydown)="search($event.target['value'])" placeholder="Tìm kiếm thông tin"/>
+                <button class="btn btn-success" *ngIf="addRow" (click)="addNewRowClick($event)">
+                    <i class="pi pi-fw pi-plus-circle"></i>{{addRowLabel}}
+                </button>
+                <ng-container *ngIf="headerButtons && headerButtons.length">
+                    <button *ngFor="let btn of headerButtons" pButton pRipple [pTooltip]="btn.tooltip||''" [tooltipPosition]="btn.tooltipPosition||'top'" type="button" [icon]="btn.icon" [class]="btn.class" [label]="btn.label" (click)="userClick(btn)"></button>
+                </ng-container>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center ovic-w-40px">#</th>
+                <ng-container *ngFor="let col of tblStructure">
+                    <th class="{{col.headClass}}" *ngIf="!col.sortable">{{col.header}}</th>
+                    <th class="{{col.headClass}}" *ngIf="col.sortable" pSortableColumn="{{col.field[0]}}">
+                        {{col.header}}
+                        <p-sortIcon field="{{col.field[0]}}"></p-sortIcon>
+                    </th>
+                </ng-container>
+                <!--expanded setting-->
+                <th *ngIf="rowExpanded" [ngClass]="expandedHeadCssClass" [innerHTML]="expandedHeadInner"></th>
+                <!--expanded setting-->
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data let-i="rowIndex" let-expanded="expanded">
+            <tr class="ui-selectable-row" [class.element-selected]="data[dataKey] === activeRow" (click)="rowClickHandle(data[dataKey])" (contextmenu)="openContextMenu($event, data )">
+                <td class="text-center">
+                    <span class="ui-column-title">{{i + index}}</span>
+                </td>
+                <ng-container *ngFor="let col of tblStructure">
+
+                    <!--field Normal-->
+                    <ng-container *ngIf="col.fieldType == 'normal'">
+
+                        <!--Case: multiple fields-->
+                        <td [class]="col.rowClass" *ngIf=" col.field.length > 1 ">
+                            <ng-container *ngFor="let line of col.field ">
+                                <span class="ui-column-title">{{ data[ line ] }}</span><br>
+                            </ng-container>
+                        </td>
+
+                        <!--Case: single field-->
+                        <td [class]="col.rowClass" *ngIf=" col.field.length == 1 ">
+                            <span class="ui-column-title" *ngIf="!col.innerData">{{data[ col.field[ 0 ] ]}}</span>
+                            <div class="ui-column-title" *ngIf="col.innerData" [innerHTML]="data[col.field[0]]"></div>
+                        </td>
+
+                    </ng-container>
+
+                    <!--Field Actions forced or no checker-->
+                    <ng-container *ngIf="col.fieldType == 'actions' && ( col.forced || ! data[col.checker] )">
+                        <td [class]="col.rowClass" class="ovic-btn-inrow" [class.row-locked]="data[col.checker]">
+                            <ng-container *ngFor="let btn of col.field ">
+                                <button class="btn ovic-btn-edit btn-primary" [class]="col.tooltip ? 'ovic-btn-tooltip ovic-tooltip__parent':''" (click)="editClick(data[dataKey])" *ngIf="btn=='edit'">
+                                    <span class="ov-tooltip ovic-tooltip__content ovic-tooltip__content--top" *ngIf="col.tooltip"><span>Sửa {{col.tooltip}}</span></span>
+                                    <i class="pi pi-wrench"></i>
+                                </button>
+                                <button class="btn ovic-btn-lock btn-secondary" [class]="col.tooltip ? 'ovic-btn-tooltip ovic-tooltip__parent':''" (click)="lockClick(data[dataKey])" *ngIf="btn=='lock'">
+                                    <span class="ov-tooltip ovic-tooltip__content ovic-tooltip__content--top" *ngIf="col.tooltip && ! data[col.checker]"><span>Khóa {{col.tooltip}}</span></span>
+                                    <span class="ov-tooltip ovic-tooltip__content ovic-tooltip__content--top" *ngIf="col.tooltip && data[col.checker] "><span>Mở khóa {{col.tooltip}}</span></span>
+                                    <i class="pi pi-lock-open" [class.pi-lock]="data[col.checker]"></i>
+                                </button>
+                                <button class="btn ovic-btn-delete btn-danger" [class]="col.tooltip ? 'ovic-btn-tooltip ovic-tooltip__parent':''" (click)="deleteClick(data[dataKey])" *ngIf="btn=='delete'">
+                                    <span class="ov-tooltip ovic-tooltip__content ovic-tooltip__content--top" *ngIf="col.tooltip"><span>Xóa {{col.tooltip}}</span></span>
+                                    <i class="pi pi-trash"></i>
+                                </button>
+                            </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <!--Field Actions no forced and checker-->
+                    <ng-container *ngIf="col.fieldType == 'actions' &&  ( ! col.forced && data[col.checker] ) ">
+                        <td [class]="col.rowClass" class="ovic-btn-inrow row-locked">
+                            <ng-container *ngFor="let btn of col.field ">
+                                <span class="btn ovic-btn-edit " [class.ovic-btn-tooltip]="col.tooltip" *ngIf="btn=='edit'" data-title="Sửa {{col.tooltip}}">
+                                    <span class="ov-tooltip" *ngIf="col.tooltip"><span>Sửa {{col.tooltip}}</span></span>
+                                    <i class="pi pi-wrench"></i>
+                                </span>
+                                <span class="btn ovic-btn-lock btn-secondary" [class.ovic-btn-tooltip]="col.tooltip" *ngIf="btn=='lock'" data-title="Khóa {{col.tooltip}}">
+                                    <span class="ov-tooltip" *ngIf="col.tooltip"><span>Khóa {{col.tooltip}}</span></span>
+                                    <i class="pi pi-lock" aria-hidden="true"></i>
+                                </span>
+                                <span class="btn ovic-btn-delete" [class.ovic-btn-tooltip]="col.tooltip" *ngIf="btn=='delete'" data-title="Xóa {{col.tooltip}}">
+                                    <span class="ov-tooltip" *ngIf="col.tooltip"><span>Xóa {{col.tooltip}}</span></span>
+                                    <i class="pi pi-trash"></i>
+                                </span>
+                            </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <!--Field media-->
+                    <ng-container *ngIf="col.fieldType == 'media'">
+                        <td [class]="col.rowClass">
+                            <img [src]="data[col.field[0]]" alt="user media" class="ov-img-avatar" *ngIf="data[col.field[0]]">
+                            <img src="../../../../../assets/images/a_none.jpg" alt="none avatar" class="ov-img-avatar" *ngIf="!data[col.field[0]] && col.placeholder">
+                        </td>
+                    </ng-container>
+
+                    <!--Field switch-->
+                    <ng-container *ngIf="col.fieldType == 'switch'">
+                        <td [class]="col.rowClass" class="ovic-switch">
+                            <button class="ovic-switch-btn" (click)="switchClick(data[dataKey])" [class.on]="data[col.field[0]]" [class.off]="!data[col.field[0]]">
+                                <span class="slider">{{data[ col.field[ 0 ] ]}}</span>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <!--Field convertLabel-->
+                    <ng-container *ngIf="col.fieldType == 'convertLabel'">
+                        <td [class]="col.rowClass" class="ovic-convert-label" *ngIf="col.labelConverter">
+                            <div class="ui-column-title" [innerHTML]="col.labelConverter[data[ col.field[ 0 ] ]] || col.labelConverter.default"></div>
+                        </td>
+                        <td [class]="col.rowClass" class="ovic-convert-label" *ngIf="!col.labelConverter && col.labelConverter2">
+                            <div class="ui-column-title" [innerHTML]="col.labelConverter2.getResult( data[ col.field[ 0 ] ] )"></div>
+                        </td>
+                    </ng-container>
+
+                    <!--Field buttons-->
+                    <ng-container *ngIf="col.fieldType == 'buttons' && col.buttons">
+                        <td [class]="col.rowClass" class="ovic-btn-inrow">
+                            <ng-container *ngFor="let btn of col.buttons">
+                                <button class="btn {{ btn.cssClass }}" [ngClass]="btn.tooltip ? 'ovic-btn-tooltip ovic-tooltip__parent':''" (click)="buttonClick(btn,data[dataKey])" *ngIf="(!btn['conditionField'] || (btn['conditionField'] && data[btn['conditionField']] ===  btn['conditionValue']))">
+                                    <span class="ov-tooltip ovic-tooltip__content ovic-tooltip__content--top" *ngIf="btn.tooltip"><span>{{btn.tooltip}}</span></span>
+                                    <i class="{{ btn.icon }}" *ngIf="btn.icon"></i><span *ngIf="btn.label">{{ btn.label }}</span>
+                                </button>
+                            </ng-container>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <!--expanded setting-->
+                <td *ngIf="rowExpanded" class="ovic-btn-inrow" [ngClass]="expandedColumnCssClass">
+                    <a href="#" [pRowToggler]="data" [class.ovic-btn-tooltip]="expandedTooltip">
+                        <span class="ov-tooltip" *ngIf="expandedTooltip"><span>{{expandedTooltip}}</span></span>
+                        <i [ngClass]="expanded ? expandedBtnIcons[0] : expandedBtnIcons[1]" *ngIf="expandedBtnIcons"></i>
+                    </a>
+                </td>
+                <!--expanded setting-->
+
+            </tr>
+        </ng-template>
+
+        <!--expansion template-->
+        <ng-template pTemplate="rowexpansion" let-data [ngIf]="rowExpanded">
+            <tr>
+                <td [attr.colspan]="rowLength" class="ovic-expanded-contain">
+                    <div class="tbl-inner-data" [innerHTML]="data[expandedDataField]"></div>
+                    <button class="{{expandedBtnInside.cssClass}}" *ngIf="expandedBtnInside" (click)="expandedBtnInsideHandle(data[dataKey])">
+                        <i class="{{expandedBtnInside.icon}}"></i>
+                        <span class="btn-inside-title">{{expandedBtnInside.title}}</span>
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+        <!--expansion template-->
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td [attr.colspan]="rowLength" style="text-align:left">{{ emptyMessage }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

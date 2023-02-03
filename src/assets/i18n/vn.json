@@ -1,0 +1,103 @@
+{
+  "route"                : {
+    "dashboard"                    : "Bảng điều khiển",
+    "he-thong"                     : "Hệ thống",
+    "he-thong/thong-tin-tai-khoan" : "Thông tin tài khoản",
+    "he-thong/quan-ly-tai-khoan"   : "Quản lý tài khoản",
+    "he-thong/thong-tin-he-thong"  : "Thông tin hệ thống",
+    "message"                      : "Tin nhắn",
+    "message/notifications"        : "Thông báo",
+    "message/chat"                 : "Trò chuyện"
+  },
+  "dashboard"            : {
+    "confirm_logout"      : "Xác nhận đăng xuất",
+    "confirm_logout_mess" : "Bạn có chắc chắn muốn đăng xuất không?"
+  },
+  "buttons"              : {
+    "yes"     : "Có",
+    "no"      : "Không",
+    "ok"      : "Đồng ý",
+    "cancel"  : "Hủy",
+    "close"   : "Đóng",
+    "save"    : "Lưu lại",
+    "confirm" : "Xác nhận"
+  },
+  "notificationService"  : {
+    "messCaution"       : "Cảnh báo",
+    "mesNotice"         : "Thông báo",
+    "messConfirmAction" : "Xác nhận hành động",
+    "mesOk"             : "Ok",
+    "mesYes"            : "Có",
+    "mesNo"             : "Không"
+  },
+  "thongTinTaiKhoan"     : {
+    "title"                                   : "Thông tin tài khoản",
+    "subtitle"                                : "Cập nhật thông tin tài khoản",
+    "errorAvatarType"                         : "Chỉ chấp nhận các file có định dạng .png, .jpg, .jpeg",
+    "errorAvatarSize"                         : "Kích thước tệp hình ảnh không được lớn hơn 15Mb",
+    "lblCreateStorageSpaceHead"               : "Khởi tạo không gian lưu trữ",
+    "lblCreateStorageSpaceMessage"            : "Vui lòng khởi tạo không gian lưu trữ của bạn",
+    "lblCreateStorageSpaceMessageBeforeUsing" : "Vui lòng khởi tạo không gian lưu trữ trước khi lưu trũ dữ liệu",
+    "lblCreateNow"                            : "Khởi tạo",
+    "lblRemindLate"                           : "Để sau",
+    "headCreateStoreFail"                     : "Lỗi",
+    "messageCreateStoreFail"                  : "Quá trình khởi tạo không gian lưu trữ thất bại",
+    "headCreateStoreSuccess"                  : "Thành công",
+    "messageCreateStoreSuccess"               : "Đã khởi tạo không gian lưu trữ thành công",
+    "messageUpdateAvatarSuccess"              : "Cập nhật avatar thành công",
+    "messageUpdateAvatarFail"                 : "Cập nhật avatar thất bại",
+    "headUpdateUserSuccess"                   : "Cập nhật thông tin thành công",
+    "headUpdateUserFail"                      : "Cập nhật thông tin thất bại"
+  },
+  "messageState"         : {
+    "error"       : "Lỗi",
+    "warning"     : "Cảnh báo",
+    "notice"      : "Thông báo",
+    "success"     : "Thành công",
+    "loadingFail" : "Tải dữ liệu thất bại"
+  },
+  "systems"              : {
+    "logout"           : "Đăng xuất",
+    "userInfo"         : "Thông tin tài khoản",
+    "userManagement"   : "Quản lý tài khoản",
+    "unauthorized"     : "Bạn chưa được phân quyền sử dụng trên phần mềm này, vui lòng liên hệ với quản trị viên để được giải đáp",
+    "logoutFail"       : "Đăng xuất thất bại, vui lòng thử lại",
+    "profile"          : "Hồ sơ",
+    "messages"         : "Tin nhắn",
+    "help"             : "Trợ giúp",
+    "lock"             : "Khóa tài khoản",
+    "notificationText" : "Thông báo",
+    "viewAll"          : "Xem tất cả",
+    "markAllAsRead"    : "Đã đọc tất cả",
+    "reload"           : "Tải lại"
+  },
+  "avatarMakerComponent" : {
+    "cancelActionHead"    : "Xác nhận hủy",
+    "cancelActionMessage" : "Bạn có chắc chắn muốn hủy hành động không",
+    "dismissAct"          : "Người đùng ngăn cấm sử dụng camera",
+    "rejectByUser"        : "Tiến trình bị hủy bởi người dùng",
+    "cameraNotAvailable"  : "Không tồn tại camera",
+    "result"              : "Thành công",
+    "original"            : "Ảnh gốc",
+    "destination"         : "Ảnh kết quả",
+    "btnCancel"           : "Hủy",
+    "btnTakePicture"      : "Chụp lại",
+    "btnChoosePicture"    : "Chọn lại",
+    "btnSave"             : "Lưu lại"
+  },
+  "serverResponseCode"   : {
+    "update_fail"    : "Cập nhật không thành công",
+    "create_fail"    : "Tạo mới không thành công",
+    "delete_fail"    : "Xóa không thành công",
+    "auth_fail"      : "Đăng nhập thất bại",
+    "user_not_found" : "Không tìm thấy người dùng",
+    "user_disable"   : "Người dùng đã bị vô hiệu hóa",
+    "user_not_exist" : "người dùng không tồn tại",
+    "wrong_password" : "Sai mật khẩu",
+    "system_error"   : "Lỗi hệ thống",
+    "not_exist"      : "Không tồn tại",
+    "not_found"      : "Không tìm thấy",
+    "forbidden"      : "Cấm truy cập",
+    "unauthorized"   : "Không được phép truy cập"
+  }
+}

@@ -1,0 +1,55 @@
+<div class="text-lg mb-2"> Chi tiết kế hoạch học tập bồi dưỡng</div>
+<div class="grid">
+  <div class="col container-left m-1">
+    <div class="card p-4" *ngFor="let data of data_danhSachQuyHoach">
+      <div class="text-2xl font-medium mb-3 border-bottom-1 ">{{data.ten_quyhoach}}</div>
+      <div class="text-lg font-medium">Quyết định số:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.ma_quyhoach}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Nội dung:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.noidung_quyhoach}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Nhiệm kỳ:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.nhiem_ky}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Đợt:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.dot}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Người ký:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.nguoi_ky}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">File:</div>
+      <div
+        class="border-netke m-auto text-lg flex align-items-center justify-content-center w-50 mb-2 "
+        *ngFor="let item of data.file_quyetdinh">
+        <!-- <div class="block">
+          <label class="txt-label align-items-center">{{item.title}}</label>
+        </div> -->
+        <div class="flex">
+          <label class="pt-2 btn-open" (click)="openFilre(item)">{{item.title}}</label>
+          <button pButton pRipple (click)="downloadFile(item)" type="button" icon="pi pi-download"
+            class="p-button-rounded p-button-primary p-button-text"></button>
+            <!-- <button pButton pRipple (click)="openFilre(item)" type="button" icon="pi pi-download"
+            class="p-button-rounded p-button-primary p-button-text"></button> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col container-right m-1" >
+    <div class="card p-4">
+      <div class="text-2xl font-medium mb-3 border-bottom-1 ">Danh sách đối tượng quy hoạch</div>
+      <app-doituong-quyhoach></app-doituong-quyhoach>
+    </div>
+  </div>
+</div>

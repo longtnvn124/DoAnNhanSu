@@ -1,0 +1,596 @@
+/************************************************************
+* NEW LAZY-LOAD
+************************************************************/
+body {
+	--ovic-loader-overlay_color: rgba(255, 255, 255, .5);
+	--ovic-loader-size: 48px;
+	--ovic-loader-color_1: #ffffff;
+	--ovic-loader-color_2: #FF3D00;
+	--ovic-loader-border_size: 3px;
+}
+
+.ovic-loader-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--ovic-loader-overlay_color);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+/************ loader_01 *******************************/
+.ovic-loader__spinner-bounce-circle-dots .spinner {
+	margin: 0 auto 0;
+	width: 50px;
+	text-align: center;
+	height: 20px;
+	border-radius: 100px;
+	background-color: #fff;
+	line-height: 20px;
+	border: 1px solid #efefef;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.ovic-loader__spinner-bounce-circle-dots .spinner > span {
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	display: inline-block;
+	-webkit-animation: sk-bounce-delay 1.4s infinite ease-in-out both;
+	animation: sk-bounce-delay 1.4s infinite ease-in-out both;
+}
+
+.ovic-loader__spinner-bounce-circle-dots .spinner > .bounce-one {
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+	background-color: #333;
+}
+
+.ovic-loader__spinner-bounce-circle-dots .spinner > .bounce-two {
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+	background-color: #333;
+	opacity: 0.702;
+}
+
+.ovic-loader__spinner-bounce-circle-dots .spinner > .bounce-three {
+	-webkit-animation-delay: -0.12s;
+	animation-delay: -0.12s;
+	background-color: #333;
+	opacity: 0.4;
+}
+
+/************ loader_02 *******************************/
+.ovic-loader--layout-02 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-bottom-color: var(--ovic-loader-color_2);
+	border-radius: 50%;
+	display: inline-block;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+/************ loader_03 *******************************/
+.ovic-loader--layout-03 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-03::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(var(--ovic-loader-size) - 8px);
+	height: calc(var(--ovic-loader-size) - 8px);
+	border-radius: 50%;
+	border: var(--ovic-loader-border_size) solid transparent;
+	border-bottom-color: var(--ovic-loader-color_2);
+}
+
+/************ loader_04 *******************************/
+.ovic-loader--layout-04 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid #FFF;
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-04::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(var(--ovic-loader-size) + 8px);
+	height: calc(var(--ovic-loader-size) + 8px);
+	border-radius: 50%;
+	border: var(--ovic-loader-border_size) solid transparent;
+	border-bottom-color: #FF3D00;
+}
+
+/************ loader_05 *******************************/
+.ovic-loader--layout-05 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid #FFF;
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-05:after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(var(--ovic-loader-size) - 8px);
+	height: calc(var(--ovic-loader-size) - 8px);
+	border-radius: 50%;
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-color: var(--ovic-loader-color_2) transparent;
+}
+
+/************ loader_06 *******************************/
+.ovic-loader--layout-06 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid #FFF;
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-06::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(var(--ovic-loader-size) + 8px);
+	height: calc(var(--ovic-loader-size) + 8px);
+	border-radius: 50%;
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-color: var(--ovic-loader-color_2) transparent;
+}
+
+/******************* loader_07 *******************/
+.ovic-loader--layout-07 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-07::after,
+.ovic-loader--layout-07::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: var(--ovic-loader-color_2);
+	width: 6px;
+	height: 6px;
+	transform: translate(150%, 150%);
+	border-radius: 50%;
+}
+
+.ovic-loader--layout-07::before {
+	left: auto;
+	top: auto;
+	right: 0;
+	bottom: 0;
+	transform: translate(-150%, -150%);
+}
+
+/******************* loader_08 *******************/
+.ovic-loader--layout-08 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-08::after,
+.ovic-loader--layout-08::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: var(--ovic-loader-color_2);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+}
+
+.ovic-loader--layout-08::before {
+	left: auto;
+	top: auto;
+	right: 0;
+	bottom: 0;
+}
+
+/******************* loader_09 *******************/
+.ovic-loader--layout-09 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-09::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: var(--ovic-loader-color_2);
+	width: 16px;
+	height: 16px;
+	transform: translate(-50%, 50%);
+	border-radius: 50%;
+}
+
+/******************* loader_10 *******************/
+.ovic-loader--layout-10 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	border: var(--ovic-loader-border_size) solid;
+	border-color: var(--ovic-loader-color_1) var(--ovic-loader-color_1) transparent transparent;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-10::after,
+.ovic-loader--layout-10::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	border: var(--ovic-loader-border_size) solid;
+	border-color: transparent transparent var(--ovic-loader-color_2) var(--ovic-loader-color_2);
+	width: calc(var(--ovic-loader-size) - 8px);
+	height: calc(var(--ovic-loader-size) - 8px);
+	border-radius: 50%;
+	-webkit-animation: rotationBack 0.5s linear infinite;
+	animation: rotationBack 0.5s linear infinite;
+	transform-origin: center center;
+}
+
+.ovic-loader--layout-10::before {
+	width: calc(var(--ovic-loader-size) - 16px);
+	height: calc(var(--ovic-loader-size) - 16px);
+	border-color: #FFF #FFF transparent transparent;
+	-webkit-animation: rotation 1.5s linear infinite;
+	animation: rotation 1.5s linear infinite;
+}
+
+/******************* loader_11 *******************/
+.ovic-loader--layout-11 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) dotted var(--ovic-loader-color_1);
+	border-top-style: solid;
+	border-left-style: solid;
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 2s linear infinite;
+	animation: rotation 2s linear infinite;
+}
+
+.ovic-loader--layout-11::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_2);
+	border-bottom-style: dotted;
+	width: calc(var(--ovic-loader-size) / 2);
+	height: calc(var(--ovic-loader-size) / 2);
+	border-radius: 50%;
+	-webkit-animation: rotationBack 1s linear infinite;
+	animation: rotationBack 1s linear infinite;
+	transform-origin: center center;
+}
+
+/******************* loader_12 *******************/
+.ovic-loader--layout-12 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) dotted var(--ovic-loader-color_1);
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 2s linear infinite;
+	animation: rotation 2s linear infinite;
+}
+
+/******************* loader_13 *******************/
+.ovic-loader--layout-13 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid;
+	border-color: var(--ovic-loader-color_1) transparent;
+	border-radius: 50%;
+	display: inline-block;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+/******************* loader_14 *******************/
+.ovic-loader--layout-14 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border: var(--ovic-loader-border_size) solid var(--ovic-loader-color_1);
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+}
+
+.ovic-loader--layout-14::after {
+	content: "";
+	position: absolute;
+	left: 49%;
+	top: 74%;
+	border: 10px solid transparent;
+	border-right-color: var(--ovic-loader-color_1);
+	transform: rotate(-40deg);
+}
+
+/******************* loader_15 *******************/
+.ovic-loader--layout-15 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	display: inline-block;
+	position: relative;
+}
+
+.ovic-loader--layout-15::after,
+.ovic-loader--layout-15::before {
+	content: "";
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border-radius: 50%;
+	background: var(--ovic-loader-color_1);
+	position: absolute;
+	left: 0;
+	top: 0;
+	-webkit-animation: animation_loader15 2s linear infinite;
+	animation: animation_loader15 2s linear infinite;
+}
+
+.ovic-loader--layout-15::after {
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+}
+
+/******************* loader_16 *******************/
+.ovic-loader--layout-16 {
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	display: inline-block;
+	position: relative;
+}
+
+.ovic-loader--layout-16::after,
+.ovic-loader--layout-16::before {
+	content: "";
+	width: var(--ovic-loader-size);
+	height: var(--ovic-loader-size);
+	border-radius: 50%;
+	background: var(--ovic-loader-color_1);
+	position: absolute;
+	left: 0;
+	top: 0;
+	-webkit-animation: animation_loader16 2s ease-in-out infinite;
+	animation: animation_loader16 2s ease-in-out infinite;
+}
+
+.ovic-loader--layout-16::after {
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+}
+
+/******************* loader_17 *******************/
+.ovic-loader--layout-17 {
+	width: 8px;
+	height: 40px;
+	border-radius: 999px;
+	display: inline-block;
+	position: relative;
+	background: currentColor;
+	color: var(--ovic-loader-color_1);
+	-webkit-animation: animation_loader17 0.3s 0.3s linear infinite alternate;
+	animation: animation_loader17 0.3s 0.3s linear infinite alternate;
+}
+
+.ovic-loader--layout-17::after,
+.ovic-loader--layout-17::before {
+	content: "";
+	width: 8px;
+	height: 40px;
+	border-radius: 999px;
+	background: currentColor;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 20px;
+	-webkit-animation: animation_loader17 0.3s 0.45s linear infinite alternate;
+	animation: animation_loader17 0.3s 0.45s linear infinite alternate;
+}
+
+.ovic-loader--layout-17::before {
+	left: -20px;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+}
+
+/*************************************************
+ * Key Frames
+ ************************************************/
+@-webkit-keyframes sk-bounce-delay {
+	0%, 80%, 100% {
+		transform: scale(0)
+	}
+	40% {
+		transform: scale(1.0)
+	}
+}
+
+@keyframes sk-bounce-delay {
+	0%, 80%, 100% {
+		transform: scale(0);
+	}
+	40% {
+		transform: scale(1.0);
+	}
+}
+
+@-webkit-keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes rotationBack {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+	}
+}
+
+@keyframes rotationBack {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+	}
+}
+
+@-webkit-keyframes animation_loader15 {
+	0% {
+		transform: scale(0);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+@keyframes animation_loader15 {
+	0% {
+		transform: scale(0);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes animation_loader16 {
+	0%, 100% {
+		transform: scale(0);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+@keyframes animation_loader16 {
+	0%, 100% {
+		transform: scale(0);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes animation_loader17 {
+	0% {
+		height: 48px;
+	}
+	100% {
+		height: 4.8px;
+	}
+}
+
+@keyframes animation_loader17 {
+	0% {
+		height: 48px;
+	}
+	100% {
+		height: 4.8px;
+	}
+}

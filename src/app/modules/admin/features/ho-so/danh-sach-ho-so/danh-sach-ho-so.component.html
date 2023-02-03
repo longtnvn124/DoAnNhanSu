@@ -1,0 +1,26 @@
+<div class="danh-sach-ho-so__head">
+    <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"/>
+</div>
+<div class="danh-sach-ho-so__body">
+    <p-table [value]="data">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Tên</th>
+                <th>Loại Khen</th>
+                <th>Ngày Duyệt</th>
+                <th>Thao Tác</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-hoSo>
+            <tr>
+                <td>{{hoSo.ten}}</td>
+                <td>{{hoSo.loai_khen}}</td>
+                <td>{{hoSo.ngay_duyet}}</td>
+                <td>
+                    <button (click)="editHoSo(hoSo)" pButton pRipple class="p-button-primary p-button-text p-button-icon-only" icon="pi pi-file-edit"></button>
+                    <button (click)="deleteHoSo(hoSo)" pButton pRipple class="p-button-danger p-button-text p-button-icon-only" icon="pi pi-trash"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

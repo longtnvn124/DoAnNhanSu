@@ -1,0 +1,79 @@
+.tttk-ui-block--submit {
+	/*padding: 5px 30px 20px;*/
+	border-top: 1px solid #ced4da;
+}
+.tttk-ui-block--avatar {
+	padding: 5px 30px 20px;
+	/*border-bottom: 1px solid #ced4da;*/
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tttk-ui-block--avatar .btn {
+	font-size: 0;
+	line-height: 0;
+	display: inline-block;
+	margin: 0;
+	outline: none !important;
+	box-shadow: none !important;
+	border: 1px solid #ced4da;
+	padding: 2px;
+	border-radius: 999px;
+	overflow: hidden;
+	position: relative;
+}
+
+.tttk-ui-block--avatar .btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, .3);
+	display: none;
+}
+
+.tttk-ui-block--avatar .btn::after {
+	content: "\f030";
+	position: absolute;
+	top: calc(50% - 9px);
+	right: calc(50% - 9px);
+	width: 18px;
+	height: 18px;
+	z-index: 2;
+	font: normal normal normal 14px/1 FontAwesome;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 18px;
+	color: #ffffff;
+	text-align: center;
+	display: none;
+}
+
+.tttk-ui-block--avatar .btn:hover::before,
+.tttk-ui-block--avatar .btn:hover::after {
+	display: block;
+}
+
+.tttk-ui-block--avatar .btn img {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	border-radius: 999px;
+}
+
+.tttk-filed-title {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.ovic-section-ui .p-inputtext {
+	min-height: 42px;
+	font-size: 15px;
+}

@@ -1,0 +1,28 @@
+.confirm-rounded-block__head {
+	display: block;
+	text-align: center;
+	margin-bottom: 15px;
+	font-size: 20px;
+	font-weight: 700;
+	padding-top: 10px;
+}
+
+.confirm-rounded-block__mess {
+	display: block;
+}
+
+.confirm-rounded-block__wrap-buttons {
+	display: block;
+	text-align: center;
+	margin-top: 30px;
+	padding-bottom: 10px;
+}
+
+.confirm-rounded-block__wrap-buttons button + button {
+	margin-left: 15px;
+}
+
+.--body-box-shadow {
+	/*box-shadow: 0 0 7px 2px #cfcfcf;*/
+	border-radius: 5px;
+}

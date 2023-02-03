@@ -1,0 +1,88 @@
+<div class="p-card intro-x">
+  <div class="danh-sach-ho-so__head p-3 ">
+    <!-- <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
+      class="p-inputtext p-component p-element" /> -->
+    <button pButton pRipple class="p-button-outlined" label="Thêm danh hiệu thi đua" styleClass="p-button-link"
+      icon="pi pi-plus" (click)="addDanhHieu()"></button>
+
+  </div>
+  <div class="danh-sach-ho-so__body">
+    <p-table [value]="nsDanhhieuThidua">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center" style="margin-bottom: 100px;">Danh hiệu thi Đua</th>
+          <th class="text-center">Ký hiệu</th>
+          <th class="text-center">Cấp</th>
+          <th class="text-center">Thời gian</th>
+          <th class="text-center">Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-nsDanhhieuThidua>
+        <tr>
+          <td class="text-left" style="padding-left: 40px;">{{nsDanhhieuThidua.ten_danhhieu}}</td>
+          <td class="text-center">{{nsDanhhieuThidua.ki_hieu}}</td>
+          <td class="text-center">{{nsDanhhieuThidua.cap}}</td>
+          <td class="text-center">{{nsDanhhieuThidua.thoigian | date:"dd/MM/yyyy"}}</td>
+          <td class="text-center">
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+              (click)="editDanhHieu(nsDanhhieuThidua)">
+
+            </button>
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+              (click)="deleteDanhhieu(nsDanhhieuThidua)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
+<ng-template #nsFormEdit let-c="close">
+  <div class="model-header container mt-3">
+    <h4 class="modal-title">{{formState.formTitle}}</h4>
+
+  </div>
+  <div class="modal-body ovic-modal-body">
+    <form [formGroup]="formData">
+      <div class="card" style="padding: 20px;">
+        <div class=" row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Danh hiệu thi đua:</label>
+            <input type="text" pinputtext="" placeholder="Danh hiệu thi đua"
+              class="p-inputtext p-component p-element w-full" formControlName="ten_danhhieu">
+          </div>
+
+        </div>
+        <div class=" row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Kí hiệu:</label>
+            <input type="text" pinputtext="" placeholder="Kí hiệu" class="p-inputtext p-component p-element w-full"
+              formControlName="ki_hieu">
+          </div>
+          <div class="col">
+            <label class="txt-label" for="">Cấp:</label>
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="cap" formControlName="cap"
+              placeholder="Chọn..." [style]="{'minWidth':'100%'}">
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Thời gian:</label>
+            <input type="date" [style]="{'minWidth':'100%'}" pInputText formControlName="thoigian">
+          </div>
+        </div>
+        <br>
+        <div class="flex ">
+          <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
+            class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
+          <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
+            (click)="btnCancel()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

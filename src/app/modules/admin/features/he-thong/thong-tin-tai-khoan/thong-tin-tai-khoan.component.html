@@ -1,0 +1,70 @@
+<div class="ovic-section-ui">
+    <div class="ovic-form-ui">
+        <div class="ovic-form-ui__head ovic-form-ui__head--border-bottom">
+            <div class="ovic-form-ui__head__left">
+                <h4 class="ovic-form-ui__head__title">{{ translations.title }}</h4>
+                <p class="ovic-form-ui__head__sub-title">{{translations.subtitle}}</p>
+            </div>
+        </div>
+        <div class="tttk-ui-block tttk-ui-block--avatar">
+            <button type="button" class="btn" (click)="changeAvatar()">
+                <img src="assets/images/a_none.jpg" alt="{{ user.display_name }}">
+            </button>
+        </div>
+        <div class="tttk-ui-block">
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-12 col-md-4 col-sm-6 mb-4">
+                        <h5 class="tttk-filed-title">Display name</h5>
+                        <div class="ovic-form-row">
+                            <div class="p-inputgroup">
+                                <input type="text" pInputText placeholder="User name" formControlName="display_name">
+                            </div>
+                            <span *ngIf="f['display_name'].touched && f['display_name'].invalid" class="ovic-form-row__notices ovic-form-row__notices--top-right ovic-notices--error">Tên hiển thị phải có ít nhất 3 kí tự</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-sm-6 mb-4">
+                        <h5 class="tttk-filed-title">User name</h5>
+                        <div class="p-inputgroup ovic-form-row">
+                            <input type="text" pInputText placeholder="User name" formControlName="username">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-sm-6 mb-4">
+                        <h5 class="tttk-filed-title">Password</h5>
+                        <div class="ovic-form-row">
+                            <div class="p-inputgroup">
+                                <input type="text" pInputText placeholder="Nhập mật khẩu mới " formControlName="password" [disabled]>
+                                <span class="p-inputgroup-addon"><button pRipple pButton type="button" icon="pi pi-check" [class]="[ isUpdatePassword ? 'p-button-primary' : 'p-button-white']" (click)="changeUpdatePasswordMode()"></button></span>
+                            </div>
+                            <span *ngIf="f['password'].touched && f['password'].invalid" class="ovic-form-row__notices ovic-form-row__notices--bottom-right ovic-notices--error">Mật khẩu phải có ít nhất 8 kí tự. Phải bao gồm ít nhất 1 ký tự in hoa, 1 ký tự in thường, 1 ký tự đặc biệt và 1 ký tự số</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-sm-6 mb-4">
+                        <h5 class="tttk-filed-title">Email</h5>
+                        <div class="ovic-form-row ovic-form-row--icon-right">
+                            <div class="p-inputgroup">
+                                <input type="text" pInputText placeholder="Email" formControlName="email">
+                            </div>
+                            <span *ngIf="emailControl.alreadyExist" class="ovic-form-row__notices ovic-form-row__notices--top-right ovic-notices--error">Email đã tồn tại</span>
+                            <span class="ovic-form-row__icon" *ngIf="emailControl.checking"><i class="pi pi-spin pi-spinner"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-sm-6 mb-4">
+                        <h5 class="tttk-filed-title">Phone</h5>
+                        <div class="ovic-form-row ovic-form-row--icon-right">
+                            <div class="p-inputgroup">
+                                <input type="text" pInputText placeholder="Phone" formControlName="phone">
+                            </div>
+                            <span *ngIf="phoneControl.alreadyExist" class="ovic-form-row__notices ovic-form-row__notices--top-right ovic-notices--error">Số điện thoại đã tồn tại</span>
+                            <span class="ovic-form-row__icon" *ngIf="phoneControl.checking"><i class="pi pi-spin pi-spinner"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tttk-ui-block ovic-form-ui__foot ovic-form-ui__foot--border ovic-form-ui__foot--align-right pb-0 mt-3 pt-4">
+            <button pRipple pButton type="button" [label]="buttons.refresh.label" [icon]="buttons.refresh.icon" [class]="buttons.refresh.class" (click)="btnRefreshClick()"></button>
+            <button pRipple pButton type="button" [label]="buttons.submit.label" [icon]="buttons.submit.icon" [class]="buttons.submit.class" (click)="btnSubmitClick()"></button>
+        </div>
+    </div>
+</div>

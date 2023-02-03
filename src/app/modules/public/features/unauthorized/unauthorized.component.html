@@ -1,0 +1,4 @@
+<div class="unauthorized__wrap">
+    <p class="unauthorized__messages">{{unauthorized}}</p>
+    <button *ngIf="showLogoutButton" pRipple pButton type="button" [label]="textButtonLogout" icon="pi pi-sign-out" class="p-button p-button-primary mt-3" (click)="logout()"></button>
+</div>

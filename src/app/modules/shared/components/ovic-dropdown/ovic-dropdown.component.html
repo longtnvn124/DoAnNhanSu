@@ -1,0 +1,21 @@
+<p-dropdown
+        *ngIf="!freeze"
+        [options]="options"
+        optionLabel="{{optionLabel}}"
+        (onChange)="onChangeHandle($event)"
+        placeholder="{{placeholder}}"
+        [showClear]="showClear"
+        [filter]="filter"
+        [filterBy]="filterBy"
+        [filterPlaceholder]="filterPlaceholder"
+        [filterMatchMode]="filterMatchMode"
+        styleClass="{{wrapClass}}"
+        emptyFilterMessage="{{emptyFilterMessage}}"
+        panelStyleClass="ovic-input-line-dropdown-panel"
+        [(ngModel)]="value"
+></p-dropdown>
+
+<p class="ovic-answer__selector" *ngIf="freeze">
+    <span *ngIf="value && optionLabel">{{value[optionLabel]}}</span>
+    <span *ngIf="!value">No answer</span>
+</p>

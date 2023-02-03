@@ -1,0 +1,11 @@
+.modal-header {
+	align-items: center;
+}
+
+.modal-footer > button {
+	border-radius: 0;
+}
+
+.modal-footer > button + button {
+	margin-left: 15px;
+}

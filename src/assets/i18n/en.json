@@ -1,0 +1,103 @@
+{
+  "route"                : {
+    "dashboard"                    : "Dashboard",
+    "he-thong"                     : "System",
+    "he-thong/thong-tin-tai-khoan" : "My account",
+    "he-thong/quan-ly-tai-khoan"   : "User management",
+    "he-thong/thong-tin-he-thong"  : "System information",
+    "message"                      : "Message",
+    "message/notifications"        : "Notifications",
+    "message/chat"                 : "Chat"
+  },
+  "dashboard"            : {
+    "confirm_logout"      : "Sign out confirmation",
+    "confirm_logout_mess" : "Please confirm you want to log out now?"
+  },
+  "buttons"              : {
+    "yes"     : "Yes",
+    "no"      : "No",
+    "ok"      : "Ok",
+    "cancel"  : "Cancel",
+    "close"   : "Close",
+    "save"    : "Save",
+    "confirm" : "Confirm"
+  },
+  "notificationService"  : {
+    "messCaution"       : "Caution!",
+    "mesNotice"         : "Notice",
+    "messConfirmAction" : "Action Confirmation",
+    "mesOk"             : "Ok",
+    "mesYes"            : "Yes",
+    "mesNo"             : "No"
+  },
+  "thongTinTaiKhoan"     : {
+    "title"                                   : "Account",
+    "subtitle"                                : "Update account info",
+    "errorAvatarType"                         : "Only accept files in .png, .jpg, .jpeg",
+    "errorAvatarSize"                         : "Image file size should not be larger than 15Mb",
+    "lblCreateStorageSpaceHead"               : "Create storage space",
+    "lblCreateStorageSpaceMessage"            : "Please create your storage space",
+    "lblCreateStorageSpaceMessageBeforeUsing" : "Please create your storage space before using",
+    "lblCreateNow"                            : "Create now",
+    "lblRemindLate"                           : "Remind me later",
+    "headCreateStoreFail"                     : "Error",
+    "messageCreateStoreFail"                  : "Creation of storage space failed",
+    "headCreateStoreSuccess"                  : "Success",
+    "messageCreateStoreSuccess"               : "Created storage space successfully",
+    "messageUpdateAvatarSuccess"              : "Update avatar successfully",
+    "messageUpdateAvatarFail"                 : "Update avatar failed",
+    "headUpdateUserSuccess"                   : "Update successful",
+    "headUpdateUserFail"                      : "Update failed"
+  },
+  "messageState"         : {
+    "error"       : "Error",
+    "warning"     : "Warning",
+    "notice"      : "Notice",
+    "success"     : "Success",
+    "loadingFail" : "Loading fail"
+  },
+  "systems"              : {
+    "logout"           : "Logout",
+    "userInfo"         : "My account",
+    "userManagement"   : "User management",
+    "unauthorized"     : "You are not authorized to use this software, please contact the administrator for answers",
+    "logoutFail"       : "Logout failed, please try again",
+    "profile"          : "Profile",
+    "messages"         : "messages",
+    "help"             : "help",
+    "lock"             : "lock",
+    "notificationText" : "Notification",
+    "viewAll"          : "View all",
+    "markAllAsRead"    : "Mark all as read",
+    "reload"           : "Reload"
+  },
+  "avatarMakerComponent" : {
+    "cancelActionHead"    : "Confirm cancellation action",
+    "cancelActionMessage" : "Are you sure you want to cancel",
+    "dismissAct"          : "User does block camera",
+    "rejectByUser"        : "The progress was canceled by user",
+    "cameraNotAvailable"  : "Requested device not found",
+    "result"              : "Successful",
+    "original"            : "the original image",
+    "destination"         : "destination image",
+    "btnCancel"           : "Cancel",
+    "btnTakePicture"      : "Take pictures again",
+    "btnChoosePicture"    : "Reselect image",
+    "btnSave"             : "Save"
+  },
+  "serverResponseCode"   : {
+    "update_fail"    : "Update failed",
+    "create_fail"    : "Create failed",
+    "delete_fail"    : "Delete failed",
+    "auth_fail"      : "Login failed",
+    "user_not_found" : "User not found",
+    "user_disable"   : "User has been disabled",
+    "user_not_exist" : "User does not exist",
+    "wrong_password" : "Wrong password",
+    "system_error"   : "System error",
+    "not_exist"      : "Does not exist",
+    "not_found"      : "Not found",
+    "forbidden"      : "Forbidden",
+    "unauthorized"   : "Unauthorized"
+  }
+}

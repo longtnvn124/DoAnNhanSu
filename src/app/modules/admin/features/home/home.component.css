@@ -1,0 +1,89 @@
+.border-round {
+	border-radius: 6px;
+}
+
+.bg-blue-100 {
+	background-color: var(--blue-100)
+}
+
+.bg-orange-100 {
+	background-color: var(--orange-100)
+}
+
+.bg-cyan-100 {
+	background-color: var(--cyan-100)
+}
+
+.bg-purple-100 {
+	background-color: var(--purple-100)
+}
+
+.text-blue-500 {
+	color: var(--blue-500)
+}
+
+.text-orange-500 {
+	color: var(--orange-500)
+}
+
+.text-cyan-500 {
+	color: var(--cyan-500)
+}
+
+.text-purple-500 {
+	color: var(--purple-500)
+}
+
+.surface-card {
+	background-color: #ffffff;
+	box-shadow: 0 4px 10px #00000008, 0 0 2px #0000000f, 0 2px 6px #0000001f !important;
+	border-radius: 6px;
+}
+
+.surface-card__title {
+	color: var(--surface-500);
+	font-weight: 500;
+	font-size: 16px;
+}
+
+.surface-card__title--type-2 {
+	text-align: center;
+	display: block;
+	margin-bottom: 16px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.surface-card__title--type-3 {
+	font-size: 18px;
+	font-weight: 500;
+	color: #212121;
+}
+
+.surface-card__subtitle {
+	font-weight: 500;
+	color: #333333;
+	font-size: 20px;
+}
+
+.surface-card__subtitle--type-2 {
+	font-weight: 400;
+	color: #495057;
+	font-size: 15px;
+	line-height: 24px;
+}
+
+.surface-card__text-highlight {
+	color: var(--green-500);
+	font-weight: 500;
+	font-size: 16px;
+}
+
+.surface-card__text {
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.text-size-20 {
+	font-size: 20px;
+}

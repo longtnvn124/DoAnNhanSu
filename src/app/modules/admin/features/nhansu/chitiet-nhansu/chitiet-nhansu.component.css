@@ -1,0 +1,39 @@
+/* .txt-label{
+  font-size: 14px;
+  font-weight: 500;
+  display:block;
+
+} */
+.text-size{
+  padding: 10px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.img-rounder{
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.img-rounder img{
+  width: 150px;
+  border: 1px solid #b2c2dfab;
+  border-radius: 50%;
+}
+
+.container-left{
+  width:100%;
+  height:800px;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+.container-left, .container-right{
+  width:100%;
+  height:835px;
+  overflow-x:hidden;
+  overflow-y:auto;
+}

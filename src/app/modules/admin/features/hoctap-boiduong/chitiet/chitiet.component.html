@@ -1,0 +1,61 @@
+<div class="text-lg mb-2"> Chi tiết quy hoạch</div>
+<div class="grid">
+  <div class="col container-left m-1">
+    <div class="card p-4" *ngFor="let data of data_keHoacHocTapBoiTuong">
+      <div class="text-2xl font-medium mb-3 border-bottom-1 ">{{data.ten_kehoach}}</div>
+      <div class="text-lg font-medium">Quyết định số:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.ma_kehoach}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Nội dung:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.noidung_kehoach}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Thời gian:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.thoigian}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Hình thức đào tạo:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.hinhthuc_daotao}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Địa điểm đào tạo:
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.diadiem_daotao}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">Số lượng :
+        <p class="text-base font-weight-normal d-sm-inline-block">
+          {{data.soluong}}
+        </p>
+      </div>
+      <div class=" text-lg font-weight-bold">File:</div>
+      <div
+        class="border-netke m-auto text-lg flex align-items-center justify-content-center w-50 mb-2 "
+        *ngFor="let item of data.file_kehoach">
+        <!-- <div class="block">
+          <label class="txt-label align-items-center">{{item.title}}</label>
+        </div> -->
+        <div class="flex">
+          <label class="pt-2 btn-open" (click)="openFilre(item)">{{item.title}}</label>
+          <button pButton pRipple (click)="downloadFile(item)" type="button" icon="pi pi-download"
+            class="p-button-rounded p-button-primary p-button-text"></button>
+            <!-- <button pButton pRipple (click)="openFilre(item)" type="button" icon="pi pi-download"
+            class="p-button-rounded p-button-primary p-button-text"></button> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col container-right m-1" >
+    <div class="card p-4">
+      <div class="text-2xl font-medium mb-3 border-bottom-1 ">Danh sách đăng ký </div>
+      <!-- <app-doituong-quyhoach></app-doituong-quyhoach> -->
+      <app-danhsach-hoctap-boiduong></app-danhsach-hoctap-boiduong>
+    </div>
+  </div>
+</div>

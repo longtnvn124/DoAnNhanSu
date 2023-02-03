@@ -1,0 +1,9 @@
+<div class="modal-body ovic-modal-body">
+    <div class="v-step-popup v-step-popup---round">
+        <h4 class="v-step-popup__head">{{textHead}}</h4>
+        <div class="v-step-popup__mess" [innerHTML]="htmlBody | appSafeHtml"></div>
+        <div class="v-step-popup__wrap-buttons">
+            <button type="button" class="btn" [ngClass]="button.class" (click)="confirmAction(button)">{{ 'buttons.' + button.name | translate }}</button>
+        </div>
+    </div>
+</div>

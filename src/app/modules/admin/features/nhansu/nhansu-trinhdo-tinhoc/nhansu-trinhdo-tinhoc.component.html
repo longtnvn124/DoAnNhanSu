@@ -1,0 +1,90 @@
+<div class="p-card intro-x">
+  <div class="danh-sach__head p-3 ">
+    <!-- <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
+      class="p-inputtext p-component p-element" /> -->
+    <button pButton pRipple class="p-button-outlined" label="Thêm trình độ tin học" styleClass="p-button-link "
+      icon="pi pi-plus " (click)="btnAdd()"></button>
+  </div>
+  <div class="danh-sach-ho-so__body">
+    <p-table [value]="nsTrinhdoTinhoc">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">Năm Công nhận</th>
+          <th class="text-center">Trình độ tin học </th>
+          <th class="text-center">Loại</th>
+          <th class="text-center">Xếp loại</th>
+          <th class="text-center">Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-nsTrinhdoTinhoc>
+        <tr>
+          <td class="text-center">{{nsTrinhdoTinhoc.nam_congnhan}}</td>
+          <td class="text-center">{{nsTrinhdoTinhoc.ten_trinhdo_tinhoc}}</td>
+          <td class="text-center">{{nsTrinhdoTinhoc.loai}}</td>
+          <td class="text-center">{{nsTrinhdoTinhoc.xeploai}}</td>
+          <td class="text-center">
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+              (click)="btnEdit(nsTrinhdoTinhoc)">
+
+            </button>
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+              (click)="btnDelete(nsTrinhdoTinhoc)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<ng-template #nsFormEdit let-c="close">
+  <div class="model-header container mt-3">
+    <h4 class="modal-title">{{formState.formTitle}}</h4>
+
+  </div>
+  <div class="modal-body ovic-modal-body">
+    <form [formGroup]="formData">
+      <div class="card" style="padding: 20px;">
+        <div class=" row mb-2">
+
+          <div class="col">
+            <label class="txt-label" for="">Năm Công nhận</label>
+            <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="nam_congnhan"
+              [style]="{'minWidth':'100%'}"></p-inputMask>
+          </div>
+
+          <div class="col">
+            <label class="txt-label" for="">Trình độ tin học</label>
+            <input type="text" pinputtext="" placeholder="Trình độ tin học"
+              class="p-inputtext p-component p-element w-full" formControlName="ten_trinhdo_tinhoc">
+          </div>
+
+        </div>
+        <div class=" row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Loại:</label>
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="loai" formControlName="loai"
+              [style]="{'minWidth':'100%'}">
+
+            </p-dropdown>
+          </div>
+          <div class="col">
+            <label class="txt-label" for="">Xếp Loại:</label>
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="xeploai"
+              formControlName="xeploai" [style]="{'minWidth':'100%'}">
+
+            </p-dropdown>
+
+          </div>
+        </div>
+        <div class="flex ">
+          <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
+            class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
+          <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
+            (click)="formCancel()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

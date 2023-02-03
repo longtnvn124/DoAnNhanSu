@@ -1,0 +1,11 @@
+<div class="modal-body ovic-modal-body --body-box-shadow">
+    <div class="confirm-rounded-block text-center">
+        <h4 class="confirm-rounded-block__head">{{head}}</h4>
+        <div class="confirm-rounded-block__mess" [innerHTML]="body | appSafeHtml"></div>
+        <div class="confirm-rounded-block__wrap-buttons">
+            <ng-container *ngIf="buttons && buttons.length">
+                <button pButton pRipple type="button" [label]="btn | appTranslateButton " [class]="btn.class" [icon]="btn.icon" *ngFor="let btn of buttons" (click)="confirmAction(btn)"></button>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="alert-wrapper">
+    <div class="alert-frame">
+        <div class="alert-header {{options.type}}-bg">
+            <button class="btn alert-close" (click)="close(btnDismiss)"><i class="pi pi-times"></i></button>
+            <img class="alert-img" [src]="icon" alt="{{options.type}}">
+        </div>
+        <div class="alert-body">
+            <span class="alert-title">{{options.title}}</span>
+            <span class="alert-message">{{options.message}}</span>
+            <button *ngIf="options.type !=='question'" class="alert-button {{options.type}}-bg {{options.type}}-btn" (click)="close(btnYes)">{{options.btnLabel[ 0 ]}}</button>
+            <div class="question-buttons" *ngIf="options.type ==='question'">
+                <button class="confirm-button question-bg question-btn" (click)="close(btnYes)">{{options.btnLabel[ 0 ]}}</button>
+                <button class="cancel-button error-bg error-btn" (click)="close(btnNo)">{{options.btnLabel[ 1 ]}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="login-wrap-animation" *ngIf="isLoading">
+    <div class="login-wrap-animation__inner">
+        <div class="login-wrap-animation__inner_gear-1"></div>
+        <div class="login-wrap-animation__inner_gear-2"></div>
+        <div class="login-wrap-animation__inner_gear-3"></div>
+    </div>
+</div>
+
+<div class="container sign-up-mode">
+    <div class="forms-container">
+        <div class="signin-signup">
+            <form action="#" class="sign-in-form"></form>
+            <form action="#" class="sign-up-form" [formGroup]="loginForm">
+                <figure class="sign-up-form__logo">
+                    <img src="../../../../../assets/images/logo.png" alt="ictu log" width="941" height="941"></figure>
+                <h2 class="sign-up-form__title">Xin chào, vui lòng đăng nhập để vào học...</h2>
+                <div class="input-field">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <input type="text" placeholder="Mã sinh viên" formControlName="username" autocomplete="username"/>
+                </div>
+                <div class="input-field input-field--password">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                    <input [type]="formFieldPassword.field" placeholder="Mật khẩu" formControlName="password" autocomplete="current-password" (keydown)="enterOnPasswordField($event)"/>
+                    <button class="btn sign-up-form__show-password" (click)="toggleShowPassword()">
+                        <i [class]="formFieldPassword.icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="buttons-field">
+                    <button [class.--btn-loading]="signInButton.isLoading" class="btn sign-up-form__btn sign-up-form__btn--full" (click)="btnSignIn(signInButton)">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập
+                    </button>
+                </div>
+                <div class="forgot-password-field">
+                    <button class="btn sign-up-form__btn-forgot-password" (click)="openResetPasswordPanel(resetPasswordPanel)">
+                        <i class="fa fa-key" aria-hidden="true"></i>Quên mật khẩu đăng nhập ?
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panels-container">
+        <div class="panel left-panel"></div>
+        <div class="panel right-panel">
+            <div class="content text-right">
+                <h3 class="right-panel__first-title">Hệ thống học trực tuyến</h3>
+                <p class="right-panel__seconds-title">Trường Đại học Công nghệ Thông tin và Truyền thông</p>
+                <span class="right-panel__line"></span>
+            </div>
+            <img src="../../../../../assets/images/svg/bg-register-template.svg" class="image" alt=""/>
+        </div>
+    </div>
+    <div class="sign-up-mode__copyright"><p>Trung tâm phát triển phần mềm © 2015 - 2022 - V 2.0.0</p></div>
+</div>
+
+<ng-template #resetPasswordPanel>
+    <div class="modal-body ovic-modal-body">
+        <div class="ovic-request-reset-password__form">
+            <div class="ovic-form-rsp__thumb">
+                <svg xmlns="http://www.w3.org/2000/svg" width="157" height="132.5">
+                    <g>
+                        <g>
+                            <rect x="34" y="5" width="90" height="117" rx="45" ry="45" fill="#d8e3f7"/>
+                            <rect x="84" y="57" width="58" height="52" rx="26" ry="26" fill="#d8e3f7"/>
+                            <rect y="27" width="68" height="45" rx="22.5" ry="22.5" fill="#d8e3f7"/>
+                            <circle cx="60" cy="61" r="25" transform="rotate(-45 59.996 60.999)" fill="#787d81"/>
+                            <path fill="#787d81" d="M38.802 65.39L54.804 81.39l-8.888 8.888-16.002-16.002z"/>
+                            <path fill="#787d81" d="M27 98h5v-5h6.02l22.61-22.61L49.8 59.57 8.71 100.66l-.79 11.62 11.61-.79 7.47-7.47V98z"/>
+                            <path d="M71.5 124.24v-9.65l-1.5 1.47-4.16-4.16 3.5-3.5-3.5-3.5 4.16-4.16 1.47 1.47V95.5h-5V85.26l-.56-.33c-.29-.17-.58-.34-.86-.53-.64-.43-1.26-.9-1.85-1.38A24 24 0 0156 72.75c-.27-.74-.51-1.5-.7-2.25a24.18 24.18 0 010-12c.19-.76.43-1.52.7-2.25A24 24 0 0163.23 46c.59-.49 1.21-1 1.85-1.38s1.31-.84 2-1.2 1.39-.71 2.1-1a23.85 23.85 0 013.34-1.13q.58-.15 1.16-.27a24.09 24.09 0 012.32-.4 24.34 24.34 0 012.45-.12 24 24 0 017.35 46.85l-.35.11v36.78l-7 7.53z" fill="#fff"/>
+                            <path d="M78.5 41a23.5 23.5 0 017.19 45.87l-.69.23V124l-6.5 7-6.5-7v-10.62l-1.71 1.71-.26.26-3.45-3.45 2.79-2.79.71-.71-.71-.71-2.79-2.79 3.42-3.45.26.26 1.74 1.7V95h-5V85l-.49-.29-.32-.19c-.29-.17-.57-.33-.83-.51-.62-.42-1.23-.88-1.81-1.35a23.54 23.54 0 01-7.13-10.05c-.26-.72-.49-1.46-.69-2.21a23.69 23.69 0 010-11.75c.19-.74.42-1.49.69-2.21a23.54 23.54 0 017.13-10.05 23.868 23.868 0 013.75-2.53c.66-.36 1.36-.69 2.05-1a23.38 23.38 0 013.27-1.11l1.14-.26a23.56 23.56 0 012.33-.36A23.89 23.89 0 0178.5 41m0-1a24.79 24.79 0 00-2.5.13 24.46 24.46 0 00-2.43.37q-.6.12-1.19.27A24.31 24.31 0 0069 41.93q-1.1.46-2.14 1t-2 1.23q-1 .66-1.89 1.41a24.54 24.54 0 00-7.43 10.48q-.41 1.13-.72 2.3a24.69 24.69 0 000 12.25q.3 1.17.72 2.3a24.54 24.54 0 007.43 10.48q.91.75 1.89 1.41c.39.26.8.49 1.2.73V96h5v5l-1-1-4.86 4.86 3.5 3.5-3.5 3.5 4.8 4.9 1-1v8.64l7.5 8.07 7.5-8.07V87.83A24.5 24.5 0 0078.5 40z" fill="#cdced0"/>
+                            <circle cx="78" cy="55" r="5" fill="#787d81"/>
+                            <path d="M78 50a5 5 0 11-5 5 5 5 0 015-5m0-1a6 6 0 106 6 6 6 0 00-6-6z" fill="#787d81"/>
+                            <rect x="80" y="94" width="2" height="29" rx="1" ry="1" fill="#cdced0"/>
+                            <path d="M81 94a1 1 0 00-1 1v27a1 1 0 002 0V95a1 1 0 00-1-1z" fill="#cdced0"/>
+                            <rect x="126" y="80" width="18" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="121" y="80" width="3" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="133" y="85" width="18" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="154" y="85" width="3" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="28" y="11" width="18" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="23" y="11" width="3" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="35" y="16" width="18" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="56" y="16" width="3" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="36" y="121" width="15" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <rect x="31" y="121" width="3" height="2" rx="1" ry="1" fill="#cdced0"/>
+                            <path d="M74 14a21 21 0 00-21 21c0 .67 0 1.32.1 2a25 25 0 015-.89c0-.36-.05-.72-.05-1.08a16 16 0 1117.04 15.91 4.94 4.94 0 00-2 5h.9a20.88 20.88 0 008.9-2c.32-.15.63-.33.95-.49a21.11 21.11 0 008.84-9A21 21 0 0074 14z" fill="#cdced0"/>
+                            <circle cx="106" cy="21" r="21" fill="#d02d3b"/>
+                            <path d="M103.38 25.1v-1.19a5.26 5.26 0 01.66-2.68 8.62 8.62 0 012.41-2.42 10.06 10.06 0 002.22-2 2.84 2.84 0 00.54-1.68 1.82 1.82 0 00-.77-1.59 3.67 3.67 0 00-2.15-.55 12.34 12.34 0 00-5.48 1.57l-1.75-3.46a15.28 15.28 0 017.58-2 8.07 8.07 0 015.25 1.59 5.18 5.18 0 011.95 4.23 5.62 5.62 0 01-.8 3 11.41 11.41 0 01-3 2.89 9.46 9.46 0 00-2.04 1.77 2.69 2.69 0 00-.41 1.56v1zm-.51 5.48a2.69 2.69 0 01.72-2 2.93 2.93 0 012.1-.69 2.84 2.84 0 012.06.71 2.68 2.68 0 01.73 2 2.68 2.68 0 01-.74 2 2.79 2.79 0 01-2.05.73 2.88 2.88 0 01-2.08-.71 2.67 2.67 0 01-.74-2.03z" fill="#fff"/>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <h3 class="ovic-form-rsp__title">Bạn quên mật khẩu?</h3>
+            <b class="ovic-form-rsp__subtitle">Vui lòng nhập địa chỉ Email (mã-sinh-viên@ictu.edu.vn) mà trường đã cấp cho bạn để nhận link khôi phục mật khẩu</b>
+            <form class="ovic-form-rsp__form" [formGroup]="resetPasswordForm">
+                <div class="wrap-form-row text-center">
+                    <span class="ovic-form-rsp__lbl-input">
+                        <input type="text" formControlName="email" autocomplete="email" placeholder="ICTU Email">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw" *ngIf="resetPasswordLoading"></i>
+                        <span class="ovic-form-rsp__f-message" [class.showed]="showEmailInvalid">Email chưa đúng định dạng</span>
+                    </span>
+                    <button class="btn btn-request btn-primary" (click)="btnClickSendRequestPassword()">Gửi yêu cầu</button>
+                </div>
+            </form>
+            <button class="btn ovic-form-rsp__close-form" (click)="closeModalResetPassword()">
+                <span aria-hidden="true">×</span></button>
+        </div>
+    </div>
+</ng-template>

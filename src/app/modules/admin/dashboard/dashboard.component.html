@@ -1,0 +1,77 @@
+<div class="ovic-student-layout ovic-student-layout--rounded osl" [class.ovic-is-loading]="isLoading"
+  [class.--mobile-menu-open]="mobileMenuOpen" [ngClass]="menuCollapse ? '--layout-menu-collapse' : '--layout-menu-full'"
+  [style.--side-navigation-off-canvas--size]="sideNavigationOffCanvasSize">
+  <!--section header-->
+  <div class="ovic-student-layout__header">
+    <div class="ovic-student-layout__header__left">
+      <h2 class="ovic-student-layout__app-name">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200.84pt" height="200.94pt" viewBox="0 0 200.84 200.94">
+          <defs>
+            <clipPath id="clip1">
+              <path d="M 0 0 L 200.839844 0 L 200.839844 200.941406 L 0 200.941406 Z M 0 0 " />
+            </clipPath>
+          </defs>
+          <g id="surface1">
+            <g clip-path="url(#clip1)" clip-rule="nonzero">
+              <path style=" stroke:none;fill-rule:evenodd;fill:#ffffff;fill-opacity:1;"
+                d="M 56.824219 160.425781 C 56.824219 160.425781 100.191406 156.742188 120.550781 169.980469 C 120.550781 169.980469 96.625 159.507813 56.824219 168.484375 Z M 120.550781 169.980469 C 120.550781 169.980469 105.371094 149.722656 64.761719 149.839844 L 64.761719 105.070313 C 64.761719 105.070313 62 104.609375 56.824219 105.644531 L 56.824219 154.789063 C 56.824219 154.789063 97.542969 151.109375 120.550781 169.980469 M 120.550781 169.980469 C 120.550781 169.980469 109.503906 144.085938 74.882813 140.863281 L 74.882813 95.863281 L 67.523438 95.863281 L 67.523438 145.234375 C 67.523438 145.234375 101.914063 143.394531 120.550781 169.980469 M 77.757813 89.304688 C 77.757813 89.304688 101.457031 87.574219 120.550781 114.050781 L 120.550781 169.980469 C 120.550781 169.980469 112.960938 141.785156 77.757813 136.71875 Z M 122.964844 113.699219 C 122.964844 113.699219 122.507813 81.476563 174.039063 81.476563 C 174.039063 81.476563 152.070313 86.773438 152.070313 118.765625 C 152.070313 150.761719 151.144531 168.828125 122.964844 169.980469 Z M 100.421875 -0.00390625 C 155.863281 -0.00390625 200.84375 44.996094 200.84375 100.46875 C 200.84375 155.933594 155.863281 200.941406 100.421875 200.941406 C 51.1875 200.941406 10.347656 165.605469 1.722656 118.886719 C 34.507813 84.816406 78.335938 60.992188 128.71875 53.28125 C 138.375 51.78125 148.046875 50.980469 157.480469 50.75 C 141.023438 49.484375 124.117188 50.175781 107.089844 52.703125 C 66.371094 58.921875 29.90625 75.835938 0 100.007813 C 0 93.792969 0.6875 87.695313 1.722656 81.707031 C 33.816406 57.882813 72.582031 42.347656 115.140625 38.4375 C 124.921875 37.628906 134.582031 37.398438 144.128906 37.742188 C 127.683594 35.5625 110.773438 35.101563 93.632813 36.59375 C 62.460938 39.46875 33.355469 48.558594 7.472656 62.488281 C 9.886719 56.390625 12.996094 50.523438 16.679688 45.109375 C 38.652344 35.101563 62.578125 28.535156 87.992188 26.121094 C 97.65625 25.195313 107.324219 24.96875 116.867188 25.195313 C 100.421875 23.128906 83.507813 22.785156 66.371094 24.394531 C 52.910156 25.660156 39.914063 28.078125 27.378906 31.644531 C 45.664063 12.195313 71.660156 -0.00390625 100.421875 -0.00390625 " />
+            </g>
+          </g>
+        </svg>
+        HSNS
+      </h2>
+      <div class="ovic-student-layout__header__icon">
+        <button class="btn ovic-student-layout__header-btn-collapse-menu" type="button" (click)="toggleMenu()">
+          <i class="fi-rr-menu-burger"></i>
+        </button>
+      </div>
+    </div>
+    <div class="ovic-student-layout__header__right">
+      <div class="ovic-student-layout__right-header-label">
+        <i [class]="menuActive ? menuActive.icon : 'fi-rr-bug'"></i>
+        <h2>{{menuActive ? menuActive.label : 'error'}}</h2>
+      </div>
+      <ul class="ovic-student-layout__right-header-menu">
+        <li class="ovic-student-layout__right-header-menu-item">
+          <admin-menu-language></admin-menu-language>
+        </li>
+        <li class="ovic-student-layout__right-header-menu-item">
+          <admin-user-info></admin-user-info>
+        </li>
+        <li class="ovic-student-layout__right-header-menu-item btn--for-mobile">
+          <button class="btn ovic-student-layout__button-right-header" type="button" (click)="toggleMenuForMobile(null)"
+            style="line-height: 0;">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!--section left menu-->
+  <div class="ovic-student-layout__vertical-nav ovic-left-menu">
+    <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 60px)'}" styleClass="ovic-scroll-panel--default">
+      <p-panelMenu [model]="verticalMenu" class="ovic-student-layout__vertical-nav__panel-menu"></p-panelMenu>
+    </p-scrollPanel>
+  </div>
+
+  <!--section right content-->
+  <div class="ovic-student-layout__wrapper">
+    <div class="ovic-student-layout__wrapper-animation ovic-student-scroll-style">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <!--menu mobile overlay-->
+  <a href="#" class="mobile-menu-overlay" (click)="toggleMenuForMobile($event)"></a>
+</div>
+
+<div class="ovic-side-navigation__right" [style.--side-navigation-offset-top]="navigationOffsetTop"
+  [style.--side-navigation-init-right]="initRight" [style.--side-navigation-size]="menuSize"
+  [@navigationMenuEffect]="navigationMenuState">
+  <ng-container
+    *ngTemplateOutlet="sideNavigationMenuSettings ? sideNavigationMenuSettings.template : null"></ng-container>
+</div>
+
+<button [@overlayAnimations]="navigationMenuState" class="btn ovic-side-navigation__overlay"
+  (click)="closePanel(sideNavigationMenuSettings.name)"></button>

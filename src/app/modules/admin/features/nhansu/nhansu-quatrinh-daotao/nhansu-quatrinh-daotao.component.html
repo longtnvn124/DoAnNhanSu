@@ -1,0 +1,108 @@
+<div class="p-card intro-x">
+  <div class="danh-sach__head p-3 ">
+    <!-- <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
+      class="p-inputtext p-component p-element" /> -->
+    <button pButton pRipple class="p-button-outlined" label="Thêm quá trình đào tạo" styleClass="p-button-link "
+      icon="pi pi-plus " (click)="addQtDaoTao()"></button>
+  </div>
+  <div class="danh-sach-ho-so__body">
+    <p-table [value]="nsQuaTrinhDaoTao">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center" style="margin-left: 40px;">Từ</th>
+          <th class="text-center">Đến</th>
+          <th class="text-center">Nơi Đào tạo</th>
+          <th class="text-center">Quốc gia</th>
+          <th class="text-center">Học vị</th>
+          <th class="text-center">Kết quả</th>
+          <th class="text-center">Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-nsQuaTrinhDaoTao>
+        <tr>
+          <td class="text-left" style="padding-left: 40px;">{{nsQuaTrinhDaoTao.tg_batdau}}</td>
+          <td class="text-center">{{nsQuaTrinhDaoTao.tg_ketthuc}}</td>
+          <td class="text-center">{{nsQuaTrinhDaoTao.noi_daotao}}</td>
+          <td class="text-center">{{nsQuaTrinhDaoTao.quocgia}}</td>
+          <td class="text-center">{{nsQuaTrinhDaoTao.hoc_vi}}</td>
+          <td class="text-center">{{nsQuaTrinhDaoTao.ketqua}}</td>
+          <td class="text-center">
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+              (click)="editQtDaoTao(nsQuaTrinhDaoTao)">
+
+            </button>
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+              (click)="deleteDanhhieu(nsQuaTrinhDaoTao)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<ng-template #nsFormEdit let-c="close">
+  <div class="model-header container mt-3">
+    <h4 class="modal-title">{{formState.formTitle}}</h4>
+
+  </div>
+  <div class="modal-body ovic-modal-body">
+    <form [formGroup]="formData">
+      <div class="card" style="padding: 20px;">
+        <div class=" row mb-2">
+
+          <div class="col">
+            <label class="txt-label" for="">Từ năm:</label>
+            <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_batdau" [style]="{'minWidth':'100%'}"></p-inputMask>
+          </div>
+
+          <div class="col">
+            <label class="txt-label" for="">Đến năm:</label>
+            <!-- <input type="text" pinputtext="" placeholder="(oooo)" class="p-inputtext p-component p-element w-full"
+              formControlName="tg_ketthuc"> -->
+              <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_ketthuc" [style]="{'minWidth':'100%'}"></p-inputMask>
+          </div>
+
+        </div>
+        <div class=" row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Nơi đào tạo:</label>
+            <input type="text" pinputtext="" placeholder="Nơi đào tạo" class="p-inputtext p-component p-element w-full"
+              formControlName="noi_daotao">
+          </div>
+          <div class="col">
+            <label class="txt-label" for="">Quốc gia:</label>
+            <input type="text" pinputtext="" placeholder="Quốc gia" class="p-inputtext p-component p-element w-full"
+              formControlName="quocgia">
+
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Học vị:</label>
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="hocvi" placeholder="Chọn..."
+              formControlName="hoc_vi" [style]="{'minWidth':'100%'}">
+
+            </p-dropdown>
+          </div>
+          <div class="col">
+            <label class="txt-label" for="">Kết quả:</label>
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="ketqua" placeholder="Chọn..."
+              formControlName="ketqua" [style]="{'minWidth':'100%'}">
+
+            </p-dropdown>
+          </div>
+        </div>
+        <br>
+        <div class="flex ">
+          <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
+            class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
+          <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
+            (click)="btnCancel()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

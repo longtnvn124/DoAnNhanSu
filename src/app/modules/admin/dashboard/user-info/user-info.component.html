@@ -1,0 +1,43 @@
+<div class="admin-user-info-box" #overlayAnchor>
+    <button class="btn admin-user-info-box__btn" type="button" (click)="panel.toggle($event)">
+        <img class="admin-user-info-box__img" [src]="currentUser.avatar | safeUrl" alt="">
+        <div class="admin-user-info-box__info">
+            <h3 class="admin-user-info-box__info__user-name">{{ currentUser.display }}</h3>
+            <b class="admin-user-info-box__info__user-role-name">{{ currentUser.name }}</b>
+        </div>
+    </button>
+</div>
+<p-overlayPanel #panel styleClass="top-bar__overlay-panel --append-to-overlay-anchor" [appendTo]="overlayAnchor">
+    <div class="top-bar__vertical-menu__head">
+        <b class="top-bar__vertical-menu__user-name">{{ currentUser.name }}</b>
+        <b class="top-bar__vertical-menu__user-email">{{ currentUser.email }}</b>
+    </div>
+    <ul class="top-bar__vertical-menu__menu">
+        <li>
+            <button class="btn" type="button" (click)="routeLink(panel,'admin/he-thong/thong-tin-tai-khoan')">
+                <i class="fa fa-user-circle"></i><span>{{ userMenu.profile }}</span>
+            </button>
+        </li>
+        <li>
+            <span class="btn">
+                <i class="fa fa-commenting"></i><span>{{ userMenu.messages }}</span>
+            </span>
+        </li>
+        <li>
+            <span class="btn">
+                <i class="fa fa-life-ring"></i><span>{{ userMenu.help }}</span>
+            </span>
+        </li>
+        <li><span class="top-bar__vertical-menu__separator"></span></li>
+        <li>
+            <span class="btn">
+                <i class="fa fa-lock"></i><span>{{ userMenu.lock }}</span>
+            </span>
+        </li>
+        <li>
+            <button class="btn" type="button" (click)="confirmSignOut(panel)">
+                <i class="fa fa-sign-out"></i><span>{{ userMenu.signOut }}</span>
+            </button>
+        </li>
+    </ul>
+</p-overlayPanel>
