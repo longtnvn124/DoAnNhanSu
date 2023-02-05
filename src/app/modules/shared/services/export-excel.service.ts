@@ -37,7 +37,7 @@ export class ExportExcelService {
     worksheet.mergeCells('A1:' + this.numToAlpha(header.length - 1) + '1');
     worksheet.getCell('A1').value = reportHeading;
     worksheet.getCell('A1').alignment = { horizontal: 'center' };
-    worksheet.getCell('A1').font = { size: 18, bold: true };
+    worksheet.getCell('A1').font = { size: 24, bold: true };
 
     if (reportSubHeading !== '') {
       worksheet.addRow([]);
@@ -54,11 +54,12 @@ export class ExportExcelService {
 
     // Cell Style : Fill and Border
     headerRow.eachCell((cell, index) => {
+
       cell.fill = {
         type: 'pattern',
         pattern: 'solid',
         fgColor: { argb: 'CCCCCC' },
-        bgColor: { argb: '000000' }
+        bgColor: { argb: '000000' },
       };
       cell.border = {
         top: { style: 'thin' },
@@ -66,7 +67,8 @@ export class ExportExcelService {
         bottom: { style: 'thin' },
         right: { style: 'thin' }
       };
-      cell.font = { size: 12, bold: true };
+      cell.font = { size: 13, bold: true };
+      cell.alignment = {horizontal: 'center'};
 
       worksheet.getColumn(index).width = header[index - 1].length < 20 ? 20 : header[index - 1].length;
     });
@@ -81,27 +83,34 @@ export class ExportExcelService {
 
     //Add Data and Conditinal Formatting
 
-    data.forEach((element:any)=>{
+    data.forEach((element: any) => {
       const eachRow = [];
-      columnsArray.forEach((column)=>{
+      columnsArray.forEach((column) => {
         eachRow.push(element[column]);
+
       })
 
-      if(element.isDeleted === 'Y'){
+      if (element.isDeleted === 'Y') {
         const deleteRow = worksheet.addRow(eachRow);
-        deleteRow.eachCell((cell)=>{
-          cell.font = {name: 'Times New Roman', family: 4, size: 11, bold: false, strike: true};
+        deleteRow.eachCell((cell) => {
+          cell.font = { name: 'Times New Roman', family: 4, size: 11, bold: false, strike: true };
+
         })
-      }else{
+      } else {
         worksheet.addRow(eachRow);
       }
+      //set with column to fit
+      worksheet.columns.forEach(column => {
+        const lengths = column.values.map(v => v.toString().length);
+        const maxLength = Math.max(...lengths.filter(v => typeof v === 'number'));
+        column.width = maxLength;
+      });
     });
 
     // save Excel File
-    workbook.xlsx.writeBuffer().then((data:ArrayBuffer)=>
-    {
-      const blob = new Blob([data],{type: EXCEL_TYPE});
-      fs.saveAs(blob,excelFileName + EXCEL_EXTENSION);
+    workbook.xlsx.writeBuffer().then((data: ArrayBuffer) => {
+      const blob = new Blob([data], { type: EXCEL_TYPE });
+      fs.saveAs(blob, excelFileName + EXCEL_EXTENSION);
     })
 
 
