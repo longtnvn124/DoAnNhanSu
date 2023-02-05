@@ -30,6 +30,8 @@
     "autoprefixer": "10.4.5",
     "bootstrap": "^5.2.1",
     "crypto-js": "^4.1.1",
+    "exceljs": "^4.3.0",
+    "file-save": "^0.2.0",
     "file-saver": "^2.0.5",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",

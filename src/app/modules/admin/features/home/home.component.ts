@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
 	search() {
 		const query = [ { key : 'search_text' , value : this.searchText } , this.selectedDepartment , this.selectedYear , this.selectedSemester ].map( ( { key , value } ) => key + '=' + value ).join( '&' );
-		console.log( query );
+		// console.log( query );
 	}
 
 	onTypeSearchText( event : Event ) {

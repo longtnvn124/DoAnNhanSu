@@ -70,9 +70,7 @@ export class NhansuQuatrinhDaotaoComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams
       .subscribe(params => {
-        // console.log(params); // { ns_id: "price" }
         this.param_id = this.auth.decryptData(params['code']);
-        // console.log(this.param_id);
       }
       );
     this.loadData();
@@ -85,8 +83,6 @@ export class NhansuQuatrinhDaotaoComponent implements OnInit {
       next: dsQuaTrinhDaoTao => {
         this.nsQuaTrinhDaoTao = dsQuaTrinhDaoTao;
         this.notificationService.isProcessing(false);
-
-        // console.log(dsQuaTrinhDaoTao);
       },
       error: () => {
         this.notificationService.isProcessing(false);
@@ -169,7 +165,7 @@ export class NhansuQuatrinhDaotaoComponent implements OnInit {
             this.loadData();
             this.formData.reset(
               {
-                // ma_ns: '',
+                ma_ns: this.param_id,
                 tg_batdau: '',
                 tg_ketthuc: '',
                 noi_daotao: '',

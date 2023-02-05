@@ -1,3 +1,4 @@
+import { ExportExcelService } from './../../../../shared/services/export-excel.service';
 import { __values } from 'tslib';
 import { filter } from 'rxjs/operators';
 import { NsTrinhdoTinhoc } from './../../../../shared/models/ns-trinhdo';
@@ -68,6 +69,23 @@ export class DanhsachNhansuComponent implements OnInit {
     { label: 'Nam', value: 'Nam' },
     { label: 'Nữ', value: 'Nữ' },
   ];
+  columns = [
+    'ID',
+    'Mã nhân sự',
+    'Họ và tên',
+    'Giới tính',
+    'Ngày sinh',
+    'Quê quán',
+    'Nơi thường trú',
+    'Điện thoại',
+    'Email',
+    'Chức danh',
+    'Chức vụ',
+    'Dân tộc',
+    'Phòng ban',
+    'Tôn giáo'
+
+  ]
   formData: FormGroup = this.formBuilder.group({
     ma_ns: ['', [Validators.required]],
     hoten: ['', [Validators.required]],
@@ -108,10 +126,10 @@ export class DanhsachNhansuComponent implements OnInit {
     private formBuilder: FormBuilder,
     private nhansuService: NhansuService,
     private notificationService: NotificationService,
-    private modalService: NgbModal,
-    private helperService: HelperService,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private exportExcelService :ExportExcelService
+
   ) {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
   }
@@ -135,6 +153,8 @@ export class DanhsachNhansuComponent implements OnInit {
     this.nhansuService.list(1, filter).subscribe({
       next: danhSachNhansu => {
         this.data_ns = danhSachNhansu;
+        console.log(this.data_ns);
+
         this.notificationService.isProcessing(false);
         danhSachNhansu.forEach((f) => {
           this.ma_ns_auto = 'ns' + [f.id + 1];
@@ -322,17 +342,6 @@ export class DanhsachNhansuComponent implements OnInit {
       }
     });
   }
-  exportexcel(): void {
-    // pass here the table ID
-    let element = document.getElementById('excel-table');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    //generate workbook and add the worksheet
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    // save to file
-    XLSX.writeFile(wb, "ExcelSheet.xlsx");
-  }
 
   filterDropdown1 = [
     { label: 'Chức vụ', value: 'Chức vụ', key: 'chucvu' },
@@ -369,6 +378,10 @@ export class DanhsachNhansuComponent implements OnInit {
       this.loadData();
     }
 
+  }
+
+  exportExcel() {
+    this.exportExcelService.exportAsExcelFile('Danh sách hồ sơ nhân sự','', this.columns, this.data_ns,'dsHoSoNhanSu','Sheet1');
   }
 
 }

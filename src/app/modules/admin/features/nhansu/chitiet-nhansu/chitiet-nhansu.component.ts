@@ -47,6 +47,8 @@ export class ChitietNhansuComponent implements OnInit {
       next: dsNhansu => {
         this.data_ns = dsNhansu;
         this.notificationService.isProcessing(false);
+        console.log(dsNhansu);
+
       },
       error: () => {
         this.notificationService.isProcessing(false);
