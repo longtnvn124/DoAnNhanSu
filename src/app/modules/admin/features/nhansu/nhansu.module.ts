@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { NhansuRoutingModule } from './nhansu-routing.module';
 import { NhansuDanhhieuThiduaComponent } from './nhansu-danhhieu-thidua/nhansu-danhhieu-thidua.component';
-
 import { NhansuQuatrinhXuatngoaiComponent } from './nhansu-quatrinh-xuatngoai/nhansu-quatrinh-xuatngoai.component';
 import { NhansuQuatrinhHopdongComponent } from './nhansu-quatrinh-hopdong/nhansu-quatrinh-hopdong.component';
 import { NhansuQuatrinhDaotaoComponent } from './nhansu-quatrinh-daotao/nhansu-quatrinh-daotao.component';
@@ -17,7 +16,9 @@ import { NhansuTrinhdoTinhocComponent } from './nhansu-trinhdo-tinhoc/nhansu-tri
 import { NhansuTrinhdoNgoainguComponent } from './nhansu-trinhdo-ngoaingu/nhansu-trinhdo-ngoaingu.component';
 import { NhansuTrinhdoChinhtriComponent } from './nhansu-trinhdo-chinhtri/nhansu-trinhdo-chinhtri.component';
 import { DanhsachNhansuComponent } from './danhsach-nhansu/danhsach-nhansu.component';
+import { NhansuDetaiKhoahocComponent } from './nhansu-detai-khoahoc/nhansu-detai-khoahoc.component';
 
+//import libra
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -43,7 +44,8 @@ import {CalendarModule} from 'primeng/calendar';
     NhansuTrinhdoChuyenmonComponent,
     NhansuTrinhdoTinhocComponent,
     NhansuTrinhdoNgoainguComponent,
-    NhansuTrinhdoChinhtriComponent
+    NhansuTrinhdoChinhtriComponent,
+    NhansuDetaiKhoahocComponent
   ],
   imports: [
     CommonModule,

@@ -18,7 +18,7 @@
       <ng-template pTemplate="body" let-doiTuongQuyHoach>
         <tr>
           <td class="text-center">{{doiTuongQuyHoach.hoten}}</td>
-          <td class="text-center">{{doiTuongQuyHoach.ngaysinh}}</td>
+          <td class="text-center">{{doiTuongQuyHoach.ngaysinh| date:'dd/MM/yyyy'}}</td>
           <td class="text-center">{{doiTuongQuyHoach.chucvu_hientai}}</td>
           <td class="text-center">{{doiTuongQuyHoach.chucvu_quyhoach}}</td>
           <td class="text-center">
@@ -54,8 +54,7 @@
           </div>
           <div class="col">
             <label class="txt-label" for="">Ngày sinh:</label>
-            <p-inputMask mask="99/99/9999" placeholder="dd/mm/yyyy" slotChar="dd/mm/yyyy" formControlName="ngaysinh"
-              [style]="{'minWidth':'100%'}"></p-inputMask>
+            <input type="date" [style]="{'minWidth':'100%'}" pInputText formControlName="ngaysinh">
           </div>
         </div>
         <div class="row mb-2">

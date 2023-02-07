@@ -1,3 +1,4 @@
+import { DanhmucTrinhdoVanhoaComponent } from './danhmuc-trinhdo-vanhoa/danhmuc-trinhdo-vanhoa.component';
 import { DanhmucDantocComponent } from './danhmuc-dantoc/danhmuc-dantoc.component';
 import { DanhmucPhongbanComponent } from './danhmuc-phongban/danhmuc-phongban.component';
 import { DanhmucTrinhdoComponent } from './danhmuc-trinhdo/danhmuc-trinhdo.component';
@@ -7,6 +8,7 @@ import { DanhmucChucdanhComponent } from './danhmuc-chucdanh/danhmuc-chucdanh.co
 import { DanhmucChucvuComponent } from './danhmuc-chucvu/danhmuc-chucvu.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DanhmucTrinhdoChinhtriComponent } from './danhmuc-trinhdo-chinhtri/danhmuc-trinhdo-chinhtri.component';
 
 const routes: Routes = [
   { path: 'danhmuc-chucdanh', component: DanhmucChucdanhComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'danhmuc-trinhdo', component: DanhmucTrinhdoComponent },
   { path: 'danhmuc-phongban', component: DanhmucPhongbanComponent },
   { path: 'danhmuc-dantoc', component: DanhmucDantocComponent },
+  { path: 'danhmuc-trinhdo-vanhoa', component: DanhmucTrinhdoVanhoaComponent },
+  { path: 'danhmuc-trinhdo-chinhtri', component: DanhmucTrinhdoChinhtriComponent },
 ];
 
 @NgModule({

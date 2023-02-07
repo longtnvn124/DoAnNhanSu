@@ -1,4 +1,4 @@
-import { DmChucdanh, DmChucvu, DmDantoc, DmTongiao } from './../models/danh-muc';
+import { DmChucdanh, DmChucvu, DmDantoc, DmTongiao, DmTrinhdoChinhtri, DmTrinhdoVanhoa } from './../models/danh-muc';
 
 import { NhanSu } from './../models/nhan-su';
 import { getRoute } from './../../../../environments/environment';
@@ -23,6 +23,8 @@ export class NhansuService {
   private readonly api_dmphongban = getRoute('danhmuc-phongban/');
   private readonly api_dmchucvu = getRoute('danhmuc-chucvu/');
   private readonly api_dmchucdanh = getRoute('danhmuc-chucdanh/');
+  private readonly api_dmtrinhdovanhoa = getRoute('danhmuc-trinhdo-vanhoa/');
+  private readonly api_dmtrinhdochinhtri = getRoute('danhmuc-trinhdo-chinhtri/');
 
 
   constructor(
@@ -113,5 +115,12 @@ export class NhansuService {
   }
   getdata_tongiao(): Observable<DmTongiao[]> {
     return this.http.get<Dto>(this.api_dmtongiao).pipe(map(res => res.data));
+  }
+
+  getdata_trinhdo_vanhoa(): Observable<DmTrinhdoVanhoa[]> {
+    return this.http.get<Dto>(this.api_dmtrinhdovanhoa).pipe(map(res => res.data));
+  }
+  getdata_trinhdo_chinhtri(): Observable<DmTrinhdoChinhtri[]> {
+    return this.http.get<Dto>(this.api_dmtrinhdochinhtri).pipe(map(res => res.data));
   }
 }

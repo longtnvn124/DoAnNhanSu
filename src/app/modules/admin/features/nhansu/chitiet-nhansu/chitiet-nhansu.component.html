@@ -3,80 +3,350 @@
 
     <div class="img-rounder m-3">
       <div class="mb-3">
-      <img src="../../../../../../assets/images/a_none.jpg">
+        <img src="../../../../../../assets/images/a_none.jpg">
       </div>
       <p style="font-size: 18px;width: 100%;" class="ovic-form-ui__head--border-bottom text-700 font-bold text-center">
         Thông tin lý lịch nhân sự</p>
     </div>
-    <div class="p-4 ml-5 -mt-3" *ngFor="let data of data_ns">
-      <div class="text-lg font-weight-bold">Họ và tên:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.hoten}}
-        </p>
+    <div class="ml-5" *ngFor="let data of data_ns">
+      <div class="row ">
+        <div class="col text-lg font-weight-bold ">1.Họ và tên:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.hoten}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">2.Tên khác:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.hoten_khac}}
+          </p>
+        </div>
       </div>
-      <div class=" text-lg font-weight-bold">giới tính:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.gioitinh}}
-        </p>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">3.Giới tính:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.gioitinh}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">4.Ngày sinh:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngaysinh|date :'dd/MM/yyyy'}}
+          </p>
+        </div>
       </div>
-      <div class=" text-lg font-weight-bold">Ngày sinh:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.ngaysinh|date:"dd/MM/yyyy"}}
-        </p>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">5.Nơi sinh:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.noisinh}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">6.Quê quán:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.quequan}}
+          </p>
+        </div>
       </div>
-      <div class=" text-lg font-weight-bold">Quê quán:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.quequan}}
-        </p>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">7.Nơi thường trú:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.noithuongtru}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">8.Nơi ở hiện tại:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.noiohientai}}
+          </p>
+        </div>
       </div>
-      <div class=" text-lg font-weight-bold">Nơi thường chú:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.noithuongtru}}
-        </p>
-      </div>
-      <div class="row ml-0">
-        <div class=" text-lg font-weight-bold">Số điện thoại:
-          <p class="text-base font-weight-normal d-sm-inline-block">
+
+      <div class="row ">
+        <div class="col text-lg font-weight-bold ">9.Số điện Thoại:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
             {{data.dienthoai}}
           </p>
         </div>
-        <div class="ml-6 text-lg font-weight-bold">Email:
-          <p class="text-base font-weight-normal d-sm-inline-block">
+        <div class="col text-lg font-weight-bold">10.Email:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
             {{data.email}}
           </p>
         </div>
       </div>
-      <div class=" text-lg font-weight-bold">Chức danh:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.chucdanh}}
-        </p>
-      </div>
-      <div class=" text-lg font-weight-bold">Chức vụ:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.chucvu}}
-        </p>
-      </div>
-      <div class="row ml-0">
-        <div class=" text-lg font-weight-bold">Dân tộc:
-          <p class="text-base font-weight-normal d-sm-inline-block">
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">11.Dân tộc:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
             {{data.dantoc}}
           </p>
         </div>
-        <div class="ml-8 text-lg font-weight-bold">Tôn giáo:
-          <p class="text-base font-weight-normal d-sm-inline-block">
+        <div class="col text-lg font-weight-bold">12.Tôn giáo:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
             {{data.tongiao}}
           </p>
         </div>
       </div>
-      <div class=" text-lg font-weight-bold">Phòng ban:
-        <p class="text-base font-weight-normal d-sm-inline-block">
-          {{data.phongban}}
-        </p>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">13.Nghề nghiệp khi được tuyển dụng:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.congviec_tuyendung}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">14.1.Ngày tuyển dụng:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngay_tuyendung| date :'dd/MM/yyyy'}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">14.2.Cơ quan tuyển dụng:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.coquan_tuyendung}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">15.1.Chức danh:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.chucdanh}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">15.2.Chức vụ:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.chucvu}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">16.Công việc chính được giao:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.congviec_chinh}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">17.1.Ngạch công chức(viên chức):
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngach_congchuc}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">17.2.Mã ngạch:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ma_ngach}}
+          </p>
+        </div>
       </div>
 
 
-    </div>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">17.3.Bậc lương:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.bacluong}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">17.4.Hệ số:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.heso}}
+          </p>
+        </div>
+        <div class="col-5 text-lg font-weight-bold">17.5.Ngày hưởng:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngay_huong|date:'dd/MM/yyyy'}}
+          </p>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">18.1.Trình độ Phổ thông:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.trinhdo_phothong}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">18.2.Trình độ chuyên môn:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.trinhdo_chuyenmon}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">18.3.Trình độ lý luận chính trị:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.lyluan_chinhtri}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">18.4.Quản lý nhà nước:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.quanly_nhanuoc}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">18.5.Ngoại ngữ:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngoaingu}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">18.6.Tin học:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.tinhoc}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">19.1.Ngày vào Đảng :
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngay_vaoDang |date: 'dd/MM/yyyy'}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold">19.2.Ngày chính thức:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.Ngay_chinhthuc |date: 'dd/MM/yyyy'}}
+
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">20.Ngày tham gia tổ chức chính trị - xã hội :
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngay_vaoDang |date: 'dd/MM/yyyy'}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">21.1.ngày nhập ngũ:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngay_nhapngu |date: 'dd/MM/yyyy'}}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold ">21.2.Ngày xuất ngũ:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngay_xuatngu |date: 'dd/MM/yyyy'}}
+          </p>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-6 text-lg font-weight-bold ">21.3.Quân hàm:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.quanham}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 text-lg font-weight-bold ">22.Danh hiệu Được phong tặng cao nhất:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.danhhieu_caonhat}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 text-lg font-weight-bold ">23.Sở trường công tác:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.sotruong_congtac }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 text-lg font-weight-bold ">24.Khen thưởng:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.khenthuong }}
+          </p>
+        </div>
+        <div class="col-6 text-lg font-weight-bold ">25.Kỷ luật:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.khenthuong }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 text-lg font-weight-bold ">26.1.Sức khoẻ:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.tinhtrang_suckhoe }}
+          </p>
+        </div>
+        <div class="col-6 text-lg font-weight-bold ">26.2.Chiều cao:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.chieucao }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 text-lg font-weight-bold ">26.3.Cân nặng:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.cannang }}
+          </p>
+        </div>
+        <div class="col-6 text-lg font-weight-bold ">26.4.Nhóm máu:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.nhommau }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">27.1.Hạng Thương binh:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.hang_thuongbinh }}
+          </p>
+        </div>
+        <div class="col-8 text-lg font-weight-bold ">27.2.Là con gia đình chính sách:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.giadinh_chinhsach}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">28.1.Số căn cước công dân:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.so_cccd }}
+          </p>
+        </div>
+        <div class="col text-lg font-weight-bold ">28.2.Ngày cấp:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.ngaycap|date:'dd/MM/yyyy'}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">29.Số sổ bảo hiểm XH:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.so_bhxh }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-lg font-weight-bold ">30.Phòng ban Làm việc:
+          <p class="text-lg font-weight-normal d-sm-inline-block">
+            {{data.phongban }}
+          </p>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
   </div>
 
 

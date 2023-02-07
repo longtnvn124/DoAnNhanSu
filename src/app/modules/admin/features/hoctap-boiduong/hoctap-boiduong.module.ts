@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HoctapBoiduongRoutingModule } from './hoctap-boiduong-routing.module';
 import { KehoachHoctapBoiduongComponent } from './kehoach-hoctap-boiduong/kehoach-hoctap-boiduong.component';
 import { DanhsachHoctapBoiduongComponent } from './danhsach-hoctap-boiduong/danhsach-hoctap-boiduong.component';
-import { DangkyHoctapBoiduongComponent } from './dangky-hoctap-boiduong/dangky-hoctap-boiduong.component';
+
 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -20,7 +20,6 @@ import { ChitietComponent } from './chitiet/chitiet.component';
   declarations: [
     KehoachHoctapBoiduongComponent,
     DanhsachHoctapBoiduongComponent,
-    DangkyHoctapBoiduongComponent,
     ChitietComponent
   ],
   imports: [

@@ -13,6 +13,8 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 
 import {TableModule} from 'primeng/table';
+import { DanhmucTrinhdoChinhtriComponent } from './danhmuc-trinhdo-chinhtri/danhmuc-trinhdo-chinhtri.component';
+import { DanhmucTrinhdoVanhoaComponent } from './danhmuc-trinhdo-vanhoa/danhmuc-trinhdo-vanhoa.component';
 @NgModule({
   declarations: [
     DanhmucChucdanhComponent,
@@ -22,6 +24,8 @@ import {TableModule} from 'primeng/table';
     DanhmucDantocComponent,
     DanhmucTrinhdoComponent,
     DanhmucDanhhieuthiduaComponent,
+    DanhmucTrinhdoChinhtriComponent,
+    DanhmucTrinhdoVanhoaComponent,
   ],
   imports: [
     CommonModule,

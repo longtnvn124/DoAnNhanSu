@@ -1,28 +1,28 @@
 <div class="p-card intro-x w-6 mx-auto">
   <div class="card-head p-3">
-    <button pButton pRipple class="p-button-outlined" label="Thêm tôn giáo " styleClass="p-button-link"
+    <button pButton pRipple class="p-button-outlined" label="Thêm trình độ chính trị " styleClass="p-button-link"
       icon="pi pi-pencil" (click)="btnAdd()"></button>
   </div>
 
   <div class="danh-sach-ho-so__body">
-    <p-table [value]="dmTongiao" [rows]="10" [paginator]="true">
+    <p-table [value]="dmTrinhdoChinhtri" [rows]="10" [paginator]="true">
       <ng-template pTemplate="header">
         <tr>
-          <th class="text-center">Danh hiệu thi đua</th>
+          <th class="text-center">Trình độ chính trị</th>
           <th class="text-center" style="width: 15rem">Thao tác</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-dmTongiao>
+      <ng-template pTemplate="body" let-dmTrinhdoChinhtri>
         <tr>
-          <td class="text-center">{{dmTongiao.ten_tongiao}}</td>
+          <td class="text-center">{{dmTrinhdoChinhtri.ten_trinhdo}}</td>
           <td class="text-center">
             <button pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-user-edit"
-              (click)="btnEdit(dmTongiao)">
+              (click)="btnEdit(dmTrinhdoChinhtri)">
             </button>
             <button pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
-              (click)="btnDelete(dmTongiao)"></button>
+              (click)="btnDelete(dmTrinhdoChinhtri)"></button>
           </td>
         </tr>
       </ng-template>
@@ -43,9 +43,9 @@
         <div class=" row mb-2">
 
           <div class="col">
-            <label class="txt-label" for="">Tôn giáo:</label>
-            <input type="text" pinputtext="" placeholder="Tôn giáo" class="p-inputtext p-component p-element w-full"
-              formControlName="ten_tongiao">
+            <label class="txt-label" for="">Trình độ chính trị:</label>
+            <input type="text" pinputtext="" placeholder="Trình độ chính trị"
+              class="p-inputtext p-component p-element w-full" formControlName="ten_trinhdo">
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import { NhansuDetaiKhoahocComponent } from './nhansu-detai-khoahoc/nhansu-detai-khoahoc.component';
 import { ChitietNhansuComponent } from './chitiet-nhansu/chitiet-nhansu.component';
 import { NhansuTrinhdoNgoainguComponent } from './nhansu-trinhdo-ngoaingu/nhansu-trinhdo-ngoaingu.component';
 import { NhansuTrinhdoTinhocComponent } from './nhansu-trinhdo-tinhoc/nhansu-trinhdo-tinhoc.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'trinhdo-tinhoc', component: NhansuTrinhdoTinhocComponent },
   { path: 'trinhdo-ngoaingu', component: NhansuTrinhdoNgoainguComponent },
   { path: 'trinhdo-chinhtri', component: NhansuTrinhdoChinhtriComponent },
+  { path: 'detai-khoahoc', component: NhansuDetaiKhoahocComponent },
 
 
 ];

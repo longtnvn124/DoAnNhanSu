@@ -23,7 +23,7 @@
           <td class="text-center">{{DanhSach.nguoi_ky}}</td>
           <td class="text-center">{{DanhSach.nhiem_ky}}</td>
           <td class="text-center">{{DanhSach.dot}}</td>
-          <td class="text-center">{{DanhSach.ngay_banhanh}}</td>
+          <td class="text-center">{{DanhSach.ngay_banhanh|date:'dd/MM/yyyy'}}</td>
 
           <td class="text-center">
             <button pRipple pButton type="button"
@@ -88,10 +88,7 @@
             </div>
             <div class="col">
               <label class="txt-label" for="">Ngày ban hành:</label>
-              <!-- <input type="text" pInputText placeholder="Ngày ban hành" class="p-inputtext p-component p-element w-full"
-                formControlName="ngay_banhanh"> -->
-              <p-inputMask mask="99/99/9999" placeholder="dd/mm/yyyy" slotChar="dd/mm/yyyy"
-                [style]="{'minWidth':'100%'}" formControlName="ngay_banhanh"></p-inputMask>
+                <input type="date" [style]="{'minWidth':'100%'}" pInputText formControlName="ngay_banhanh">
             </div>
           </div>
           <div class="row mb-2">

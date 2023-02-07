@@ -1,22 +1,17 @@
 import { ExportExcelService } from './../../../../shared/services/export-excel.service';
-import { __values } from 'tslib';
-import { filter } from 'rxjs/operators';
-import { NsTrinhdoTinhoc } from './../../../../shared/models/ns-trinhdo';
-import { DmPhongban, DmDantoc, DmTongiao, DmChucdanh, DmChucvu } from './../../../../shared/models/danh-muc';
+;
+import { DmPhongban, DmDantoc, DmTongiao, DmChucdanh, DmChucvu, DmTrinhdoVanhoa, DmTrinhdoChinhtri } from './../../../../shared/models/danh-muc';
 
 import { NhanSu } from '@modules/shared/models/nhan-su';
-import { Auth } from './../../../../../core/models/auth';
-import { FormType } from './../../../../shared/models/ovic-models';
-import { HelperService } from './../../../../../core/services/helper.service';
-import { DEFAULT_MODAL_OPTIONS } from './../../../../shared/utils/syscat';
+
 import { NhansuService } from './../../../../shared/services/nhansu.service';
 import { debounceTime, distinctUntilChanged, Subject, async, forkJoin } from 'rxjs';
 import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { NotificationService } from '@core/services/notification.service';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { AuthService } from '@core/services/auth.service';
+import { NotificationService } from '@core/services/notification.service';
 
 import * as XLSX from 'xlsx';
 
@@ -42,6 +37,8 @@ export class DanhsachNhansuComponent implements OnInit {
   dmTongiao: DmTongiao[];
   dmChucdanh: DmChucdanh[];
   dmChucvu: DmChucvu[];
+  dmTrinhdoVanhoa: DmTrinhdoVanhoa[];
+  dmTrinhdoChinhtri: DmTrinhdoChinhtri[];
 
 
 
@@ -73,33 +70,113 @@ export class DanhsachNhansuComponent implements OnInit {
     'ID',
     'Mã nhân sự',
     'Họ và tên',
+    'Tên khác',
     'Giới tính',
     'Ngày sinh',
+    'Nơi sinh',
     'Quê quán',
     'Nơi thường trú',
+    'Nơi ở hiện tại',
     'Điện thoại',
     'Email',
+    'Dân tộc',
+    'Tôn giáo',
+    'Công việc tuyển dụng',
+    'Ngày tuyển dụng',
+    'Cơ quan tuyển dụng',
     'Chức danh',
     'Chức vụ',
-    'Dân tộc',
-    'Phòng ban',
-    'Tôn giáo'
+    'Công việc chính ',
+    'Ngạch Công chức',
+    'Mã ngạch',
+    'Bậc lương ',
+    'Hệ số ',
+    'Ngày hưởng ',
+    'Phụ cấp chức vụ',
+    'Phụ cấp khác',
+    'Trình độ Phổ thông',
+    'Trình độ chuo',
+    'Trình độ Chuyên môn',
+    'Trình độ Lý luận chính trị',
+    'Quản lý nhà nước',
+    'Ngoại ngữ',
+    'Tin học',
+    'Ngày vào Đảng Công sản Việt Nam',
+    'Ngày Chính thức ',
+    'Ngày Nhập ngũ',
+    'Ngày xuất ngũ',
+    'Quân hàm ',
+    'Danh hiệu cao nhất ',
+    'Sở trường công tác',
+    'Khen thưởng',
+    'Kỷ luật',
+    'Tình trạng sức khoẻ',
+    'Chiều cao',
+    'Cân nặng',
+    'Nhóm máu',
+    'Hạng Thương binh',
+    'Con gia đình chính sách',
+    'Sô Cân Cước công Dân ',
+    'Ngày Cấp',
+    'Số sổ bảo hiểm xã hội',
+    'Phòng ban'
+
+
 
   ]
   formData: FormGroup = this.formBuilder.group({
     ma_ns: ['', [Validators.required]],
     hoten: ['', [Validators.required]],
-    ngaysinh: ['', [Validators.required]],
+    hoten_khac: [''],
     gioitinh: ['', [Validators.required]],
+    ngaysinh: ['', [Validators.required]],
+    noisinh: ['', [Validators.required]],
     quequan: ['', [Validators.required]],
     noithuongtru: ['', [Validators.required]],
+    noiohientai: ['', [Validators.required]],
     dienthoai: ['', [Validators.required]],
+    dantoc: ['', [Validators.required]],
     email: ['', [Validators.required]],
+    tongiao: ['', [Validators.required]],
+    congviec_tuyendung: ['', [Validators.required]],
+    ngay_tuyendung: ['', [Validators.required]],
+    coquan_tuyendung: ['', [Validators.required]],
     chucdanh: ['', [Validators.required]],
     chucvu: ['', [Validators.required]],
-    dantoc: ['', [Validators.required]],
-    phongban: ['', [Validators.required]],
-    tongiao: ['', [Validators.required]],
+    congviec_chinh: ['', [Validators.required]],
+    ngach_congchuc: ['', [Validators.required]],
+    ma_ngach: ['', [Validators.required]],
+    bacluong: ['', [Validators.required]],
+    heso: ['', [Validators.required]],
+    ngay_huong: ['', [Validators.required]],
+    phucap_chucvu: ['' ],
+    phucap_khac: [''],
+    trinhdo_phothong: ['', [Validators.required]],
+    trinhdo_chuyenmon: ['', [Validators.required]],
+    lyluan_chinhtri: [''],
+    quanly_nhanuoc: [''],
+    ngoaingu: [''],
+    tinhoc: [''],
+    ngay_vaoDang: [''],
+    Ngay_chinhthuc: [''],
+    ngay_chinhtrixahoi: [''],
+    ngay_nhapngu: [''],
+    ngay_xuatngu: [''],
+    quanham: [''],
+    danhhieu_caonhat: [''],
+    sotruong_congtac: [''],
+    khenthuong: [''],
+    kyluat: [''],
+    tinhtrang_suckhoe: [''],
+    chieucao: [''],
+    cannang: [''],
+    nhommau: [''],
+    hang_thuongbinh: [''],
+    giadinh_chinhsach: [''],
+    so_cccd: [''],
+    ngaycap: [''],
+    so_bhxh: [''],
+    phongban: [''],
   });
   private OBSERVER_SEARCH_DATA = new Subject<string>();
 
@@ -128,7 +205,7 @@ export class DanhsachNhansuComponent implements OnInit {
     private notificationService: NotificationService,
     private router: Router,
     private auth: AuthService,
-    private exportExcelService :ExportExcelService
+    private exportExcelService: ExportExcelService
 
   ) {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
@@ -156,8 +233,9 @@ export class DanhsachNhansuComponent implements OnInit {
         console.log(this.data_ns);
 
         this.notificationService.isProcessing(false);
-        danhSachNhansu.forEach((f) => {
+        this.data_ns.forEach((f) => {
           this.ma_ns_auto = 'ns' + [f.id + 1];
+          console.log(this.ma_ns_auto);
 
         })
       },
@@ -202,17 +280,56 @@ export class DanhsachNhansuComponent implements OnInit {
         {
           ma_ns: this.ma_ns_auto,
           hoten: '',
-          ngaysinh: '',
+          hoten_khac: '',
           gioitinh: '',
+          ngaysinh: '',
+          noisinh: '',
           quequan: '',
           noithuongtru: '',
+          noiohientai: '',
           dienthoai: '',
+          dantoc: '',
           email: '',
+          tongiao: '',
+          congviec_tuyendung: '',
+          ngay_tuyendung: '',
+          coquan_tuyendung: '',
           chucdanh: '',
           chucvu: '',
-          dantoc: '',
+          congviec_chinh: '',
+          ngach_congchuc: '',
+          ma_ngach: '',
+          bacluong: '',
+          heso: '',
+          ngay_huong: '',
+          phucap_chucvu: '',
+          phucap_khac: '',
+          trinhdo_phothong: '',
+          trinhdo_chuyenmon: '',
+          lyluan_chinhtri: '',
+          quanly_nhanuoc: '',
+          ngoaingu: '',
+          tinhoc: '',
+          ngay_vaoDang: '',
+          Ngay_chinhthuc: '',
+          ngay_chinhtrixahoi: '',
+          ngay_nhapngu: '',
+          ngay_xuatngu: '',
+          quanham: '',
+          danhhieu_caonhat: '',
+          sotruong_congtac: '',
+          khenthuong: '',
+          kyluat: '',
+          tinhtrang_suckhoe: '',
+          chieucao: '',
+          cannang: '',
+          nhommau: '',
+          hang_thuongbinh: '',
+          giadinh_chinhsach: '',
+          so_cccd: '',
+          ngaycap: '',
+          so_bhxh: '',
           phongban: '',
-          tongiao: '',
         }
       );
     } else {
@@ -221,18 +338,56 @@ export class DanhsachNhansuComponent implements OnInit {
       this.formData.reset(
         {
           ma_ns: this.ma_ns_auto,
-          hoten: object?.hoten,
-          ngaysinh: object?.ngaysinh,
-          gioitinh: object?.gioitinh,
-          quequan: object?.quequan,
-          noithuongtru: object?.noithuongtru,
-          dienthoai: object?.dienthoai,
-          email: object?.email,
-          chucdanh: object?.chucdanh,
-          chucvu: object?.chucvu,
-          dantoc: object?.dantoc,
-          phongban: object?.phongban,
-          tongiao: object?.tongiao,
+          hoten: object.hoten,
+          hoten_khac: object.hoten_khac,
+          gioitinh: object.gioitinh,
+          ngaysinh: object.ngaysinh,
+          noisinh: object.noisinh,
+          quequan: object.quequan,
+          noithuongtru: object.noithuongtru,
+          noiohientai: object.noiohientai,
+          dienthoai: object.dienthoai,
+          dantoc: object.dantoc,
+          email: object.email,
+          tongiao: object.tongiao,
+          congviec_tuyendung: object.congviec_tuyendung,
+          ngay_tuyendung: object.ngay_tuyendung,
+          coquan_tuyendung: object.coquan_tuyendung,
+          chucdanh: object.chucdanh,
+          chucvu: object.chucvu,
+          congviec_chinh: object.congviec_chinh,
+          ngach_congchuc: object.ngach_congchuc,
+          ma_ngach: object.ma_ngach,
+          bacluong: object.bacluong,
+          heso: object.heso,
+          ngay_huong: object.ngay_huong,
+          phucap_khac: object.phucap_khac,
+          trinhdo_phothong: object.trinhdo_phothong,
+          trinhdo_chuyenmon: object.trinhdo_chuyenmon,
+          lyluan_chinhtri: object.lyluan_chinhtri,
+          quanly_nhanuoc: object.quanly_nhanuoc,
+          ngoaingu: object.ngoaingu,
+          tinhoc: object.tinhoc,
+          ngay_vaoDang: object.ngay_vaoDang,
+          Ngay_chinhthuc: object.Ngay_chinhthuc,
+          ngay_chinhtrixahoi: object.ngay_chinhtrixahoi,
+          ngay_nhapngu: object.ngay_nhapngu,
+          ngay_xuatngu: object.ngay_xuatngu,
+          quanham: object.quanham,
+          danhhieu_caonhat: object.danhhieu_caonhat,
+          sotruong_congtac: object.sotruong_congtac,
+          khenthuong: object.khenthuong,
+          kyluat: object.kyluat,
+          tinhtrang_suckhoe: object.tinhtrang_suckhoe,
+          chieucao: object.chieucao,
+          cannang: object.cannang,
+          nhommau: object.nhommau,
+          hang_thuongbinh: object.hang_thuongbinh,
+          giadinh_chinhsach: object.giadinh_chinhsach,
+          so_cccd: object.so_cccd,
+          ngaycap: object.ngaycap,
+          so_bhxh: object.so_bhxh,
+          phongban: object.phongban,
         }
       );
     }
@@ -260,17 +415,56 @@ export class DanhsachNhansuComponent implements OnInit {
               {
                 ma_ns: this.ma_ns_auto,
                 hoten: '',
+                hoten_khac: '',
+                gioitinh: '',
                 ngaysinh: '',
-                gioitinh: 1,
+                noisinh: '',
                 quequan: '',
                 noithuongtru: '',
+                noiohientai: '',
                 dienthoai: '',
+                dantoc: '',
                 email: '',
+                tongiao: '',
+                congviec_tuyendung: '',
+                ngay_tuyendung: '',
+                coquan_tuyendung: '',
                 chucdanh: '',
                 chucvu: '',
-                dantoc: '',
+                congviec_chinh: '',
+                ngach_congchuc: '',
+                ma_ngach: '',
+                bacluong: '',
+                heso: '',
+                ngay_huong: '',
+                phucap_chucvu: '',
+                phucap_khac: '',
+                trinhdo_phothong: '',
+                trinhdo_chuyenmon: '',
+                lyluan_chinhtri: '',
+                quanly_nhanuoc: '',
+                ngoaingu: '',
+                tinhoc: '',
+                ngay_vaoDang: '',
+                Ngay_chinhthuc: '',
+                ngay_chinhtrixahoi: '',
+                ngay_nhapngu: '',
+                ngay_xuatngu: '',
+                quanham: '',
+                danhhieu_caonhat: '',
+                sotruong_congtac: '',
+                khenthuong: '',
+                kyluat: '',
+                tinhtrang_suckhoe: '',
+                chieucao: '',
+                cannang: '',
+                nhommau: '',
+                hang_thuongbinh: '',
+                giadinh_chinhsach: '',
+                so_cccd: '',
+                ngaycap: '',
+                so_bhxh: '',
                 phongban: '',
-                tongiao: '',
               }
             );
             this.loadData();
@@ -316,26 +510,32 @@ export class DanhsachNhansuComponent implements OnInit {
     // dmChucdanh: DmChucdanh[];
     // dmChucvu: DmChucvu[];
     this.notificationService.isProcessing(true);
-    forkJoin<[DmPhongban[], DmChucdanh[], DmChucvu[], DmDantoc[], DmTongiao[]]>([
+    forkJoin<[DmPhongban[], DmChucdanh[], DmChucvu[], DmDantoc[], DmTongiao[], DmTrinhdoVanhoa[], DmTrinhdoChinhtri[]]>([
       this.nhansuService.getdata_phongban(),
       this.nhansuService.getdata_chucdanh(),
       this.nhansuService.getdata_chucvu(),
       this.nhansuService.getdata_dantoc(),
-      this.nhansuService.getdata_tongiao()
+      this.nhansuService.getdata_tongiao(),
+      this.nhansuService.getdata_trinhdo_vanhoa(),
+      this.nhansuService.getdata_trinhdo_chinhtri(),
     ]).subscribe({
-      next: ([dmPhongban, dmChucdanh, dmChucvu, dmDantoc, dmTongiao]) => {
+      next: ([dmPhongban, dmChucdanh, dmChucvu, dmDantoc, dmTongiao, dmTrinhdoVanhoa, dmTrinhdoChinhtri]) => {
         this.dmPhongban = dmPhongban;
         this.dmChucdanh = dmChucdanh;
         this.dmChucvu = dmChucvu;
         this.dmDantoc = dmDantoc;
         this.dmTongiao = dmTongiao;
+        this.dmTrinhdoVanhoa = dmTrinhdoVanhoa;
+        this.dmTrinhdoChinhtri = dmTrinhdoChinhtri;
 
         const filterdmPhongban = dmPhongban.map(r => ({ value: r.ten_phongban, type: 'phongban' }));
         const filterdmChucdanh = dmChucdanh.map(r => ({ value: r.ten_chucdanh, type: 'chucdanh' }));
         const filterdmChucvu = dmChucvu.map(r => ({ value: r.ten_chucvu, type: 'chucvu' }));
         const filterdmDantoc = dmDantoc.map(r => ({ value: r.ten_dantoc, type: 'dantoc' }));
         const filterdmTongiao = dmTongiao.map(r => ({ value: r.ten_tongiao, type: 'tongiao' }));
-        this.allFilterList = [].concat(filterdmPhongban, filterdmChucdanh, filterdmChucvu, filterdmDantoc, filterdmTongiao);
+        const filterdmTrinhdoVanhoa = dmTrinhdoVanhoa.map(r => ({ value: r.ten_trinhdo, type: 'trinhdovanhoa' }));
+        const filterdmTrinhdoChinhtri = dmTrinhdoChinhtri.map(r => ({ value: r.ten_trinhdo, type: 'trinhdochinhtri' }));
+        this.allFilterList = [].concat(filterdmPhongban, filterdmChucdanh, filterdmChucvu, filterdmDantoc, filterdmTongiao, filterdmTrinhdoVanhoa, filterdmTrinhdoChinhtri);
         this.notificationService.isProcessing(false)
       }, error: () => {
         this.notificationService.isProcessing(false);
@@ -381,7 +581,7 @@ export class DanhsachNhansuComponent implements OnInit {
   }
 
   exportExcel() {
-    this.exportExcelService.exportAsExcelFile('Danh sách hồ sơ nhân sự','', this.columns, this.data_ns,'dsHoSoNhanSu','Sheet1');
+    this.exportExcelService.exportAsExcelFile('Danh sách hồ sơ nhân sự', '', this.columns, this.data_ns, 'dsHoSoNhanSu', 'Sheet1');
   }
 
 }

@@ -47,7 +47,7 @@ export class DanhsachQuyhoachComponent implements OnInit {
     ngay_banhanh: ['', [Validators.required]],
     dot: ['', [Validators.required]],
     nhiem_ky: ['', [Validators.required]],
-    file_quyetdinh: [[]]
+    file_quyetdinh: []
   });
   private OBSERVER_SEARCH_DATA = new Subject<string>();
 
