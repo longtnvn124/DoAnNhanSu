@@ -138,7 +138,6 @@ export class DanhsachQuyhoachComponent implements OnInit {
           file_quyetdinh: object.file_quyetdinh
         }
       );
-      console.log(object.file_quyetdinh);
 
       this.fileUploaded = object.file_quyetdinh && object.file_quyetdinh.length ? object.file_quyetdinh : [];
     }
@@ -196,17 +195,10 @@ export class DanhsachQuyhoachComponent implements OnInit {
 
   btnDetail(object: DanhSachQuyHoach) {
     const code = this.auth.encryptData(`${object.ma_quyhoach}`);
-    // const url = this.router.serializeUrl(
-    //   this.router.createUrlTree(['admin/nhansu/them-nhansu'], { queryParams: { code } })
-    // );
-    // window.open(url, '_blank');
     this.router.navigate(['admin/quyhoach/chitiet-quyhoach'], { queryParams: { code } });
-    // console.log(code);
-    // this.auth.decryptData(code);
-    // console.log(this.auth.decryptData(code));
   }
 
-
+  // file upload
   myUploader() {
     this.fileChooser.nativeElement.click();
   }
@@ -245,3 +237,5 @@ export class DanhsachQuyhoachComponent implements OnInit {
     });
   }
 }
+
+

@@ -41,12 +41,12 @@ export class NhansuService {
           conditionName: 'hoten',
           condition: OvicQueryCondition.like,
           value: '%' + filter.search + '%',
-          orWhere:'or'
+          orWhere: 'or'
         },
         {
           conditionName: 'ma_ns',
-          condition: OvicQueryCondition.like,
-          value: '%' + filter.search + '%',
+          condition: OvicQueryCondition.equal,
+          value: filter.search,
           orWhere: 'or'
         },
         {

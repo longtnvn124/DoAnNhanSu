@@ -1,0 +1,182 @@
+<div class="p-card intro-y">
+  <div class="danh-sach-ho-so__head p-3 flex flex-wrap justify-content-between">
+    <div>
+      <!-- <input type="text" [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
+        class="p-inputtext p-component p-element" /> -->
+      <!-- <p-button label="Thêm nhân sự " styleClass="p-button-link" icon="pi pi-user-plus" (click)="btnAdd()"></p-button> -->
+
+    </div>
+
+  </div>
+  <div class="danh-sach-ho-so__body" id="excel-table">
+    <p-table [value]="dataNhansu" [rows]="10" [paginator]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">STT</th>
+
+          <th class="text-left" style="width: 10rem;">Họ và tên</th>
+
+          <th class="text-center">Ngày sinh</th>
+          <th class="text-center">Phòng ban</th>
+          <th class="text-center">Chi tiết</th>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dataNhansu>
+        <tr>
+          <td class="text-center" style="width: 1rem;">{{dataNhansu.__index}}</td>
+          <td class="text-left" style="max-width: 10rem;">{{dataNhansu.hoten}}</td>
+          <td class="text-center" style="width: 8rem;">{{dataNhansu.ngaysinh |date:"dd/MM/yyyy"}}</td>
+          <td class="text-center" style="width: 8rem;">{{dataNhansu.phongban}}</td>
+          <td class="text-center" style="width: 14rem;">
+            <div class="flex flex-row align-items-center justify-content-center">
+              <div>
+                {{dataNhansu['__count_nghiviec']}} Ngày nghỉ phép
+              </div>
+              <div>
+                &nbsp;
+                |
+              </div>
+              <button pButton pRipple type="button" label="Xem chi tiết" class="p-button-text"
+                (click)="showInfor(dataNhansu.ma_ns)">
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog (onHide)="changeForm(dataChanged)" header="Danh sách nghỉ phép" [(visible)]="displayMaximizable"
+  [modal]="true" [style]="{width: '80vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+  <div>
+    <div class="header-seach p-3">
+      <button pButton pRipple class="p-button-outlined" label="Thêm đề tài khoa học " styleClass="p-button-link "
+        icon="pi pi-plus " (click)="btnAdd()"></button>
+
+    </div>
+    <div class="chedo_body">
+      <p-table [value]="data_CheDo_NghiPhep">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-center">Lý do nghỉ phép</th>
+            <th class="text-center">Thời gian nghỉ phép</th>
+            <th class="text-center">Ngày ký</th>
+            <th class="text-center">Người ký</th>
+            <th class="text-center">File minh chứng</th>
+            <th class="text-center">Thao tác</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data_CheDo_NghiPhep>
+          <tr>
+            <td class="text-center">{{data_CheDo_NghiPhep.loai_nghiphep}}</td>
+            <td class="text-center">{{data_CheDo_NghiPhep.thoigian_batdau |date:'dd/MM/yyyy'}} -
+              {{data_CheDo_NghiPhep.thoigian_ketthuc |date:'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{data_CheDo_NghiPhep.ngay_duyet|date:'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{data_CheDo_NghiPhep.nguoi_duyet}}</td>
+            <td class="text-center">
+
+              <div *ngFor="let item of data_CheDo_NghiPhep.file_minhchung">
+                <label class="pt-2 btn-open" (click)="openFilre(item)">{{item.title}}</label>
+                <button pButton pRipple (click)="downloadFile(item)" type="button" icon="pi pi-download"
+                  class="p-button-rounded p-button-primary p-button-text"></button>
+              </div>
+            </td>
+
+            <td class="text-center">
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+                (click)="btnEdit(data_CheDo_NghiPhep)">
+
+              </button>
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+                (click)="btnDelete(data_CheDo_NghiPhep)"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+      <br>
+    </div>
+  </div>
+</p-dialog>
+
+
+<ng-template #nsFormEdit let-c="close">
+  <div class="model-header container mt-3">
+    <h4 class="modal-title">{{formState.formTitle}}</h4>
+
+  </div>
+  <div class="modal-body ovic-modal-body">
+    <form [formGroup]="formData">
+      <div class="card" style="padding: 20px;">
+        <div class="row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Lý do nghỉ phép:</label>
+            <!-- <p-dropdown [options]="lydo_nghiphep" optionValue="value" optionLabel="label" placeholder="Chọn..."
+              formControlName="loai_nghiphep" [style]="{'minWidth': '100%'}"></p-dropdown> -->
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="lydo_nghiphep"
+              placeholder="Tuỳ chọn" formControlName="loai_nghiphep" [style]="{'minWidth':'100%'}"></p-dropdown>
+
+          </div>
+        </div>
+        <div class=" row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Ngày bắt đầu nghỉ:</label>
+            <input type="date" class="p-inputtext p-component p-element w-full" formControlName="thoigian_batdau">
+
+          </div>
+
+          <div class="col">
+            <label class="txt-label" for="">Nghỉ đến ngày:</label>
+            <input type="date" class="p-inputtext p-component p-element w-full" formControlName="thoigian_ketthuc">
+
+          </div>
+
+        </div>
+        <div class=" row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Ngày duyệt:</label>
+            <input type="date" class="p-inputtext p-component p-element w-full" formControlName="ngay_duyet">
+          </div>
+          <div class="col">
+            <label class="txt-label" for="">Người duyệt:</label>
+            <input type="text" placeholder="Người duyệt" class="p-inputtext p-component p-element w-full"
+              formControlName="nguoi_duyet">
+
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="txt-label" for="">File minh chứng:</label>
+        </div>
+        <div class="field form-name flex flex-column pb-1" style="flex: 1;">
+          <button (click)="myUploader()" class="btn btn-primary"><i class="pi pi-upload"></i> Upload</button>
+          <input class="d-none" #fileChooser type="file" multiple="true" (change)="fileChnages($event)">
+          <br>
+          <div class="onShowFile flex justify-content-between" *ngFor="let f of fileUploaded">
+            <div class="">
+              <label class="txt-label align-items-center">{{f.title}}</label>
+            </div>
+            <div class="inline">
+              <button pButton pRipple (click)="downloadFile(f)" type="button" icon="pi pi-download"
+                class="p-button-rounded p-button-primary p-button-text"></button>
+              <button pButton pRipple type="button" icon="pi pi-times" (click)="deleteFile(f)"
+                class="p-button-rounded p-button-danger p-button-text"></button>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <br>
+        <div class="flex ">
+          <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
+            class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
+          <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
+            (click)="btnCancel()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

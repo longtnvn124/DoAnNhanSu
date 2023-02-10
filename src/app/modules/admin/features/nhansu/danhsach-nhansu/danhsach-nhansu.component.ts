@@ -13,9 +13,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
 
-import * as XLSX from 'xlsx';
-
-
 interface FilterData {
   value: string;
   type: string;
@@ -230,13 +227,11 @@ export class DanhsachNhansuComponent implements OnInit {
     this.nhansuService.list(1, filter).subscribe({
       next: danhSachNhansu => {
         this.data_ns = danhSachNhansu;
-        console.log(this.data_ns);
 
         this.notificationService.isProcessing(false);
         this.data_ns.forEach((f) => {
           this.ma_ns_auto = 'ns' + [f.id + 1];
-          console.log(this.ma_ns_auto);
-
+  
         })
       },
       error: () => {
