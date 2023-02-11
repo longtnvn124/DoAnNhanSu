@@ -14,7 +14,7 @@ import { CheDo_NghiViec } from '../models/nghi-chedo';
 })
 export class CdNghiviecService {
 
-  private readonly api = getRoute('chedo-nghiphep/');
+  private readonly api = getRoute('chedo-nghiviec/');
   private readonly api_nhansu = getRoute('danhsach-nhansu/');
 
 
@@ -22,12 +22,12 @@ export class CdNghiviecService {
     private helperService: HelperService,
     private httpParamsHeplerService: HttpParamsHeplerService) { }
 
-  list(ma_id: number, filter?: { search: string }): Observable<CheDo_NghiViec[]> {
+  list( filter?: { search: string }): Observable<CheDo_NghiViec[]> {
     let params: HttpParams = new HttpParams();
     if (filter) {
       const conditions: OvicConditionParam[] = [
         {
-          conditionName: "loai",
+          conditionName: "ma_ns",
           condition: OvicQueryCondition.like,
           value: '%' + filter.search + '%'
         },
@@ -45,7 +45,6 @@ export class CdNghiviecService {
   edit(id: number, data: any) {
     return this.http.put<Dto>(this.api + id.toString(), data);
   }
-
 
   add(data: any): Observable<any> {
     return this.http.post<Dto>(this.api, data);

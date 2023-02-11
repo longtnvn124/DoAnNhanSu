@@ -97,7 +97,7 @@ export class ChedoNghiphepComponent implements OnInit {
         this.dataNhansu = data.map(
           r => {
             r['__index'] = ++index;
-            r['__count_nghiviec'] = _count.filter(m => m.ma_ns === r.ma_ns).length;
+            r['__count_nghiphep'] = _count.filter(m => m.ma_ns === r.ma_ns).length;
             return r;
           }
         )
@@ -119,6 +119,9 @@ export class ChedoNghiphepComponent implements OnInit {
         next: () => {
           this.notificationService.isProcessing(false);
           this.loadData();
+          this.load_data_CdNghiPhep();
+          this.notificationService.toastWarning('Thao tác thành công')
+
         },
         error: () => {
           this.notificationService.isProcessing(false);
@@ -140,7 +143,24 @@ export class ChedoNghiphepComponent implements OnInit {
   dataChanged = false;
   public ma_ns_param: string;
 
-  load_data_CdNghiPhep(){
+
+  showInfor(id: any) {
+    this.ma_ns_param = id;
+    console.log(this.ma_ns_param);
+
+    this.dataChanged = false;
+    this.displayMaximizable = true;
+
+    this.load_data_CdNghiPhep();
+  }
+
+  changeForm(changed: boolean) {
+    if (changed) {
+      this.loadData();
+    }
+  }
+
+ load_data_CdNghiPhep(){
     const code_param = this.ma_ns_param ? { search: this.ma_ns_param.trim() } : null;
     this.notificationService.isProcessing(true);
     this.cdNghiphepService.list(code_param).subscribe({
@@ -154,24 +174,6 @@ export class ChedoNghiphepComponent implements OnInit {
       }
     });
   }
-  showInfor(id: any) {
-    this.ma_ns_param = id;
-    console.log(this.ma_ns_param);
-
-    this.dataChanged = false;
-    this.displayMaximizable = true;
-
-    this.load_data_CdNghiPhep();
-
-
-  }
-
-  changeForm(changed: boolean) {
-    if (changed) {
-      this.loadData();
-    }
-  }
-
 
   changeInputMode(formType: 'add' | 'edit', object: CheDo_NghiPhep | null = null) {
     this.fileUploaded = [];
@@ -233,6 +235,7 @@ export class ChedoNghiphepComponent implements OnInit {
                 file_minhchung: [],
               }
             )
+            this.loadData();
             this.load_data_CdNghiPhep();
           }, error: () => {
             this.notificationService.isProcessing(false);
