@@ -26,6 +26,12 @@ export class QhDanhsachService {
     if (filter) {
       const conditions: OvicConditionParam[] = [
         {
+          conditionName: 'nhiem_ky',
+          condition: OvicQueryCondition.like,
+          value: '%' + filter.search + '%',
+          orWhere: 'or'
+        },
+        {
           conditionName: 'ma_quyhoach',
           condition: OvicQueryCondition.equal,
           value: filter.search,

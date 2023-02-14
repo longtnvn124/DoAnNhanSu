@@ -33,7 +33,7 @@ export class NhansuDetaiKhoahocComponent implements OnInit {
     }
   vaitro = [
     { 'label': 'Chủ trì', 'value': 'Chủ trì' },
-    { 'label': 'Chủ trì', 'value': 'Chủ trì' },
+    { 'label': 'Thành viên', 'value': 'Thành viên' },
 
   ]
   formData: FormGroup = this.formBuilder.group({
@@ -67,9 +67,11 @@ export class NhansuDetaiKhoahocComponent implements OnInit {
     const filter = this.param_id ? { search: this.param_id.trim() } : null;
     this.notificationService.isProcessing(true);
     this.nsDetaiKhoahocService.list(1, filter).subscribe({
-      next: dsDeTaiKhoaHoc => {
-        this.dsDeTaiKhoaHoc = dsDeTaiKhoaHoc;
+      next: datadsDeTaiKhoaHoc => {
         this.notificationService.isProcessing(false);
+        this.dsDeTaiKhoaHoc = datadsDeTaiKhoaHoc;
+        console.log(this.dsDeTaiKhoaHoc);
+
       },
       error: () => {
         this.notificationService.isProcessing(false);
@@ -97,7 +99,7 @@ export class NhansuDetaiKhoahocComponent implements OnInit {
   onOpenFormEdit() {
     this.notificationService.openSideNavigationMenu({
       template: this.nsFormEdit,
-      size: 800,
+      size: 600,
     })
   }
   changeInputMode(formType: 'add' | 'edit', object: DeTaiKhoaHoc | null = null) {

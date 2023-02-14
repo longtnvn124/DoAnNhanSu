@@ -1,3 +1,4 @@
+import { NhansuService } from './../../../../shared/services/nhansu.service';
 import { NhanSu } from './../../../../shared/models/nhan-su';
 import { CheDo_NghiPhep } from './../../../../shared/models/nghi-chedo';
 import { CdNghiphepService } from './../../../../shared/services/cd-nghiphep.service';
@@ -24,6 +25,7 @@ export class ChedoNghiphepComponent implements OnInit {
 
   //danhmuc nhân sụ
   dataNhansu: NhanSu[];
+  dt_ds_nhansu: NhanSu[];
 
 
   //chế độ
@@ -74,6 +76,8 @@ export class ChedoNghiphepComponent implements OnInit {
     private notificationService: NotificationService,
     private fileService: FileService,
     private auth: AuthService,
+    private nhansuService: NhansuService,
+
 
 
   ) {
@@ -152,6 +156,7 @@ export class ChedoNghiphepComponent implements OnInit {
     this.displayMaximizable = true;
 
     this.load_data_CdNghiPhep();
+    this.load_data_nhansu();
   }
 
   changeForm(changed: boolean) {
@@ -159,8 +164,21 @@ export class ChedoNghiphepComponent implements OnInit {
       this.loadData();
     }
   }
+  load_data_nhansu(){
+    const param_ns = this.ma_ns_param ? { search: this.ma_ns_param.trim() } : null;
+    this.nhansuService.list(1, param_ns).subscribe({
+      next: dt_nhansu_param => {
+        this.dt_ds_nhansu = dt_nhansu_param;
+        console.log(this.dt_ds_nhansu);
 
- load_data_CdNghiPhep(){
+      },
+      error: () => {
+        this.notificationService.toastError('Lỗi không load được nội dung');
+      }
+
+    })
+  }
+  load_data_CdNghiPhep() {
     const code_param = this.ma_ns_param ? { search: this.ma_ns_param.trim() } : null;
     this.notificationService.isProcessing(true);
     this.cdNghiphepService.list(code_param).subscribe({

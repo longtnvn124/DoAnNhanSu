@@ -1,3 +1,4 @@
+import { OvicFile } from './../../../core/models/file';
 export interface NsQuatrinhXuatngoai {
   id?: number;
   ma_ns: string;
@@ -48,4 +49,13 @@ export interface NsQuatrinhHopdong {
   ngay_ky: string;
   ngay_hethan:string;
   thoihan_hopdong:string;
+}
+
+export interface NsKhenthuong_Kyluat{
+  id ?: number;
+	ma_ns : string;
+  phanloai: string;
+  so_quyetdinh: string;
+  ngaythang:string;
+  file_minhchung:OvicFile[];
 }

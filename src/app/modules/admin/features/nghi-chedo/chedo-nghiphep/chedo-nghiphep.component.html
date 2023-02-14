@@ -50,6 +50,12 @@
 
 <p-dialog (onHide)="changeForm(dataChanged)" header="Danh sách nghỉ phép" [(visible)]="displayMaximizable"
   [modal]="true" [style]="{width: '80vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+  <div class="col" *ngFor="let item of dt_ds_nhansu">
+    <p  >Họ và tên: {{item.hoten}}</p>
+    <p  >Ngày sinh: {{item.ngaysinh|date: 'dd/MM/yyyy'}}</p>
+    <p  >Phòng ban trực thuộc: {{item.phongban}}</p>
+
+  </div>
   <div>
     <div class="header-seach p-3">
       <button pButton pRipple class="p-button-outlined" label="Thêm nghỉ phép" styleClass="p-button-link "

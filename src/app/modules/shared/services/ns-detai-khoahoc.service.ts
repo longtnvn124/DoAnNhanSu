@@ -25,15 +25,10 @@ export class NsDetaiKhoahocService {
     if (filter) {
       const conditions: OvicConditionParam[] = [
         {
-          conditionName: "ten_detai",
-          condition: OvicQueryCondition.like,
-          value: '%' + filter.search + '%'
-        },
-        {
           conditionName: "ma_ns",
           condition: OvicQueryCondition.like,
           value: '%' + filter.search + '%',
-          orWhere:'or'
+          orWhere: 'or'
         },
       ]
       params = this.httpParamsHeplerService.paramsConditionBuilder(conditions);
@@ -48,8 +43,6 @@ export class NsDetaiKhoahocService {
   edit(id: number, data: any) {
     return this.http.put<Dto>(this.api + id.toString(), data);
   }
-
-
   add(data: any): Observable<any> {
     return this.http.post<Dto>(this.api, data);
   }

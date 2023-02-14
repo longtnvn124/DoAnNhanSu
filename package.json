@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o --port=4200",
-    "build": "ng b --prod --aot --outputHashing=all",
+    "build": "ng b --aot ",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

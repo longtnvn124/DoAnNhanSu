@@ -1,3 +1,4 @@
+import { ExportExcelService } from './../../../../shared/services/export-excel.service';
 import { OvicFile } from './../../../../../core/models/file';
 import { HtBdKehoachService } from './../../../../shared/services/ht-bd-kehoach.service';
 import { KeHoacHocTapBoiTuong } from './../../../../shared/models/hoctap-boiduong';
@@ -56,6 +57,7 @@ export class KehoachHoctapBoiduongComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private fileService: FileService,
+    private exportExcelService : ExportExcelService,
 
   ) {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
@@ -239,6 +241,21 @@ export class KehoachHoctapBoiduongComponent implements OnInit {
         this.notificationService.toastError('xoá file thất bại');
       }
     });
+  }
+  // export file
+  columns=[
+    'Id',
+    'Mã số kế hoạch',
+    'Tên kế hoạch',
+    'Nội dung',
+    'Thời gian đào tạo',
+    'Hình thức đạo tạo',
+    'Nơi đào tạo',
+    'Số lượng đào tạo',
+
+  ]
+  exportExcel() {
+    this.exportExcelService.exportAsExcelFile('Kế hoạch học tập bồi dưỡng', '', this.columns, this.keHoacHocTapBoiTuong, 'Kh-hoctap-boiduong', 'Sheet1');
   }
 
 }

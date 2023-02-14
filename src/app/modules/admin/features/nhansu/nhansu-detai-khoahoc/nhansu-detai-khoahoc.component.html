@@ -19,9 +19,9 @@
       <ng-template pTemplate="body" let-dsDeTaiKhoaHoc>
         <tr>
           <td class="text-center">{{dsDeTaiKhoaHoc.ten_detai}}</td>
-          <td class="text-center">{{dsDeTaiKhoaHoc}}</td>
-          <td class="text-center">{{dsDeTaiKhoaHoc.noi_congtac}}</td>
-          <td class="text-center">{{dsDeTaiKhoaHoc.congviec}}</td>
+          <td class="text-center">{{dsDeTaiKhoaHoc.ngay_batdau|date:'dd/MM/yyyy'}}</td>
+          <td class="text-center">{{dsDeTaiKhoaHoc.sothang}}</td>
+          <td class="text-center">{{dsDeTaiKhoaHoc.vaitro}}</td>
           <td class="text-center">
             <button pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
@@ -49,28 +49,27 @@
         <div class=" row mb-2">
           <div class="col">
             <label class="txt-label" for="">Tên đề tài:</label>
-            <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_batdau"
-              [style]="{'minWidth':'100%'}"></p-inputMask>
+            <input type="text" placeholder="Tên đề tài" class="p-inputtext p-component p-element w-full"
+              formControlName="ten_detai">
 
           </div>
 
           <div class="col">
-            <label class="txt-label" for="">Đến năm:</label>
-            <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_ketthuc"
-              [style]="{'minWidth':'100%'}"></p-inputMask>
+            <label class="txt-label" for="">Ngày bắt đầu:</label>
+            <input type="date" class="p-inputtext p-component p-element w-full" formControlName="sothang">
           </div>
 
         </div>
         <div class=" row mb-2">
           <div class="col">
-            <label class="txt-label" for="">Nơi công tác:</label>
-            <input type="text" pinputtext="" placeholder="Nơi công tác" class="p-inputtext p-component p-element w-full"
-              formControlName="noi_congtac">
+            <label class="txt-label" for="">Số tháng:</label>
+            <input type="text" placeholder="Số tháng" class="p-inputtext p-component p-element w-full"
+              formControlName="sothang">
           </div>
           <div class="col">
-            <label class="txt-label" for="">Công việc:</label>
-            <input type="text" pinputtext="" placeholder="Công việc" class="p-inputtext p-component p-element w-full"
-              formControlName="congviec">
+            <label class="txt-label" for="">Vai trò:</label>
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="vaitro" placeholder="Tuỳ chọn"
+              formControlName="vaitro" [style]="{'minWidth':'100%'}" [showClear]="true"></p-dropdown>
 
           </div>
         </div>

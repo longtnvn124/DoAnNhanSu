@@ -1,3 +1,4 @@
+import { ExportExcelService } from './../../../../shared/services/export-excel.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DanhSachQuyHoach } from './../../../../shared/models/quy-hoach';
@@ -59,6 +60,7 @@ export class DanhsachQuyhoachComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private fileService: FileService,
+    private exportExcelService: ExportExcelService,
 
   ) {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
@@ -162,7 +164,7 @@ export class DanhsachQuyhoachComponent implements OnInit {
             this.notificationService.toastSuccess("Thành công");
             this.formData.reset({});
             this.loadData();
-            this.fileUploaded =[];
+            this.fileUploaded = [];
           }, error: () => {
             this.notificationService.toastError("Thêm nhân sự thất bại");
             this.notificationService.isProcessing(false);
@@ -218,13 +220,10 @@ export class DanhsachQuyhoachComponent implements OnInit {
         }
       });
     }
-
   }
-
   downloadFile(file: OvicFile) {
     this.fileService.downloadWithProgress(file.id, file.title).subscribe();
   }
-
   deleteFile(file: OvicFile) {
     this.fileService.deleteFile(file.id).subscribe({
       next: () => {
@@ -236,6 +235,46 @@ export class DanhsachQuyhoachComponent implements OnInit {
       }
     });
   }
+
+  // filter-thông kê
+  filter_nhiemky = [
+    { label: '2021 - 2022', value: '2021 - 2022' },
+    { label: '2022 - 2023', value: '2022 - 2023' },
+    { label: '2023 - 2024', value: '2023 - 2024' },
+  ];
+
+  onChangeDrp1({ value }: { value: any }) {
+
+    if (value) {
+      console.log(value);
+
+      this.search = value;
+      console.log(this.search);
+      this.loadData();
+
+    } else {
+      this.search = '';
+      this.loadData();
+    }
+  }
+
+  // export excel
+  columns=[
+    'Id',
+    'Mã số quyết định',
+    'Tên quyết định quy hoạch',
+    'Nội dung',
+    'Người duyệt',
+    'Ngày ban hành',
+    'Đợt',
+    'Nhiệm kỳ',
+  ]
+  exportExcel() {
+    this.exportExcelService.exportAsExcelFile('Danh sách Quy hoạch', '', this.columns, this.danhSachQuyHoach, 'dsQuyHoach', 'Sheet1');
+  }
+
+
+
 }
 
 

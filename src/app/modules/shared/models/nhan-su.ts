@@ -52,6 +52,5 @@ export interface NhanSu {
   ngaycap: string;
   so_bhxh: string;
   phongban: string,
-
 }
 

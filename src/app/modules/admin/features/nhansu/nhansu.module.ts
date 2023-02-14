@@ -27,7 +27,9 @@ import { SidebarModule } from 'primeng/sidebar';
 import { DropdownModule } from 'primeng/dropdown';
 import { ScrollerModule } from 'primeng/scroller';
 import { InputMaskModule } from 'primeng/inputmask';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
+
+import { NhansuKhenthuongKyluatComponent } from './nhansu-khenthuong-kyluat/nhansu-khenthuong-kyluat.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {CalendarModule} from 'primeng/calendar';
     NhansuTrinhdoTinhocComponent,
     NhansuTrinhdoNgoainguComponent,
     NhansuTrinhdoChinhtriComponent,
-    NhansuDetaiKhoahocComponent
+    NhansuDetaiKhoahocComponent,
+
+    NhansuKhenthuongKyluatComponent
   ],
   imports: [
     CommonModule,

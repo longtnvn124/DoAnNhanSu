@@ -138,15 +138,15 @@ export class DanhsachNhansuComponent implements OnInit {
     congviec_tuyendung: ['', [Validators.required]],
     ngay_tuyendung: ['', [Validators.required]],
     coquan_tuyendung: ['', [Validators.required]],
-    chucdanh: ['', [Validators.required]],
-    chucvu: ['', [Validators.required]],
+    chucdanh: [''],
+    chucvu: [''],
     congviec_chinh: ['', [Validators.required]],
-    ngach_congchuc: ['', [Validators.required]],
-    ma_ngach: ['', [Validators.required]],
-    bacluong: ['', [Validators.required]],
-    heso: ['', [Validators.required]],
-    ngay_huong: ['', [Validators.required]],
-    phucap_chucvu: ['' ],
+    ngach_congchuc: [''],
+    ma_ngach: ['',],
+    bacluong: ['',],
+    heso: ['',],
+    ngay_huong: [''],
+    phucap_chucvu: [''],
     phucap_khac: [''],
     trinhdo_phothong: ['', [Validators.required]],
     trinhdo_chuyenmon: ['', [Validators.required]],
@@ -170,10 +170,10 @@ export class DanhsachNhansuComponent implements OnInit {
     nhommau: [''],
     hang_thuongbinh: [''],
     giadinh_chinhsach: [''],
-    so_cccd: [''],
-    ngaycap: [''],
-    so_bhxh: [''],
-    phongban: [''],
+    so_cccd: ['', [Validators.required]],
+    ngaycap: ['', [Validators.required]],
+    so_bhxh: ['', [Validators.required]],
+    phongban: ['', [Validators.required]],
   });
   private OBSERVER_SEARCH_DATA = new Subject<string>();
 
@@ -231,7 +231,7 @@ export class DanhsachNhansuComponent implements OnInit {
         this.notificationService.isProcessing(false);
         this.data_ns.forEach((f) => {
           this.ma_ns_auto = 'ns' + [f.id + 1];
-  
+
         })
       },
       error: () => {
@@ -498,12 +498,6 @@ export class DanhsachNhansuComponent implements OnInit {
   }
 
   getDanhmuc() {
-
-    // dmPhongban: DmPhongban[];
-    // dmDantoc: DmDantoc[];
-    // dmTongiao: DmTongiao[];
-    // dmChucdanh: DmChucdanh[];
-    // dmChucvu: DmChucvu[];
     this.notificationService.isProcessing(true);
     forkJoin<[DmPhongban[], DmChucdanh[], DmChucvu[], DmDantoc[], DmTongiao[], DmTrinhdoVanhoa[], DmTrinhdoChinhtri[]]>([
       this.nhansuService.getdata_phongban(),

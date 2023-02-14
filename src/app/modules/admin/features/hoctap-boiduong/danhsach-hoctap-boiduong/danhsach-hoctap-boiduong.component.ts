@@ -51,9 +51,7 @@ export class DanhsachHoctapBoiduongComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams
       .subscribe(params => {
-        // console.log(params);
         this.param_id = this.auth.decryptData(params['code']);
-        // console.log(this.param_id);
       }
       );
     this.loadData();
@@ -180,4 +178,6 @@ export class DanhsachHoctapBoiduongComponent implements OnInit {
   formCancel() {
     this.notificationService.closeSideNavigationMenu();
   }
+
+ 
 }
