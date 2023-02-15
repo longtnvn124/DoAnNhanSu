@@ -8,6 +8,7 @@ import { NotificationService } from '@core/services/notification.service';
 import { FileService } from '@core/services/file.service';
 import { AuthService } from '@core/services/auth.service';
 import { CdNghiviecService } from '@modules/shared/services/cd-nghiviec.service';
+import { NhansuService } from '@modules/shared/services/nhansu.service';
 
 @Component({
   selector: 'app-chedo-nghiviec',
@@ -21,6 +22,8 @@ export class ChedoNghiviecComponent implements OnInit {
 
   //danhmuc nhân sụ
   dataNhansu: NhanSu[];
+  dt_ds_nhansu: NhanSu[];
+
 
 
   //chế độ
@@ -63,6 +66,7 @@ export class ChedoNghiviecComponent implements OnInit {
     private notificationService: NotificationService,
     private fileService: FileService,
     private auth: AuthService,
+    private nhansuService : NhansuService
 
 
   ) {
@@ -144,12 +148,28 @@ export class ChedoNghiviecComponent implements OnInit {
     this.displayMaximizable = true;
 
     this.load_data_CdNghiPhep();
+    this.load_data_nhansu();
+
   }
 
   changeForm(changed: boolean) {
     if (changed) {
       this.loadData();
     }
+  }
+  load_data_nhansu() {
+    const param_ns = this.ma_ns_param ? { search: this.ma_ns_param.trim() } : null;
+    this.nhansuService.list(1, param_ns).subscribe({
+      next: dt_nhansu_param => {
+        this.dt_ds_nhansu = dt_nhansu_param;
+        console.log(this.dt_ds_nhansu);
+
+      },
+      error: () => {
+        this.notificationService.toastError('Lỗi không load được nội dung');
+      }
+
+    })
   }
 
   load_data_CdNghiPhep() {

@@ -35,6 +35,7 @@ const routes: Routes = [
   { path: 'trinhdo-ngoaingu', component: NhansuTrinhdoNgoainguComponent },
   { path: 'trinhdo-chinhtri', component: NhansuTrinhdoChinhtriComponent },
   { path: 'detai-khoahoc', component: NhansuDetaiKhoahocComponent },
+  { path: 'nhansu-kyluat', component: NhansuDetaiKhoahocComponent },
 
 
 ];

@@ -55,6 +55,7 @@ export interface NsKhenthuong_Kyluat{
   id ?: number;
 	ma_ns : string;
   phanloai: string;
+  ten: string;
   so_quyetdinh: string;
   ngaythang:string;
   file_minhchung:OvicFile[];
