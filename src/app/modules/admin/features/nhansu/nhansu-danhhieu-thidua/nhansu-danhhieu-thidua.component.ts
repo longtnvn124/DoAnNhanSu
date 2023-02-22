@@ -1,3 +1,4 @@
+import { DmDanhhieu } from './../../../../shared/models/danh-muc';
 import { NhanSu } from './../../../../shared/models/nhan-su';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from '@core/services/helper.service';
@@ -6,7 +7,7 @@ import { NsDanhhieuThiduaService } from '@modules/shared/services/ns-danhhieu-th
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, forkJoin } from 'rxjs';
 import { NsDanhhieuThidua } from '@modules/shared/models/ns-quatrinh';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
@@ -21,6 +22,8 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
   param_id: string = '';
   search: string = '';
   nsDanhhieuThidua: NsDanhhieuThidua[];
+  dmDanhhieu:DmDanhhieu[];
+
   formState: {
     formType: 'add' | 'edit',
     showForm: boolean,
@@ -65,6 +68,7 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
       }
       );
     this.loadData();
+    this.getDanhmuc();
 
   }
 
@@ -106,7 +110,7 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
   onOpenFormEdit() {
     this.notificationService.openSideNavigationMenu({
       template: this.nsFormEdit,
-      size: 800,
+      size: 600,
     })
   }
 
@@ -190,6 +194,15 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
   }
   btnCancel() {
     this.notificationService.closeSideNavigationMenu();
+  }
+  getDanhmuc(){
+    forkJoin<[DmDanhhieu[]]>([
+      this.nsDanhhieuThiduaService.getdata_danhmuc_danhhieu()
+    ]).subscribe({
+      next:([dmDanhhieu])=>{
+        this.dmDanhhieu = dmDanhhieu
+      }
+    })
   }
 
 

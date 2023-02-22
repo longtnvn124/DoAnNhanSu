@@ -98,7 +98,7 @@ export class DoituongQuyhoachComponent implements OnInit {
   }
 
   changeInputMode(formType: 'add' | 'edit', object: DoiTuongQuyHoach | null = null) {
-    this.formState.formTitle = formType === 'add' ? 'Thêm quá trình hợp đồng' : 'Cập nhật hợp đồng';
+    this.formState.formTitle = formType === 'add' ? 'Thêm đối tượng quy hoạch' : 'Cập nhật đối tượng quy hoạch';
     this.notificationService.isProcessing(true);
     this.formState.formType = formType;
     if (formType === 'add') {

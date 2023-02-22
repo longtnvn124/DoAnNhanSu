@@ -69,13 +69,13 @@ export class NhansuService {
         },
         {
           conditionName: 'dantoc',
-          condition: OvicQueryCondition.like,
+          condition: OvicQueryCondition.equal,
           value: '%' + filter.search + '%',
           orWhere: 'or'
         },
         {
           conditionName: 'tongiao',
-          condition: OvicQueryCondition.like,
+          condition: OvicQueryCondition.equal,
           value: '%' + filter.search + '%',
           orWhere: 'or'
         },

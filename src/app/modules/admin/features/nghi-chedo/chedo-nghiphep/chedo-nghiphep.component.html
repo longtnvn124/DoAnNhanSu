@@ -157,7 +157,22 @@
         <div class="row mb-2">
           <label class="txt-label" for="">File minh chứng:</label>
         </div>
-        c
+        <div class="field form-name flex flex-column pb-1" style="flex: 1;">
+          <button (click)="myUploader()" class="btn btn-primary"><i class="pi pi-upload"></i> Upload</button>
+          <input class="d-none" #fileChooser type="file" multiple="true" (change)="fileChnages($event)">
+          <br>
+          <div class="onShowFile flex justify-content-between" *ngFor="let f of fileUploaded">
+            <div class="">
+              <label class="txt-label align-items-center">{{f.title}}</label>
+            </div>
+            <div class="inline">
+              <button pButton pRipple (click)="downloadFile(f)" type="button" icon="pi pi-download"
+                class="p-button-rounded p-button-primary p-button-text"></button>
+              <button pButton pRipple type="button" icon="pi pi-times" (click)="deleteFile(f)"
+                class="p-button-rounded p-button-danger p-button-text"></button>
+            </div>
+          </div>
+        </div>
         <br>
         <div class="flex ">
           <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple

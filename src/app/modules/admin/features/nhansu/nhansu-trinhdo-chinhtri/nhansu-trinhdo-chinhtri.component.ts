@@ -1,13 +1,14 @@
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NotificationService } from '@core/services/notification.service';
-import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
+import { Subject, distinctUntilChanged, debounceTime, forkJoin } from 'rxjs';
 import { NsTrinhdoChinhtri } from './../../../../shared/models/ns-trinhdo';
 import { NsTrinhdoChinhtriService } from './../../../../shared/services/ns-trinhdo-chinhtri.service';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { HelperService } from '@core/services/helper.service';
 import { AuthService } from '@core/services/auth.service';
+import { DmTrinhdoChinhtri } from '@modules/shared/models/danh-muc';
 
 @Component({
   selector: 'app-nhansu-trinhdo-chinhtri',
@@ -18,7 +19,7 @@ export class NhansuTrinhdoChinhtriComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   search: string = '';
   param_id: string = '';
-
+  dmChinhtri:DmTrinhdoChinhtri[];
   nsTrinhdoChinhtri: NsTrinhdoChinhtri[];
   formState: {
     formType: 'add' | 'edit',
@@ -66,6 +67,7 @@ export class NhansuTrinhdoChinhtriComponent implements OnInit {
       }
       );
     this.loadData();
+    this.getDanhmuc();
 
   }
 
@@ -184,6 +186,15 @@ export class NhansuTrinhdoChinhtriComponent implements OnInit {
     }
   }
   formCancel() {     this.notificationService.closeSideNavigationMenu();
+  }
+  getDanhmuc(){
+    forkJoin<[DmTrinhdoChinhtri[]]>([
+      this.nsTrinhdoChinhtriService.getdata_danhmuc_danhhieu()
+    ]).subscribe({
+      next:([dmChinhtri])=>{
+        this.dmChinhtri = dmChinhtri
+      }
+    })
   }
 
 }

@@ -47,4 +47,5 @@ export class DmDanhhieuService {
   add(data: any): Observable<any> {
     return this.http.post<Dto>(this.api, data);
   }
+  
 }

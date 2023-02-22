@@ -103,7 +103,7 @@ export class NhansuDetaiKhoahocComponent implements OnInit {
     })
   }
   changeInputMode(formType: 'add' | 'edit', object: DeTaiKhoaHoc | null = null) {
-    this.formState.formTitle = formType === 'add' ? 'Thêm quá trình công tác' : 'Cập nhật quá trình công tác';
+    this.formState.formTitle = formType === 'add' ? 'Thêm đề tài khoa học' : 'Cập nhật đề tài khoa học';
     this.notificationService.isProcessing(true);
     this.formState.formType = formType;
     if (formType === 'add') {

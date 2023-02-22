@@ -6,6 +6,7 @@ import { HelperService } from '@core/services/helper.service';
 import { HttpParamsHeplerService } from '@core/services/http-params-hepler.service';
 import { getRoute } from '@env';
 import { Observable, map } from 'rxjs';
+import { DmTrinhdoChinhtri } from '../models/danh-muc';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { Observable, map } from 'rxjs';
 export class NsTrinhdoChinhtriService {
 
   private readonly api = getRoute('trinhdo-chinhtri/');
+  private readonly api_dm_trinhdo_chinhtri = getRoute('danhmuc-trinhdo-chinhtri/');
 
   constructor(
     private http: HttpClient,
@@ -28,7 +30,7 @@ export class NsTrinhdoChinhtriService {
           conditionName: 'ma_ns',
           condition: OvicQueryCondition.like,
           value: '%' + filter.search + '%',
-          orWhere:'or'
+          orWhere: 'or'
         },
       ]
       params = this.httpParamsHeplerService.paramsConditionBuilder(conditions);
@@ -48,5 +50,9 @@ export class NsTrinhdoChinhtriService {
 
   add_chinhtri(data: any): Observable<any> {
     return this.http.post<Dto>(this.api, data);
+  }
+
+  getdata_danhmuc_danhhieu(): Observable<DmTrinhdoChinhtri[]> {
+    return this.http.get<Dto>(this.api_dm_trinhdo_chinhtri).pipe(map(res => res.data));
   }
 }

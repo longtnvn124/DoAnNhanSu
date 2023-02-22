@@ -181,7 +181,7 @@ export class DanhsachNhansuComponent implements OnInit {
 
   filterList: FilterData[] = [];
 
-  selected: FilterData;
+  // selected: FilterData;
 
   filterdrp1 = [
     { label: 'Chức vụ', value: 'chucvu' },
@@ -227,7 +227,6 @@ export class DanhsachNhansuComponent implements OnInit {
     this.nhansuService.list(1, filter).subscribe({
       next: danhSachNhansu => {
         this.data_ns = danhSachNhansu;
-
         this.notificationService.isProcessing(false);
         this.data_ns.forEach((f) => {
           this.ma_ns_auto = 'ns' + [f.id + 1];
@@ -260,12 +259,12 @@ export class DanhsachNhansuComponent implements OnInit {
   onOpenFormEdit() {
     this.notificationService.openSideNavigationMenu({
       template: this.nsFormEdit,
-      size: 700,
+      size: 800,
     })
   }
 
   changeInputMode(formType: 'add' | 'edit', object: NhanSu | null = null) {
-    this.formState.formTitle = formType === 'add' ? 'Thêm Nhân sự' : 'Cập nhật nhân sự';
+    this.formState.formTitle = formType === 'add' ? 'Thêm hồ sơ nhân sự' : 'Cập nhật hồ sơ nhân sự';
     this.notificationService.isProcessing(true);
     // this.showFform();
     this.formState.formType = formType;
@@ -332,7 +331,7 @@ export class DanhsachNhansuComponent implements OnInit {
       this.formState.object = object;
       this.formData.reset(
         {
-          ma_ns: this.ma_ns_auto,
+          ma_ns: object.ma_ns,
           hoten: object.hoten,
           hoten_khac: object.hoten_khac,
           gioitinh: object.gioitinh,
@@ -356,6 +355,7 @@ export class DanhsachNhansuComponent implements OnInit {
           bacluong: object.bacluong,
           heso: object.heso,
           ngay_huong: object.ngay_huong,
+          phucap_chucvu: object.phucap_chucvu,
           phucap_khac: object.phucap_khac,
           trinhdo_phothong: object.trinhdo_phothong,
           trinhdo_chuyenmon: object.trinhdo_chuyenmon,
@@ -398,8 +398,6 @@ export class DanhsachNhansuComponent implements OnInit {
   }
   updateForm() {
     if (this.formData.valid) {
-      // const getMa_ns = 'ns'+ {''}
-      // this.formData.get('ma_ns').setValue(getMa_ns)
       if (this.formState.formType === "add") {
         this.notificationService.isProcessing(true);
         this.nhansuService.add_nhansu(this.formData.value).subscribe({
@@ -539,8 +537,6 @@ export class DanhsachNhansuComponent implements OnInit {
     { label: 'Phòng ban', value: 'Phòng ban', key: 'phongban' },
     { label: 'Tôn giáo', value: 'Tôn giáo', key: 'tongiao' },
     { label: 'Trình độ văn hoá', value: 'Trình độ văn hoá', key: 'trinhdovanhoa' },
-    { label: 'Trình độ ngoại ngữ', value: 'Trình độ ngoại ngữ', key: 'trinhdongoaingu' },
-    { label: 'Trình độ tin học', value: 'Trình độ tin học', key: 'trinhdotinhoc' },
     { label: 'Trình độ lý luận lý chính trị', value: 'Trình độ lý luận lý chính trị', key: 'trinhdochinhtri' },
   ];
 

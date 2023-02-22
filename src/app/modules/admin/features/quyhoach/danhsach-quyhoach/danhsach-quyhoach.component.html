@@ -1,6 +1,7 @@
 <div class="p-card intro-y">
   <div class="danh-sach-ho-so__head p-3 flex flex-wrap justify-content-between">
-    <div><input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
+    <div>
+      <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
         class="p-inputtext p-component p-element" />
       <p-button label="Thêm quyết định" styleClass="p-button-link" icon="pi pi-plus" (click)="btnAdd()"></p-button>
     </div>
@@ -134,14 +135,13 @@
               </div>
             </div>
           </div>
-          <br>
         </form>
-        <div class="flex ">
-          <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
-            class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
-          <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
-            (click)="btnCancel()"></button>
-        </div>
+      </div>
+      <div class="flex p-1">
+        <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
+          class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
+        <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
+          (click)="btnCancel()"></button>
       </div>
     </div>
   </div>

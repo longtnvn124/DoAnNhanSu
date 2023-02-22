@@ -1,8 +1,10 @@
 <div class="p-card intro-y">
-  <div class="danh-sach-ho-so__head p-3 ">
-    <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
-      class="p-inputtext p-component p-element" />
-    <p-button label="Thêm Kế hoạch" styleClass="p-button-link" icon="pi pi-plus" (click)="btnAdd()"></p-button>
+  <div class="danh-sach-ho-so__head p-3 flex flex-wrap justify-content-between">
+    <div>
+      <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
+        class="p-inputtext p-component p-element" />
+      <p-button label="Thêm Kế hoạch" styleClass="p-button-link" icon="pi pi-plus" (click)="btnAdd()"></p-button>
+    </div>
 
     <div class="flex justify-content-center text-center">
       <p-button label="Xuất excel" styleClass="p-button-link" class="flex justify-content-center text-center"
@@ -17,7 +19,7 @@
         <tr>
           <th class="text-center">Kế hoạch học tập bồi dưỡng</th>
           <th class="text-center">Thời gian</th>
-          <th class="text-center">Thời gian</th>
+          <th class="text-center">Hình thức đào tạo</th>
           <th class="text-center">Địa điểm</th>
           <th class="text-center">Số lượng</th>
           <th class="text-center" style="width: 10rem;">Thao tác</th>

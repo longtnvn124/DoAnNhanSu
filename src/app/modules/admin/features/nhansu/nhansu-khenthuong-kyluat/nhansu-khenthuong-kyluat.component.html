@@ -20,12 +20,11 @@
       <ng-template pTemplate="body" let-nsKhenthuong_Kyluat>
         <tr>
           <td class="text-center">{{nsKhenthuong_Kyluat.phanloai}}</td>
-          <td class="text-center">{{nsKhenthuong_Kyluat.ten}}</td>
+          <td class="text-center" style="max-width: 16rem;">{{nsKhenthuong_Kyluat.ten}}</td>
           <td class="text-center">{{nsKhenthuong_Kyluat.so_quyetdinh}}</td>
           <td class="text-center">{{nsKhenthuong_Kyluat.ngaythang|date :'dd/MM/yyyy'}}</td>
 
-          <td class="text-center">
-
+          <td class="text-center" >
             <div *ngFor="let item of nsKhenthuong_Kyluat.file_minhchung">
               <label class="pt-2 btn-open" (click)="openFilre(item)">{{item.title}}</label>
               <button pButton pRipple (click)="downloadFile(item)" type="button" icon="pi pi-download"

@@ -9,12 +9,14 @@ import { Observable } from 'rxjs';
 import { Dto, OvicConditionParam, OvicQueryCondition } from '@core/models/dto';
 import { map } from 'rxjs/operators';
 import { NsDanhhieuThidua } from '../models/ns-quatrinh';
+import { DmDanhhieu } from '../models/danh-muc';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NsDanhhieuThiduaService {
   private readonly api = getRoute('danhhieu-thidua/');
+  private readonly api_danhmuc_danhhieu = getRoute('danhmuc-danhhieu-thidua/');
 
   constructor(
     private http: HttpClient,
@@ -54,5 +56,8 @@ export class NsDanhhieuThiduaService {
 
   add_danhhieu(data: any): Observable<any> {
     return this.http.post<Dto>(this.api, data);
+  }
+  getdata_danhmuc_danhhieu(): Observable<DmDanhhieu[]> {
+    return this.http.get<Dto>(this.api_danhmuc_danhhieu).pipe(map(res => res.data));
   }
 }

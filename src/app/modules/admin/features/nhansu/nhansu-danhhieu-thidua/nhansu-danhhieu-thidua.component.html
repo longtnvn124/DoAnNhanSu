@@ -19,7 +19,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-nsDanhhieuThidua>
         <tr>
-          <td class="text-left" style="padding-left: 40px;">{{nsDanhhieuThidua.ten_danhhieu}}</td>
+          <td class="text-left">{{nsDanhhieuThidua.ten_danhhieu}}</td>
           <td class="text-center">{{nsDanhhieuThidua.ki_hieu}}</td>
           <td class="text-center">{{nsDanhhieuThidua.cap}}</td>
           <td class="text-center">{{nsDanhhieuThidua.thoigian | date:"dd/MM/yyyy"}}</td>
@@ -51,8 +51,9 @@
         <div class=" row mb-2">
           <div class="col">
             <label class="txt-label" for="">Danh hiệu thi đua:</label>
-            <input type="text" pinputtext="" placeholder="Danh hiệu thi đua"
-              class="p-inputtext p-component p-element w-full" formControlName="ten_danhhieu">
+            <p-dropdown class="w-full" optionLabel="ten_danhhieu" optionValue="ten_danhhieu" [options]="dmDanhhieu"
+              [showClear]="true" placeholder="Tuỳ chọn" formControlName="ten_danhhieu"
+              [style]="{'minWidth':'100%'}"></p-dropdown>
           </div>
 
         </div>
@@ -65,7 +66,7 @@
           <div class="col">
             <label class="txt-label" for="">Cấp:</label>
             <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="cap" formControlName="cap"
-              placeholder="Chọn..." [style]="{'minWidth':'100%'}">
+              [showClear]="true" placeholder="Chọn..." [style]="{'minWidth':'100%'}">
             </p-dropdown>
           </div>
         </div>

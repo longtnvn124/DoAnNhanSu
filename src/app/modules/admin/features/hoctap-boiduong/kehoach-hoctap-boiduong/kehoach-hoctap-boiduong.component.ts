@@ -107,7 +107,7 @@ export class KehoachHoctapBoiduongComponent implements OnInit {
 
   changeInputMode(formType: 'add' | 'edit', object: KeHoacHocTapBoiTuong | null = null) {
     this.fileUploaded = [];
-    this.formState.formTitle = formType === 'add' ? 'Thêm quyết định quy hoạch' : 'Cập nhật quyết định quy hoạch';
+    this.formState.formTitle = formType === 'add' ? 'Thêm kế hoạch' : 'Cập nhật kế hoạch';
     this.formState.formType = formType;
     if (formType === 'add') {
       this.formData.reset(
