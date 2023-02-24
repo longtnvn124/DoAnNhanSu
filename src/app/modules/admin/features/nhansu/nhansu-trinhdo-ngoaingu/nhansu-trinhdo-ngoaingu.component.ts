@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 import { NsTrinhdoNgoaingu } from '@modules/shared/models/ns-trinhdo';
 import { NsTrinhdoNgoainguService } from '@modules/shared/services/ns-trinhdo-ngoaingu.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +16,8 @@ import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
   styleUrls: ['./nhansu-trinhdo-ngoaingu.component.css']
 })
 export class NhansuTrinhdoNgoainguComponent implements OnInit {
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
+
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   search: string = '';
   param_id: string = '';
@@ -168,7 +171,7 @@ export class NhansuTrinhdoNgoainguComponent implements OnInit {
             this.notificationService.isProcessing(false);
           }
         })
-         
+
       } else {
         this.notificationService.isProcessing(true);
         const index = this.nsTrinhdoNgoaingu.findIndex(r => r.id === this.formState.object.id);

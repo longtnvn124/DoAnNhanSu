@@ -1,7 +1,8 @@
+import { NsPermissions } from './../../../../shared/models/nhan-su';
 import { NsDetaiKhoahocService } from './../../../../shared/services/ns-detai-khoahoc.service';
 import { Subject } from 'rxjs/internal/Subject';
 import { DeTaiKhoaHoc } from './../../../../shared/models/ns-detai-khoahoc';
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
@@ -15,6 +16,9 @@ import { distinctUntilChanged, debounceTime } from 'rxjs';
 })
 export class NhansuDetaiKhoahocComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false }
+
   search: string = '';
   param_id: string = '';
 

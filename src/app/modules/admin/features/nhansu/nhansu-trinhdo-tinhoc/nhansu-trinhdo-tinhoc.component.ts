@@ -1,10 +1,11 @@
 import { NsTrinhdoTinhocService } from './../../../../shared/services/ns-trinhdo-tinhoc.service';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 import { NsTrinhdoTinhoc } from '@modules/shared/models/ns-trinhdo';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { distinctUntilChanged, debounceTime, Subject } from 'rxjs';
@@ -15,6 +16,7 @@ import { distinctUntilChanged, debounceTime, Subject } from 'rxjs';
   styleUrls: ['./nhansu-trinhdo-tinhoc.component.css']
 })
 export class NhansuTrinhdoTinhocComponent implements OnInit {
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   search: string = '';
   param_id: string = '';

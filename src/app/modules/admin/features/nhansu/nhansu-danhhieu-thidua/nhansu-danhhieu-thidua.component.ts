@@ -1,12 +1,13 @@
+import { Permission } from '@core/models/auth';
 import { DmDanhhieu } from './../../../../shared/models/danh-muc';
-import { NhanSu } from './../../../../shared/models/nhan-su';
+import { NhanSu, NsPermissions } from './../../../../shared/models/nhan-su';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
 import { NsDanhhieuThiduaService } from '@modules/shared/services/ns-danhhieu-thidua.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged, forkJoin } from 'rxjs';
 import { NsDanhhieuThidua } from '@modules/shared/models/ns-quatrinh';
 import { ActivatedRoute } from '@angular/router';
@@ -19,10 +20,13 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class NhansuDanhhieuThiduaComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
+
   param_id: string = '';
   search: string = '';
   nsDanhhieuThidua: NsDanhhieuThidua[];
-  dmDanhhieu:DmDanhhieu[];
+  dmDanhhieu: DmDanhhieu[];
 
   formState: {
     formType: 'add' | 'edit',
@@ -195,11 +199,11 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
   btnCancel() {
     this.notificationService.closeSideNavigationMenu();
   }
-  getDanhmuc(){
+  getDanhmuc() {
     forkJoin<[DmDanhhieu[]]>([
       this.nsDanhhieuThiduaService.getdata_danhmuc_danhhieu()
     ]).subscribe({
-      next:([dmDanhhieu])=>{
+      next: ([dmDanhhieu]) => {
         this.dmDanhhieu = dmDanhhieu
       }
     })

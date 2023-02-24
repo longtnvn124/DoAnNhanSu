@@ -27,14 +27,24 @@
           <td class="text-center">{{nsQuaTrinhDaoTao.hoc_vi}}</td>
           <td class="text-center">{{nsQuaTrinhDaoTao.ketqua}}</td>
           <td class="text-center">
-            <button pRipple pButton type="button"
-              class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
-              (click)="editQtDaoTao(nsQuaTrinhDaoTao)">
-
-            </button>
-            <button pRipple pButton type="button"
-              class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
-              (click)="deleteDanhhieu(nsQuaTrinhDaoTao)"></button>
+            <ng-container *ngIf="permission.isExpert; else showLable">
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+                (click)="editQtDaoTao(nsQuaTrinhDaoTao)">
+              </button>
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+                (click)="deleteDanhhieu(nsQuaTrinhDaoTao)"></button>
+            </ng-container>
+            <ng-template #showLable>
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary" icon="pi pi-file-edit"
+               >
+              </button>
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary" icon="pi pi-trash"
+                ></button>
+            </ng-template>
           </td>
         </tr>
       </ng-template>
@@ -54,14 +64,16 @@
 
           <div class="col">
             <label class="txt-label" for="">Từ năm:</label>
-            <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_batdau" [style]="{'minWidth':'100%'}"></p-inputMask>
+            <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_batdau"
+              [style]="{'minWidth':'100%'}"></p-inputMask>
           </div>
 
           <div class="col">
             <label class="txt-label" for="">Đến năm:</label>
             <!-- <input type="text" pinputtext="" placeholder="(oooo)" class="p-inputtext p-component p-element w-full"
               formControlName="tg_ketthuc"> -->
-              <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_ketthuc" [style]="{'minWidth':'100%'}"></p-inputMask>
+            <p-inputMask mask="9999" placeholder="yyyy" slotChar="yyyy" formControlName="tg_ketthuc"
+              [style]="{'minWidth':'100%'}"></p-inputMask>
           </div>
 
         </div>

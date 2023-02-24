@@ -4,11 +4,12 @@ import { NotificationService } from '@core/services/notification.service';
 import { Subject, distinctUntilChanged, debounceTime, forkJoin } from 'rxjs';
 import { NsTrinhdoChinhtri } from './../../../../shared/models/ns-trinhdo';
 import { NsTrinhdoChinhtriService } from './../../../../shared/services/ns-trinhdo-chinhtri.service';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { HelperService } from '@core/services/helper.service';
 import { AuthService } from '@core/services/auth.service';
 import { DmTrinhdoChinhtri } from '@modules/shared/models/danh-muc';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 
 @Component({
   selector: 'app-nhansu-trinhdo-chinhtri',
@@ -16,6 +17,7 @@ import { DmTrinhdoChinhtri } from '@modules/shared/models/danh-muc';
   styleUrls: ['./nhansu-trinhdo-chinhtri.component.css']
 })
 export class NhansuTrinhdoChinhtriComponent implements OnInit {
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   search: string = '';
   param_id: string = '';

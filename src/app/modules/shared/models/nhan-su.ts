@@ -1,3 +1,5 @@
+import { Type } from "@angular/core";
+
 export interface NhanSu {
   id?: number;
   ma_ns: string;
@@ -54,3 +56,10 @@ export interface NhanSu {
   phongban: string,
 }
 
+
+export type NsPermissions = {
+  isExpert: boolean;
+  canAdd: boolean;
+  canEdit: boolean;
+  canDelete: boolean;
+}

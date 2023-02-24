@@ -1,13 +1,14 @@
 import { NsTrinhdoVanhoaService } from './../../../../shared/services/ns-trinhdo-vanhoa.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NsTrinhdoVanhoa } from './../../../../shared/models/ns-trinhdo';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 
 @Component({
   selector: 'app-nhansu-trinhdo-vanhoa',
@@ -16,6 +17,8 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class NhansuTrinhdoVanhoaComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
+
 
   search: string = '';
   param_id: string = '';

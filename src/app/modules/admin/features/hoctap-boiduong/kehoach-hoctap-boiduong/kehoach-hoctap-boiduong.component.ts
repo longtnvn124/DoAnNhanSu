@@ -57,7 +57,7 @@ export class KehoachHoctapBoiduongComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private fileService: FileService,
-    private exportExcelService : ExportExcelService,
+    private exportExcelService: ExportExcelService,
 
   ) {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
@@ -243,7 +243,7 @@ export class KehoachHoctapBoiduongComponent implements OnInit {
     });
   }
   // export file
-  columns=[
+  columns = [
     'Id',
     'Mã số kế hoạch',
     'Tên kế hoạch',
@@ -255,7 +255,7 @@ export class KehoachHoctapBoiduongComponent implements OnInit {
 
   ]
   exportExcel() {
-    this.exportExcelService.exportAsExcelFile('Kế hoạch học tập bồi dưỡng', '', this.columns, this.keHoacHocTapBoiTuong, 'Kh-hoctap-boiduong', 'Sheet1');
+    this.exportExcelService.exportAsExcelFile('Kế hoạch học tập bồi dưỡng', '', this.columns, this.keHoacHocTapBoiTuong.map(({ id, ma_kehoach, ten_kehoach, noidung_kehoach, thoigian, hinhthuc_daotao, diadiem_daotao, soluong }) => ({ id, ma_kehoach, ten_kehoach, noidung_kehoach, thoigian, hinhthuc_daotao, diadiem_daotao, soluong })), 'Kh-hoctap-boiduong', 'Sheet1');
   }
 
 }

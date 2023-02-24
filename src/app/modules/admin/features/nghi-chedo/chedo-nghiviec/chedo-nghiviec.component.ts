@@ -158,8 +158,8 @@ export class ChedoNghiviecComponent implements OnInit {
     }
   }
   load_data_nhansu() {
-    const param_ns = this.ma_ns_param ? { search: this.ma_ns_param.trim() } : null;
-    this.nhansuService.list(1, param_ns).subscribe({
+    const param_ns = this.ma_ns_param ? { key : 'ma_ns'  , value: this.ma_ns_param.trim() } : null;
+    this.nhansuService.list(param_ns).subscribe({
       next: dt_nhansu_param => {
         this.dt_ds_nhansu = dt_nhansu_param;
         console.log(this.dt_ds_nhansu);

@@ -69,10 +69,15 @@ export class ChitietComponent implements OnInit {
     this.fileService.getImageContent(file.id.toString(10)).subscribe({
       next: blob => {
         window.open(blob, '_blank',);
-
       },
       error: () => { },
     });
 
+  }
+
+
+  display: boolean = false;
+  btnRegister(){
+    this.display = true;
   }
 }

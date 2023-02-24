@@ -1,9 +1,10 @@
 
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 import { NsQuatrinhXuatngoai } from '@modules/shared/models/ns-quatrinh';
 import { NgQuatrinhXoatngoaiService } from '@modules/shared/services/ns-quatrinh-xoatngoai.service';
 import { async, debounceTime, distinctUntilChanged, Subject } from 'rxjs';
@@ -17,6 +18,7 @@ import { async, debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 })
 export class NhansuQuatrinhXuatngoaiComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
   search: string = '';
   param_id: string = '';
 

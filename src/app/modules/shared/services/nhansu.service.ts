@@ -33,56 +33,79 @@ export class NhansuService {
     private httpParamsHeplerService: HttpParamsHeplerService
   ) { }
 
-  list(nhansu_id: number, filter?: { search: string }): Observable<NhanSu[]> {
+  list(filter?: { search?: string, key?: string, value?: string }): Observable<NhanSu[]> {
+    const conditions: OvicConditionParam[] = [];
     let params: HttpParams = new HttpParams();
     if (filter) {
-      const conditions: OvicConditionParam[] = [
-        {
-          conditionName: 'hoten',
-          condition: OvicQueryCondition.like,
-          value: '%' + filter.search + '%',
-          orWhere: 'or'
-        },
-        {
-          conditionName: 'ma_ns',
-          condition: OvicQueryCondition.equal,
-          value: filter.search,
-          orWhere: 'or'
-        },
-        {
-          conditionName: 'phongban',
-          condition: OvicQueryCondition.like,
-          value: '%' + filter.search + '%',
-          orWhere: 'or'
-        },
-        {
-          conditionName: 'chucvu',
-          condition: OvicQueryCondition.like,
-          value: '%' + filter.search + '%',
-          orWhere: 'or'
-        },
-        {
-          conditionName: 'chucdanh',
-          condition: OvicQueryCondition.like,
-          value: '%' + filter.search + '%',
-          orWhere: 'or'
-        },
-        {
-          conditionName: 'dantoc',
-          condition: OvicQueryCondition.equal,
-          value: '%' + filter.search + '%',
-          orWhere: 'or'
-        },
-        {
-          conditionName: 'tongiao',
-          condition: OvicQueryCondition.equal,
-          value: '%' + filter.search + '%',
-          orWhere: 'or'
-        },
+      if (filter.search) {
+        conditions.push(
+          {
+            conditionName: 'hoten',
+            condition: OvicQueryCondition.like,
+            value: '%' + filter.search + '%'
+          },
+        );
+      }
 
-      ]
-      params = this.httpParamsHeplerService.paramsConditionBuilder(conditions);
+      if (filter.value && filter.key) {
+        conditions.push(
+          {
+            conditionName: filter.key,
+            condition: OvicQueryCondition.equal,
+            value: filter.value,
+            orWhere: 'and'
+          },
+        );
+      }
+
+      // const conditions: OvicConditionParam[] = [
+      //   {
+      //     conditionName: 'hoten',
+      //     condition: OvicQueryCondition.like,
+      //     value: '%' + filter.search + '%',
+      //     orWhere: 'or'
+      //   },
+      //   // {
+      //   //   conditionName: 'ma_ns',
+      //   //   condition: OvicQueryCondition.equal,
+      //   //   value: filter.search,
+      //   //   orWhere: 'or'
+      //   // },
+      //   // {
+      //   //   conditionName: 'phongban',
+      //   //   condition: OvicQueryCondition.like,
+      //   //   value: '%' + filter.search + '%',
+      //   //   orWhere: 'or'
+      //   // },
+      //   // {
+      //   //   conditionName: 'chucvu',
+      //   //   condition: OvicQueryCondition.like,
+      //   //   value: '%' + filter.search + '%',
+      //   //   orWhere: 'or'
+      //   // },
+      //   // {
+      //   //   conditionName: 'chucdanh',
+      //   //   condition: OvicQueryCondition.like,
+      //   //   value: '%' + filter.search + '%',
+      //   //   orWhere: 'or'
+      //   // },
+      //   // {
+      //   //   conditionName: 'dantoc',
+      //   //   condition: OvicQueryCondition.equal,
+      //   //   value: '%' + filter.search + '%',
+      //   //   orWhere: 'or'
+      //   // },
+      //   // {
+      //   //   conditionName: 'tongiao',
+      //   //   condition: OvicQueryCondition.equal,
+      //   //   value: '%' + filter.search + '%',
+      //   //   orWhere: 'or'
+      //   // },
+
+      // ]
+
     }
+    params = this.httpParamsHeplerService.paramsConditionBuilder(conditions);
     return this.http.get<Dto>(this.api, { params }).pipe(map(res => res.data));
 
   }

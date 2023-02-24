@@ -1,3 +1,4 @@
+import { NsPermissions } from './../../../../shared/models/nhan-su';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from '@core/services/helper.service';
@@ -5,7 +6,7 @@ import { NotificationService } from '@core/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 import { NsQuatrinhDaotaoService } from './../../../../shared/services/ns-quatrinh-daotao.service';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NsQuaTrinhDaoTao } from '@modules/shared/models/ns-quatrinh';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
@@ -17,6 +18,8 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class NhansuQuatrinhDaotaoComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
+
   search: string = '';
   param_id: string = '';
   nsQuaTrinhDaoTao: NsQuaTrinhDaoTao[];

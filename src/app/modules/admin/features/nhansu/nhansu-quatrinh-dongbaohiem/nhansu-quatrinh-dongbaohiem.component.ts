@@ -1,11 +1,12 @@
 import { AuthService } from '@core/services/auth.service';
 import { NsQuatrinhDongbaohiemService } from './../../../../shared/services/ns-quatrinh-dongbaohiem.service';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '@core/services/notification.service';
 import { NsQuatrinhDongbaohiem } from '@modules/shared/models/ns-quatrinh';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 
 @Component({
   selector: 'app-nhansu-quatrinh-dongbaohiem',
@@ -14,6 +15,7 @@ import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 })
 export class NhansuQuatrinhDongbaohiemComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
   search: string = '';
   param_id: string = '';
 

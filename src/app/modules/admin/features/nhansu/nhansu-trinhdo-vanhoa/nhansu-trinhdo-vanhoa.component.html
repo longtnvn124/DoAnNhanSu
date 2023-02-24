@@ -18,14 +18,24 @@
 
           <td class="text-center">{{NsTrinhdoVanhoa.ten_trinhdo_vanhoa}}</td>
           <td class="text-center">
-            <button pRipple pButton type="button"
-              class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
-              (click)="btnEdit(NsTrinhdoVanhoa)">
+            <ng-container *ngIf="permission.isExpert; else showLable">
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+                (click)="btnEdit(NsTrinhdoVanhoa)">
+              </button>
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+                (click)="btnDelete(NsTrinhdoVanhoa)"></button>
+            </ng-container>
 
-            </button>
-            <button pRipple pButton type="button"
-              class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
-              (click)="btnDelete(NsTrinhdoVanhoa)"></button>
+            <ng-template #showLable>
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary" icon="pi pi-file-edit">
+              </button>
+              <button pRipple pButton type="button"
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary"
+                icon="pi pi-trash"></button>
+            </ng-template>
           </td>
         </tr>
       </ng-template>
@@ -46,8 +56,9 @@
 
           <div class="col">
             <label class="txt-label" for="">Trình độ văn hoá:</label>
-            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="trinhdo" placeholder="Tuỳ chọn..." [showClear]="true"
-              formControlName="ten_trinhdo_vanhoa" [style]="{'minWidth':'50%'}">
+            <p-dropdown class="w-full" optionLabel="label" optionValue="value" [options]="trinhdo"
+              placeholder="Tuỳ chọn..." [showClear]="true" formControlName="ten_trinhdo_vanhoa"
+              [style]="{'minWidth':'50%'}">
 
             </p-dropdown>
           </div>

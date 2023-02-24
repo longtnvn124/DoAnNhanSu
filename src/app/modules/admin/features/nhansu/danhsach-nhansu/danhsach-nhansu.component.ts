@@ -43,9 +43,15 @@ export class DanhsachNhansuComponent implements OnInit {
 
   ma_ns_auto: string = '';
 
-  search: string = '';
+  // search: string = '';
 
   data_ns: NhanSu[];
+
+  filter = {
+    search: '',
+    value: '',
+    key: ''
+  }
 
   formState: {
     formType: 'add' | 'edit',
@@ -189,11 +195,16 @@ export class DanhsachNhansuComponent implements OnInit {
     { label: 'Dân tộc', value: 'dantoc' },
     { label: 'Phòng ban', value: 'phongban' },
     { label: 'Tôn giáo', value: 'tongiao' },
-    { label: 'Trình độ văn hoá', value: 'trinhdovanhoa' },
-    { label: 'Trình độ ngoại ngữ', value: 'trinhdongoaingu' },
-    { label: 'Trình độ tin học', value: 'trinhdotinhoc' },
-    { label: 'Trình độ lý luận lý chính trị', value: 'trinhdochinhtri' },
+    { label: 'Trình độ văn hoá', value: 'trinhdo_phothong' },
+    { label: 'Trình độ lý luận lý chính trị', value: 'lyluan_chinhtri' },
   ];
+
+  permission = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
 
 
   constructor(
@@ -205,12 +216,20 @@ export class DanhsachNhansuComponent implements OnInit {
     private exportExcelService: ExportExcelService
 
   ) {
-    this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
+
   }
   __value: any = [];
 
 
   ngOnInit(): void {
+    this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
+    const isStaffExpert = this.auth.roles.reduce((collector, role) => collector || role === 'chuyen_vien', false);
+    this.permission.isExpert = isStaffExpert;
+    this.permission.canAdd = isStaffExpert;
+    this.permission.canEdit = isStaffExpert;
+    this.permission.canDelete = isStaffExpert;
+
+
     this.loadData();
     this.getDanhmuc();
     this.onChangeDrp1(this.__value);
@@ -219,12 +238,12 @@ export class DanhsachNhansuComponent implements OnInit {
   }
 
   searchData() {
-    this.OBSERVER_SEARCH_DATA.next(this.search);
+    this.OBSERVER_SEARCH_DATA.next(this.filter.search);
   }
   loadData() {
-    const filter = this.search ? { search: this.search.trim() } : null;
+    // const filter = this.search ? { search: this.search.trim() } : null;
     this.notificationService.isProcessing(true);
-    this.nhansuService.list(1, filter).subscribe({
+    this.nhansuService.list(this.filter).subscribe({
       next: danhSachNhansu => {
         this.data_ns = danhSachNhansu;
         this.notificationService.isProcessing(false);
@@ -520,8 +539,8 @@ export class DanhsachNhansuComponent implements OnInit {
         const filterdmChucvu = dmChucvu.map(r => ({ value: r.ten_chucvu, type: 'chucvu' }));
         const filterdmDantoc = dmDantoc.map(r => ({ value: r.ten_dantoc, type: 'dantoc' }));
         const filterdmTongiao = dmTongiao.map(r => ({ value: r.ten_tongiao, type: 'tongiao' }));
-        const filterdmTrinhdoVanhoa = dmTrinhdoVanhoa.map(r => ({ value: r.ten_trinhdo, type: 'trinhdovanhoa' }));
-        const filterdmTrinhdoChinhtri = dmTrinhdoChinhtri.map(r => ({ value: r.ten_trinhdo, type: 'trinhdochinhtri' }));
+        const filterdmTrinhdoVanhoa = dmTrinhdoVanhoa.map(r => ({ value: r.ten_trinhdo, type: 'trinhdo_phothong' }));
+        const filterdmTrinhdoChinhtri = dmTrinhdoChinhtri.map(r => ({ value: r.ten_trinhdo, type: 'lyluan_chinhtri' }));
         this.allFilterList = [].concat(filterdmPhongban, filterdmChucdanh, filterdmChucvu, filterdmDantoc, filterdmTongiao, filterdmTrinhdoVanhoa, filterdmTrinhdoChinhtri);
         this.notificationService.isProcessing(false)
       }, error: () => {
@@ -530,39 +549,30 @@ export class DanhsachNhansuComponent implements OnInit {
     });
   }
 
-  filterDropdown1 = [
-    { label: 'Chức vụ', value: 'Chức vụ', key: 'chucvu' },
-    { label: 'Chức danh', value: 'Chức danh', key: 'chucdanh' },
-    { label: 'Dân tộc', value: 'Dân tộc', key: 'dantoc' },
-    { label: 'Phòng ban', value: 'Phòng ban', key: 'phongban' },
-    { label: 'Tôn giáo', value: 'Tôn giáo', key: 'tongiao' },
-    { label: 'Trình độ văn hoá', value: 'Trình độ văn hoá', key: 'trinhdovanhoa' },
-    { label: 'Trình độ lý luận lý chính trị', value: 'Trình độ lý luận lý chính trị', key: 'trinhdochinhtri' },
-  ];
 
 
   onChangeDrp1({ value }: { value: any }) {
-    this.filterList = value ? this.allFilterList.filter(p => p.type === value) : [];
-    // console.log(this.filterList);
+    // this.filterList = value ? this.allFilterList.filter(p => p.type === value) : [];
 
+    this.filter.value = '';
+    this.filter.key = '';
     if (value) {
       this.filterList = this.allFilterList.filter(p => p.type === value);
+      console.log(this.filterList);
 
     }
     else {
-      this.search = '';
-      // console.log(this.search);
+      this.filterList = [];
       this.loadData();
     }
-
   }
 
   onChangeDrp2({ value }: { value: FilterData }) {
     if (value) {
-      this.search = value.value;
+      this.filter.key = value.type;
+      this.filter.value = value.value;
       this.loadData();
     }
-
   }
 
   exportExcel() {

@@ -1,3 +1,4 @@
+import { NsPermissions } from './../../../../shared/models/nhan-su';
 import { NsQuatrinhCongtac } from './../../../../shared/models/ns-quatrinh';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from '@core/services/helper.service';
@@ -6,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 
 import { NsQuatrinhCongtacService } from './../../../../shared/services/ns-quatrinh-congtac.service';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 
@@ -17,6 +18,7 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class NhansuQuatrinhCongtacComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
   search: string = '';
   param_id: string = '';
 

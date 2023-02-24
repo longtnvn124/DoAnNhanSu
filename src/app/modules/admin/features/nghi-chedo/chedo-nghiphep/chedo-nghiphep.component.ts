@@ -165,8 +165,8 @@ export class ChedoNghiphepComponent implements OnInit {
     }
   }
   load_data_nhansu(){
-    const param_ns = this.ma_ns_param ? { search: this.ma_ns_param.trim() } : null;
-    this.nhansuService.list(1, param_ns).subscribe({
+    const param_ns = this.ma_ns_param ? { key : 'ma_ns' ,value: this.ma_ns_param.trim() } : null;
+    this.nhansuService.list(param_ns).subscribe({
       next: dt_nhansu_param => {
         this.dt_ds_nhansu = dt_nhansu_param;
         console.log(this.dt_ds_nhansu);
@@ -295,7 +295,7 @@ export class ChedoNghiphepComponent implements OnInit {
           this.formData.get('file_minhchung').setValue(files);
           this.fileUploaded = files;
           event.target.files = null;
-          console.log(files);
+          // console.log(files);
           this.notificationService.toastSuccess("Upload file thành công");
         },
         error: () => {

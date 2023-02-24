@@ -259,7 +259,7 @@ export class DanhsachQuyhoachComponent implements OnInit {
   }
 
   // export excel
-  columns=[
+  columns = [
     'Id',
     'Mã số quyết định',
     'Tên quyết định quy hoạch',
@@ -270,7 +270,7 @@ export class DanhsachQuyhoachComponent implements OnInit {
     'Nhiệm kỳ',
   ]
   exportExcel() {
-    this.exportExcelService.exportAsExcelFile('Danh sách Quy hoạch', '', this.columns, this.danhSachQuyHoach, 'dsQuyHoach', 'Sheet1');
+    this.exportExcelService.exportAsExcelFile('Danh sách Quy hoạch', '', this.columns, this.danhSachQuyHoach.map(({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky }) => ({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky })), 'dsQuyHoach', 'Sheet1');
   }
 
 

@@ -1,7 +1,8 @@
+import { NsPermissions } from './../../../../shared/models/nhan-su';
 import { ActivatedRoute } from '@angular/router';
 import { NsKhenthuongKyluatService } from './../../../../shared/services/ns-khenthuong-kyluat.service';
 import { NsKhenthuong_Kyluat } from './../../../../shared/models/ns-quatrinh';
-import { Component, OnInit, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
@@ -17,6 +18,8 @@ import { FileService } from '@core/services/file.service';
 export class NhansuKhenthuongKyluatComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   @ViewChild('fileChooser') fileChooser: ElementRef<HTMLInputElement>;
+
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false }
 
   search: string = '';
   param_id: string = '';
@@ -68,7 +71,7 @@ export class NhansuKhenthuongKyluatComponent implements OnInit {
         this.param_id = this.auth.decryptData(params['code']);
       }
       );
-      console.log(this.param_id);
+    console.log(this.param_id);
 
     this.loadData();
   }

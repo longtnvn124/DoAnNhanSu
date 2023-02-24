@@ -1,6 +1,6 @@
 import { NsQuatrinhHopdongService } from './../../../../shared/services/ns-quatrinh-hopdong.service';
 import { NsQuatrinhHopdong } from './../../../../shared/models/ns-quatrinh';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 
 @Component({
   selector: 'app-nhansu-quatrinh-hopdong',
@@ -15,7 +16,7 @@ import { AuthService } from '@core/services/auth.service';
   styleUrls: ['./nhansu-quatrinh-hopdong.component.css']
 })
 export class NhansuQuatrinhHopdongComponent implements OnInit {
-
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   search: string = '';
   param_id: string = '';

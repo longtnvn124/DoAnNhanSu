@@ -1,3 +1,5 @@
+import { NsPermissions } from './../../../../shared/models/nhan-su';
+import { Permission } from '@core/models/auth';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { NhansuService } from '../../../../shared/services/nhansu.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,6 +21,13 @@ export class ChitietNhansuComponent implements OnInit {
 
   private OBSERVER_SEARCH_DATA = new Subject<string>();
 
+  permission: NsPermissions = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private nhanSuService: NhansuService,
@@ -31,6 +40,10 @@ export class ChitietNhansuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'chuyen_vien', false);
+    this.permission.canAdd = this.permission.isExpert;
+    this.permission.canDelete = this.permission.isExpert;
+    this.permission.canEdit = this.permission.isExpert;
     this.activatedRoute.queryParams
       .subscribe(params => {
         this.ns_id = this.auth.decryptData(params['code']);
@@ -40,10 +53,10 @@ export class ChitietNhansuComponent implements OnInit {
   }
   loadData() {
     // this.OBSERVER_SEARCH_DATA.next(this.ns_id);
-    const filter = this.ns_id ? { search: this.ns_id.trim() } : null;
+    const filter = this.ns_id ? { key: 'ma_ns', value: this.ns_id.trim() } : null;
     // const filter = this.ns_id;
     this.notificationService.isProcessing(true);
-    this.nhanSuService.list(1, filter).subscribe({
+    this.nhanSuService.list(filter).subscribe({
       next: dsNhansu => {
         this.data_ns = dsNhansu;
         this.notificationService.isProcessing(false);

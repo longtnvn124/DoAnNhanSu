@@ -48,6 +48,10 @@
             class="p-button-rounded p-button-primary p-button-text"></button> -->
         </div>
       </div>
+      <br>
+      <div class="flex justify-content-end">
+        <button pButton pRipple type="button" label="Đăng ký" class="p-button-success" (click)="btnRegister()"></button>
+      </div>
     </div>
 
   </div>
@@ -59,3 +63,9 @@
     </div>
   </div>
 </div>
+
+
+<!-- <p-dialog (onHide)="changeForm(dataChanged)" header="Đăng ký" [(visible)]="displayMaximizable"
+  [modal]="true" [style]="{width: '80vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+</p-dialog> -->

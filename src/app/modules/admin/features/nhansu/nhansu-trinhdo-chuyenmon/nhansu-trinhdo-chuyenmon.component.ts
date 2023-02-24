@@ -1,13 +1,14 @@
 import { NsTrinhdoChinhtriService } from './../../../../shared/services/ns-trinhdo-chinhtri.service';
 import { NsTrinhdoChuyenmonService } from './../../../../shared/services/ns-trinhdo-chuyenmon.service';
 import { NsTrinhdoChuyenmon } from './../../../../shared/models/ns-trinhdo';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 
 @Component({
   selector: 'app-nhansu-trinhdo-chuyenmon',
@@ -15,6 +16,7 @@ import { AuthService } from '@core/services/auth.service';
   styleUrls: ['./nhansu-trinhdo-chuyenmon.component.css']
 })
 export class NhansuTrinhdoChuyenmonComponent implements OnInit {
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
 
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
 
