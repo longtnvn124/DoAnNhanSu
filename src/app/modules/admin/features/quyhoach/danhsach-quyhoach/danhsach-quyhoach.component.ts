@@ -1,3 +1,4 @@
+import { NsPermissions } from './../../../../shared/models/nhan-su';
 import { ExportExcelService } from './../../../../shared/services/export-excel.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -66,7 +67,17 @@ export class DanhsachQuyhoachComponent implements OnInit {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
   }
 
+  permission: NsPermissions = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'chuyen_vien', false);
+    this.permission.canAdd = this.permission.isExpert;
+    this.permission.canDelete = this.permission.isExpert;
+    this.permission.canEdit = this.permission.isExpert;
     this.loadData();
 
   }
@@ -270,7 +281,8 @@ export class DanhsachQuyhoachComponent implements OnInit {
     'Nhiệm kỳ',
   ]
   exportExcel() {
-    this.exportExcelService.exportAsExcelFile('Danh sách Quy hoạch', '', this.columns, this.danhSachQuyHoach.map(({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky }) => ({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky })), 'dsQuyHoach', 'Sheet1');
+    this.exportExcelService.exportAsExcelFile('Danh sách Quy hoạch', '', this.columns,
+    this.danhSachQuyHoach.map(({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky }) => ({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky })), 'dsQuyHoach', 'Sheet1');
   }
 
 

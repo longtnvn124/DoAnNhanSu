@@ -1,4 +1,4 @@
-<div class="text-lg mb-2"> Chi tiết quy hoạch</div>
+<div class="text-lg mb-2"> Chi tiết</div>
 <div class="grid">
   <div class="col container-left m-1">
     <div class="card p-4" *ngFor="let data of data_keHoacHocTapBoiTuong">
@@ -34,8 +34,7 @@
         </p>
       </div>
       <div class=" text-lg font-weight-bold">File:</div>
-      <div
-        class="border-netke m-auto text-lg flex align-items-center justify-content-center w-50 mb-2 "
+      <div class="border-netke m-auto text-lg flex align-items-center justify-content-center w-50 mb-2 "
         *ngFor="let item of data.file_kehoach">
         <!-- <div class="block">
           <label class="txt-label align-items-center">{{item.title}}</label>
@@ -44,7 +43,7 @@
           <label class="pt-2 btn-open" (click)="openFilre(item)">{{item.title}}</label>
           <button pButton pRipple (click)="downloadFile(item)" type="button" icon="pi pi-download"
             class="p-button-rounded p-button-primary p-button-text"></button>
-            <!-- <button pButton pRipple (click)="openFilre(item)" type="button" icon="pi pi-download"
+          <!-- <button pButton pRipple (click)="openFilre(item)" type="button" icon="pi pi-download"
             class="p-button-rounded p-button-primary p-button-text"></button> -->
         </div>
       </div>
@@ -55,7 +54,7 @@
     </div>
 
   </div>
-  <div class="col container-right m-1" >
+  <div class="col container-right m-1">
     <div class="card p-4">
       <div class="text-2xl font-medium mb-3 border-bottom-1 ">Danh sách đăng ký </div>
       <!-- <app-doituong-quyhoach></app-doituong-quyhoach> -->
@@ -65,7 +64,13 @@
 </div>
 
 
-<!-- <p-dialog (onHide)="changeForm(dataChanged)" header="Đăng ký" [(visible)]="displayMaximizable"
-  [modal]="true" [style]="{width: '80vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="display" [modal]="true" [style]="{width: '80vw'}" [maximizable]="true" [draggable]="false">
+  <div *ngFor="let data of data_keHoacHocTapBoiTuong">
 
-</p-dialog> -->
+    <div class="flex justify-content-center font-bold"> {{data.ten_kehoach}}</div>
+  </div>
+  <div class="col">
+    <input type="text">
+  </div>
+
+</p-dialog>

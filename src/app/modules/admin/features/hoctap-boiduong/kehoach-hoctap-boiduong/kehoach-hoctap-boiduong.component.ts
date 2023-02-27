@@ -10,6 +10,7 @@ import { FileService } from '@core/services/file.service';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 
 @Component({
   selector: 'app-kehoach-hoctap-boiduong',
@@ -63,7 +64,18 @@ export class KehoachHoctapBoiduongComponent implements OnInit {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
   }
 
+  permission: NsPermissions = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
+
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role ==='chuyen_vien',false);
+    this.permission.canAdd  = this.permission.isExpert;
+    this.permission.canEdit  = this.permission.isExpert;
+    this.permission.canDelete  = this.permission.isExpert;
     this.loadData();
 
   }

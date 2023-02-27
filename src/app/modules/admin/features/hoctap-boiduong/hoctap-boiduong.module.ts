@@ -15,6 +15,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
+import {DialogModule} from 'primeng/dialog';
+
 import { ChitietComponent } from './chitiet/chitiet.component';
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ChitietComponent } from './chitiet/chitiet.component';
     InputTextareaModule,
     FileUploadModule,
     HttpClientModule,
+    DialogModule,
+    
   ]
 })
 export class HoctapBoiduongModule { }

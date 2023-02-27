@@ -5,6 +5,7 @@ import { OvicFile } from '@core/models/file';
 import { AuthService } from '@core/services/auth.service';
 import { FileService } from '@core/services/file.service';
 import { NotificationService } from '@core/services/notification.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 import { DanhSachQuyHoach } from '@modules/shared/models/quy-hoach';
 import { QhDanhsachService } from '@modules/shared/services/qh-danhsach.service';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
@@ -32,7 +33,17 @@ export class ChitietQuyhoachComponent implements OnInit {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
 
   }
+  permission: NsPermissions = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'chuyen_vien', false);
+    this.permission.canAdd = this.permission.isExpert;
+    this.permission.canDelete = this.permission.isExpert;
+    this.permission.canEdit = this.permission.isExpert;
     this.activatedRoute.queryParams
       .subscribe(params => {
         console.log(params); // { ns_id: "price" }
@@ -68,7 +79,7 @@ export class ChitietQuyhoachComponent implements OnInit {
     this.fileService.getImageContent(file.id.toString(10)).subscribe({
       next: blob => {
         window.open(blob, '_blank',);
-      
+
       },
       error: () => { },
     });

@@ -1,10 +1,11 @@
 import { DoiTuongQuyHoach } from './../../../../shared/models/quy-hoach';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { HelperService } from '@core/services/helper.service';
 import { NotificationService } from '@core/services/notification.service';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 import { QhDoituongService } from '@modules/shared/services/qh-doituong.service';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 
@@ -15,6 +16,7 @@ import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 })
 export class DoituongQuyhoachComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
   search: string = '';
   param_id: string = '';
   doiTuongQuyHoach: DoiTuongQuyHoach[];

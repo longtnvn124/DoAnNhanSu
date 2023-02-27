@@ -1,5 +1,5 @@
 import { NhansuService } from './../../../../shared/services/nhansu.service';
-import { NhanSu } from './../../../../shared/models/nhan-su';
+import { NhanSu, NsPermissions } from './../../../../shared/models/nhan-su';
 import { CheDo_NghiPhep } from './../../../../shared/models/nghi-chedo';
 import { CdNghiphepService } from './../../../../shared/services/cd-nghiphep.service';
 
@@ -83,7 +83,17 @@ export class ChedoNghiphepComponent implements OnInit {
   ) {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
   }
+  permission: NsPermissions = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'chuyen_vien', false);
+    this.permission.canAdd = this.permission.isExpert;
+    this.permission.canDelete = this.permission.isExpert;
+    this.permission.canEdit = this.permission.isExpert;
     this.loadData();
     this.load_data_CdNghiPhep();
 

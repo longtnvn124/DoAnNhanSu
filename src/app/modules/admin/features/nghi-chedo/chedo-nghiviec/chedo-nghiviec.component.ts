@@ -1,5 +1,6 @@
+import { Permission } from '@core/models/auth';
 import { OvicFile } from '@core/models/file';
-import { NhanSu } from './../../../../shared/models/nhan-su';
+import { NhanSu, NsPermissions } from './../../../../shared/models/nhan-su';
 import { Component, OnInit, ViewChild, TemplateRef, ElementRef } from '@angular/core';
 import { CheDo_NghiViec } from '@modules/shared/models/nghi-chedo';
 import { Subject, debounceTime, distinctUntilChanged, forkJoin } from 'rxjs';
@@ -72,7 +73,18 @@ export class ChedoNghiviecComponent implements OnInit {
   ) {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
   }
+  permission: NsPermissions = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
+
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role ==='chuyen_vien',false);
+    this.permission.canAdd  = this.permission.isExpert;
+    this.permission.canEdit  = this.permission.isExpert;
+    this.permission.canDelete  = this.permission.isExpert;
     this.loadData();
     this.load_data_CdNghiPhep();
 

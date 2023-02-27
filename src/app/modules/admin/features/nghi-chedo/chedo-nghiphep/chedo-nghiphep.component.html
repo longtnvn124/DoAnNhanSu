@@ -51,13 +51,13 @@
 <p-dialog (onHide)="changeForm(dataChanged)" header="Danh sách nghỉ phép" [(visible)]="displayMaximizable"
   [modal]="true" [style]="{width: '80vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
   <div class="col" *ngFor="let item of dt_ds_nhansu">
-    <p  >Họ và tên: {{item.hoten}}</p>
-    <p  >Ngày sinh: {{item.ngaysinh|date: 'dd/MM/yyyy'}}</p>
-    <p  >Phòng ban trực thuộc: {{item.phongban}}</p>
+    <p>Họ và tên: {{item.hoten}}</p>
+    <p>Ngày sinh: {{item.ngaysinh|date: 'dd/MM/yyyy'}}</p>
+    <p>Phòng ban trực thuộc: {{item.phongban}}</p>
 
   </div>
   <div>
-    <div class="header-seach p-3">
+    <div *ngIf="permission.canAdd" class="header-seach p-3">
       <button pButton pRipple class="p-button-outlined" label="Thêm nghỉ phép" styleClass="p-button-link "
         icon="pi pi-plus " (click)="btnAdd()"></button>
 
@@ -91,14 +91,25 @@
             </td>
 
             <td class="text-center">
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
-                (click)="btnEdit(data_CheDo_NghiPhep)">
+              <ng-container *ngIf="permission.isExpert;else show">
+                <button pRipple pButton type="button"
+                  class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+                  (click)="btnEdit(data_CheDo_NghiPhep)">
+                </button>
+                <button pRipple pButton type="button"
+                  class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+                  (click)="btnDelete(data_CheDo_NghiPhep)"></button>
+              </ng-container>
+              <ng-template #show>
+                <button pRipple pButton type="button"
+                  class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary"
+                  icon="pi pi-file-edit"></button>
+                <button pRipple pButton type="button"
+                  class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary"
+                  icon="pi pi-trash"></button>
+              </ng-template>
 
-              </button>
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
-                (click)="btnDelete(data_CheDo_NghiPhep)"></button>
+
             </td>
           </tr>
         </ng-template>
