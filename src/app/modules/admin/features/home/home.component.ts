@@ -1,73 +1,124 @@
-import { Component , OnInit } from '@angular/core';
+import { CheDo_NghiViec } from '@modules/shared/models/nghi-chedo';
+import { CdNghiviecService } from './../../../shared/services/cd-nghiviec.service';
+import { HelperService } from './../../../../core/services/helper.service';
+import { filter } from 'rxjs/operators';
+import { NhanSu } from './../../../shared/models/nhan-su';
+import { NhansuService } from './../../../shared/services/nhansu.service';
+import { Component, OnInit } from '@angular/core';
 import { DropdownOptions } from '@shared/models/dropdown-options';
-import { debounceTime , distinctUntilChanged , Subject , Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, Subscription, forkJoin } from 'rxjs';
 import { AutoUnsubscribeOnDestroy } from '@core/utils/decorator';
-
+import { NotificationService } from '@core/services/notification.service';
+import { Router } from '@angular/router';
 @AutoUnsubscribeOnDestroy()
-@Component( {
-	selector    : 'app-home' ,
-	templateUrl : './home.component.html' ,
-	styleUrls   : [ './home.component.css' ]
-} )
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
 export class HomeComponent implements OnInit {
 
-	departments : DropdownOptions[] = [
-		{ name : 'Khoa Công nghệ thông tin' , value : '100' , key : 'donvi_id' } ,
-		{ name : 'Khoa Điện tử viễn thông' , value : '101' , key : 'donvi_id' } ,
-		{ name : 'Khoa Công nghệ Tự động hóa' , value : '102' , key : 'donvi_id' } ,
-		{ name : 'Khoa Tin học kinh tế' , value : '103' , key : 'donvi_id' }
-	];
-	selectedDepartment : DropdownOptions;
+  sum_ns: any;
+  sum_gioitinh_nam: any;
+  sum_gioitinh_nu: any;
+  sum_tongiao: any;
+  sum_dantoc: any;
+  data_age: any;
+  sum_nghihuu: any;
 
-	years : DropdownOptions[] = [
-		{ name : '2018' , value : '2018' , key : 'namhoc' } ,
-		{ name : '2019' , value : '2019' , key : 'namhoc' } ,
-		{ name : '2020' , value : '2020' , key : 'namhoc' } ,
-		{ name : '2021' , value : '2021' , key : 'namhoc' } ,
-		{ name : '2022' , value : '2022' , key : 'namhoc' } ,
-		{ name : '2023' , value : '2023' , key : 'namhoc' }
-	];
-	selectedYear : DropdownOptions;
+  countPersonByAges = { thirtyYld: 0, fromThirtyToFortyFiveYld: 0, fromFortyFiveToSixtyYld: 0 };
+  datanhansu: NhanSu[];
+  cdNghiviec: CheDo_NghiViec[];
 
-	semesters : DropdownOptions[] = [
-		{ name : 'Học kỳ 1' , value : '1' , key : 'hocky' } ,
-		{ name : 'Học kỳ 2' , value : '2' , key : 'hocky' } ,
-		{ name : 'Học kỳ 3' , value : '3' , key : 'hocky' } ,
-		{ name : 'Cả năm' , value : '4' , key : 'hocky' }
-	];
-	selectedSemester : DropdownOptions;
+  constructor(
+    private nhansuService: NhansuService,
+    private notificationService: NotificationService,
+    private helperService: HelperService,
+    private cdNghiviecService: CdNghiviecService,
+    private router :Router,
+  ) { }
 
-	subscription = new Subscription();
+  ngOnInit(): void {
+    this.loaddata();
 
-	searchText : string = '';
+  }
 
-	private readonly OBSERVER_SEARCH_DATA = new Subject();
+  loaddata(): void {
 
-	private readonly OBSERVER_ON_TYPE_SEARCH_TEXT = new Subject<string>();
+    const cDate = new Date();
 
-	constructor() {
-	}
+    const currentTime = cDate.getTime() + 111600000; // ngày hiện tại + thêm 1 ngày
 
-	ngOnInit() : void {
-		const observeSearchData = this.OBSERVER_SEARCH_DATA.asObservable().pipe( debounceTime( 200 ) ).subscribe( () => this.search() );
-		this.subscription.add( observeSearchData );
+    // //new Date(year, monthIndex, day)
+    // const lastThirtyYear = new Date(cDate.getFullYear() - 30, cDate.getMonth(), cDate.getDate() - 1, cDate.getHours());
 
-		const observeTypeSearchText = this.OBSERVER_ON_TYPE_SEARCH_TEXT.asObservable().pipe( debounceTime( 500 ) , distinctUntilChanged() ).subscribe( () => this.search() );
-		this.subscription.add( observeTypeSearchText );
-	}
 
-	search() {
-		const query = [ { key : 'search_text' , value : this.searchText } , this.selectedDepartment , this.selectedYear , this.selectedSemester ].map( ( { key , value } ) => key + '=' + value ).join( '&' );
-		// console.log( query );
-	}
+    // console.log(cDate.toDateString())
+    // console.log(lastThirtyYear.toDateString())
+    // console.log(cDate.getTime() - lastThirtyYear.getTime());
 
-	onTypeSearchText( event : Event ) {
-		event.stopPropagation();
-		this.OBSERVER_ON_TYPE_SEARCH_TEXT.next( this.searchText );
-	}
+    this.notificationService.isProcessing(true);
 
-	searching() {
-		this.OBSERVER_ON_TYPE_SEARCH_TEXT.next( this.searchText );
-	}
+    this.nhansuService.list().subscribe({
+      next: datanhansu => {
+        this.notificationService.isProcessing(false);
 
+        this.datanhansu = datanhansu;
+        this.sum_ns = this.datanhansu.length.toString();
+        this.sum_gioitinh_nam = this.datanhansu.filter(datanhansu => datanhansu.gioitinh === "Nam").length.toString();
+        this.sum_gioitinh_nu = this.datanhansu.filter(datanhansu => datanhansu.gioitinh === "Nữ").length.toString();;
+        this.sum_dantoc = this.datanhansu.reduce((collector, item) => collector.add(item.dantoc), new Set<string>()).size;
+        this.sum_tongiao = this.datanhansu.reduce((collector, item) => {
+          if (item.tongiao != "Không") {
+            collector.add(item.tongiao);
+          }
+          return collector;
+        }, new Set<string>()
+        ).size;
+
+        this.countPersonByAges = this.datanhansu.reduce((collector, employee) => {
+          const employeeAge = new Date(employee.ngaysinh).getTime();
+          if ((currentTime - employeeAge) < 946728000000) {
+            collector.thirtyYld += 1;
+          } else if ((currentTime - employeeAge) < 1420092000000) {
+            collector.fromThirtyToFortyFiveYld += 1;
+          } else if ((currentTime - employeeAge) < 1893456000000) {
+            collector.fromFortyFiveToSixtyYld += 1;
+          }
+          return collector;
+        }, { thirtyYld: 0, fromThirtyToFortyFiveYld: 0, fromFortyFiveToSixtyYld: 0 });
+
+      },
+      error: () => {
+        this.notificationService.isProcessing(false);
+        this.notificationService.toastError('Lỗi không load được nội dung');
+      }
+    });
+
+
+    this.cdNghiviecService.list().subscribe(
+      {
+        next: cdNghiviec => {
+          this.notificationService.isProcessing(false);
+
+          this.cdNghiviec = cdNghiviec;
+          this.sum_nghihuu = this.cdNghiviec.filter(cdNghiviec => cdNghiviec.loai === "Nghỉ hưu").length.toString();
+
+        }
+      }
+    )
+
+
+
+  }
+
+  btnGetNhansu(){
+    this.router.navigate(['/admin/nhansu/danhsach-nhansu'])
+  }
+  btnGetQuyhoach(){
+    this.router.navigate(['/admin/quyhoach/danhsach-quyhoach'])
+  }
+  btnGetNghichedo(){
+    this.router.navigate(['/admin/nghi-chedo/chedo-nghiphep'])
+  }
 }

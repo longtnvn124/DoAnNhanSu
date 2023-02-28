@@ -2,7 +2,7 @@ import { ExportExcelService } from './../../../../shared/services/export-excel.s
 import { OvicFile } from './../../../../../core/models/file';
 import { HtBdKehoachService } from './../../../../shared/services/ht-bd-kehoach.service';
 import { KeHoacHocTapBoiTuong } from './../../../../shared/models/hoctap-boiduong';
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
@@ -20,6 +20,7 @@ import { NsPermissions } from '@modules/shared/models/nhan-su';
 export class KehoachHoctapBoiduongComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   @ViewChild('fileChooser') fileChooser: ElementRef<HTMLInputElement>;
+  @Input()
   fileUploaded: OvicFile[] = [];
   uploadedFiles: any[] = [];
 

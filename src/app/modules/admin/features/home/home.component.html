@@ -1,188 +1,163 @@
-<div class="ovic-admin-row px-0 px-md-3 pt-3">
-    <div class="ovic-dashboard-top-bar-filter surface-card">
-        <div class="ovic-dashboard-top-bar-filter__element">
-            <label class="ovic-dashboard-top-bar-filter__element__label">Đơn vị</label>
-            <div class="ovic-dashboard-top-bar-filter__element__options">
-                <p-dropdown styleClass="ovic-dropdown-style" [options]="departments" [(ngModel)]="selectedDepartment" (ngModelChange)="searching()" optionLabel="name"></p-dropdown>
-            </div>
-        </div>
-        <div class="ovic-dashboard-top-bar-filter__element">
-            <label class="ovic-dashboard-top-bar-filter__element__label">Năm học</label>
-            <div class="ovic-dashboard-top-bar-filter__element__options">
-                <p-dropdown styleClass="ovic-dropdown-style" [options]="years" [(ngModel)]="selectedYear" (ngModelChange)="searching()" optionLabel="name"></p-dropdown>
-            </div>
-        </div>
-        <div class="ovic-dashboard-top-bar-filter__element">
-            <label class="ovic-dashboard-top-bar-filter__element__label">Học kỳ</label>
-            <div class="ovic-dashboard-top-bar-filter__element__options">
-                <p-dropdown styleClass="ovic-dropdown-style" [options]="semesters" [(ngModel)]="selectedSemester" (ngModelChange)="searching()" optionLabel="name"></p-dropdown>
-            </div>
-        </div>
-        <div class="ovic-dashboard-top-bar-filter__element">
-            <label class="ovic-dashboard-top-bar-filter__element__label">Tên đơn vị</label>
-            <div class="ovic-dashboard-top-bar-filter__element__options">
-                <input type="text" placeholder="search here..." [(ngModel)]="searchText" (keydown)="onTypeSearchText($event)">
-            </div>
-        </div>
-        <div class="ovic-dashboard-top-bar-filter__element">
-            <button (click)="searching()" pButton pRipple type="button" icon="pi pi-filter" class="p-button-rounded p-button-secondary p-button-outlined"></button>
-        </div>
-    </div>
-</div>
-<div class="ovic-admin-row px-0 px-md-3 pt-3">
-    <div class="ovic-admin-col ovic-admin-col--stand">
-        <div class="ovic-admin-col__wrap-content">
-            <div class="ovic-admin-col__wrap-content__element">
-                <div class="ovic-admin-col__sample-content">sample</div>
-            </div>
-            <div class="ovic-admin-col__wrap-content__element">
-                <div class="ovic-admin-col__sample-content">sample</div>
-            </div>
-            <div class="ovic-admin-col__wrap-content__element">
-                <div class="ovic-admin-col__sample-content">sample</div>
-            </div>
-            <div class="ovic-admin-col__wrap-content__element">
-                <div class="ovic-admin-col__sample-content">sample</div>
-            </div>
-        </div>
-    </div>
-    <div class="ovic-admin-col ovic-admin-col--expand">
-        <div class="ovic-admin-col__sample-content">sample</div>
-    </div>
-</div>
-
-
 <div class="surface-ground px-0 px-md-3 pt-3">
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-3 mb-3">
-            <div class="surface-card shadow-2 p-3 border-round">
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <span class="d-block surface-card__title mb-3">Orders</span>
-                        <div class="surface-card__subtitle">152</div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center bg-blue-100 border-round" style="width:42px;height:42px">
-                        <i class="pi pi-shopping-cart text-blue-500 text-size-20"></i>
-                    </div>
-                </div>
-                <span class="surface-card__text-highlight">24 new </span>
-                <span class="surface-card__text">since last visit</span>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3 mb-3">
-            <div class="surface-card shadow-2 p-3 border-round">
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <span class="d-block surface-card__title mb-3">Revenue</span>
-                        <div class="surface-card__subtitle">$2.100</div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center bg-orange-100 border-round" style="width:42px;height:42px">
-                        <i class="pi pi-map-marker text-orange-500 text-size-20"></i>
-                    </div>
-                </div>
-                <span class="surface-card__text-highlight">%52+ </span>
-                <span class="surface-card__text">since last week</span>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3 mb-3">
-            <div class="surface-card shadow-2 p-3 border-round">
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <span class="d-block surface-card__title mb-3">Customers</span>
-                        <div class="surface-card__subtitle">28441</div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center bg-cyan-100 border-round" style="width:42px;height:42px">
-                        <i class="pi pi-inbox text-cyan-500 text-size-20"></i>
-                    </div>
-                </div>
-                <span class="surface-card__text-highlight">520  </span>
-                <span class="surface-card__text">newly registered</span>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3 mb-3">
-            <div class="surface-card shadow-2 p-3 border-round">
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <span class="d-block surface-card__title mb-3">Comments</span>
-                        <div class="surface-card__subtitle">152 Unread</div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center bg-purple-100 border-round" style="width:42px;height:42px">
-                        <i class="pi pi-comment text-purple-500 text-size-20"></i>
-                    </div>
-                </div>
-                <span class="surface-card__text-highlight">85 </span>
-                <span class="surface-card__text">responded</span>
-            </div>
-        </div>
+  <div class="px-md-2 row">
+    <div class="col m-1">
+      <div class="ovic-admin-col__wrap-content__element surface-400">
+        <div class="row flex justify-content-center p-4 text-xl font-medium">Tổng số hồ sơ </div>
+        <div class="row flex justify-content-center p-4 text-5xl font-medium">{{sum_ns}}</div>
+      </div>
     </div>
+    <div class="col m-1">
+      <div class="ovic-admin-col__wrap-content__element surface-400">
+        <div class="row flex justify-content-center p-4 text-xl font-medium">Nam </div>
+        <div class="row flex justify-content-center p-4 text-5xl font-medium">{{sum_gioitinh_nam}}</div>
+      </div>
+    </div>
+    <div class="col m-1">
+      <div class="ovic-admin-col__wrap-content__element surface-400">
+        <div class="row flex justify-content-center p-4 text-xl font-medium">Nữ</div>
+        <div class="row flex justify-content-center p-4 text-5xl font-medium">{{sum_gioitinh_nu}}</div>
+      </div>
+    </div>
+    <div class="col m-1">
+      <div class="ovic-admin-col__wrap-content__element surface-400">
+        <div class="row flex justify-content-center p-4 text-xl font-medium">Dân tộc </div>
+        <div class="row flex justify-content-center p-4 text-5xl font-medium">{{sum_dantoc}}</div>
+      </div>
+    </div>
+    <div class="col m-1">
+      <div class="ovic-admin-col__wrap-content__element surface-400">
+        <div class="row flex justify-content-center p-4 text-xl font-medium">Tôn giáo</div>
+        <div class="row flex justify-content-center p-4 text-5xl font-medium">{{sum_tongiao}}</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="surface-ground px-0 px-md-3 pt-3">
+    <div class="px-md-2 row">
+      <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="surface-card shadow-2 p-3 border-round">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block surface-card__title mb-3">Nhân sự nhỏ hơn 30 tuổi</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center bg-blue-100 border-round"
+              style="width:42px;height:42px">
+              <i class="pi pi-user text-blue-500 text-size-20"></i>
+            </div>
+          </div>
+          <span class="surface-card__text-highlight">{{countPersonByAges.thirtyYld}}</span>
+          <span class="surface-card__text font-medium"> Nhân sự</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="surface-card shadow-2 p-3 border-round">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block surface-card__title mb-3">Nhân sự từ 30 - 45 tuổi</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center bg-orange-100 border-round"
+              style="width:42px;height:42px">
+              <i class="pi pi-user text-orange-500 text-size-20"></i>
+            </div>
+          </div>
+          <span class="surface-card__text-highlight">{{countPersonByAges.fromThirtyToFortyFiveYld}}</span>
+          <span class="surface-card__text font-medium"> Nhân sự</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="surface-card shadow-2 p-3 border-round">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block surface-card__title mb-3">Nhân sự từ 45 - 60 tuổi</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center bg-cyan-100 border-round"
+              style="width:42px;height:42px">
+              <i class="pi pi-user text-cyan-500 text-size-20"></i>
+            </div>
+          </div>
+          <span class="surface-card__text-highlight">{{countPersonByAges.fromFortyFiveToSixtyYld}}</span>
+          <span class="surface-card__text font-medium"> Nhân sự</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="surface-card shadow-2 p-3 border-round">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="d-block surface-card__title mb-3">Nhân sự đã về hưu </span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center bg-purple-100 border-round"
+              style="width:42px;height:42px">
+              <i class="pi pi-user text-purple-500 text-size-20"></i>
+            </div>
+          </div>
+          <span class="surface-card__text-highlight">{{sum_nghihuu}} </span>
+          <span class="surface-card__text font-medium"> Nhân sự</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="surface-ground px-0 px-md-3 pt-3">
+    <div class="px-md-2 row">
+      <div class="col-12 col-md-4 mb-3">
+        <div class="surface-card p-4 text-center">
+          <img src="assets/images/home/windows.svg" alt="Image" class="d-block mb-4 ml-auto mr-auto">
+          <div class="surface-card__title--type-2 ">Hồ sơ nhân sự</div>
+          <button pButton pRipple label="Bắt đầu" icon="pi pi-arrow-right p-button-rounded" class="p-button"
+            (click)="btnGetNhansu()"></button>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 mb-3">
+        <div class="surface-card p-4 text-center">
+
+          <img src="assets/images/home/live-collaboration.svg" alt="Image" class="d-block mb-4 ml-auto mr-auto">
+          <div class="surface-card__title--type-2">Quy hoạch</div>
+
+          <button pButton pRipple label="Bắt đầu" icon="pi pi-arrow-right p-button-rounded" class="p-button"
+            (click)="btnGetQuyhoach()"></button>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 mb-3">
+        <div class="surface-card p-4 text-center">
+          <img src="assets/images/home/security.svg" alt="Image" class="d-block mb-4 ml-auto mr-auto">
+          <div class="surface-card__title--type-2">Nghỉ phép</div>
+
+          <button pButton pRipple label="Bắt đầu" icon="pi pi-arrow-right p-button-rounded" class="p-button"
+            (click)="btnGetNghichedo()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!--
 <div class="surface-ground px-0 px-md-3 pt-3">
-    <div class="row">
-        <div class="col-12 col-md-4 mb-3">
-            <div class="surface-card p-4 text-center">
-                <img src="assets/images/home/windows.svg" alt="Image" class="d-block mb-4 ml-auto mr-auto">
-                <div class="surface-card__title--type-2">Title Placeholder</div>
-                <p class="surface-card__subtitle--type-2 mt-0 mb-4 p-0">Nunc mi ipsum faucibus vitae aliquet nec. Lacus sed viverra tellus in hac habitasse platea dictumst.</p>
-                <button pButton pRipple label="Learn More" icon="pi pi-arrow-right p-button-rounded" class="p-button"></button>
-            </div>
+  <div class="row">
+    <div class="col-12 col-md-6 mb-3">
+      <div class="surface-card p-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="surface-card__title--type-3">Sales</div>
+          <div>
+            <button pButton pRipple icon="pi pi-ellipsis-v"
+              class="p-button-rounded p-button-text p-button-plain"></button>
+          </div>
         </div>
-        <div class="col-12 col-md-4 mb-3">
-            <div class="surface-card p-4 text-center">
-                <img src="assets/images/home/security.svg" alt="Image" class="d-block mb-4 ml-auto mr-auto">
-                <div class="surface-card__title--type-2">Title Placeholder</div>
-                <p class="surface-card__subtitle--type-2 mt-0 mb-4 p-0">Nunc mi ipsum faucibus vitae aliquet nec. Lacus sed viverra tellus in hac habitasse platea dictumst.</p>
-                <button pButton pRipple label="Learn More" icon="pi pi-arrow-right p-button-rounded" class="p-button"></button>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 mb-3">
-            <div class="surface-card p-4 text-center">
-                <img src="assets/images/home/live-collaboration.svg" alt="Image" class="d-block mb-4 ml-auto mr-auto">
-                <div class="surface-card__title--type-2">Title Placeholder</div>
-                <p class="surface-card__subtitle--type-2 mt-0 mb-4 p-0">Nunc mi ipsum faucibus vitae aliquet nec. Lacus sed viverra tellus in hac habitasse platea dictumst.</p>
-                <button pButton pRipple label="Learn More" icon="pi pi-arrow-right p-button-rounded" class="p-button"></button>
-            </div>
-        </div>
+        <img src="assets/images/home/chart-line.svg" alt="Image" class="w-100">
+      </div>
     </div>
-</div>
-
-<div class="surface-ground px-0 px-md-3 pt-3">
-    <div class="row">
-        <div class="col-12 col-md-6 mb-3">
-            <div class="surface-card p-4">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div class="surface-card__title--type-3">Sales</div>
-                    <div>
-                        <button pButton pRipple icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain"></button>
-                    </div>
-                </div>
-                <img src="assets/images/home/chart-line.svg" alt="Image" class="w-100">
-            </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="surface-card p-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="surface-card__title--type-3">Customers</div>
+          <div>
+            <button pButton pRipple icon="pi pi-ellipsis-v"
+              class="p-button-rounded p-button-text p-button-plain"></button>
+          </div>
         </div>
-        <div class="col-12 col-md-6 mb-3">
-            <div class="surface-card p-4">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div class="surface-card__title--type-3">Customers</div>
-                    <div>
-                        <button pButton pRipple icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain"></button>
-                    </div>
-                </div>
-                <img src="assets/images/home/chart-bar.svg" alt="Image" class="w-100">
-            </div>
-        </div>
+        <img src="assets/images/home/chart-bar.svg" alt="Image" class="w-100">
+      </div>
     </div>
+  </div>
 </div>
-
-<div class="surface-ground px-0 px-md-3 pt-3">
-    <div class="row">
-        <div class="col-12 col-md-6 mb-3">
-            <div class="surface-card p-4">
-                <div class="d-flex align-items-center justify-content-center mb-3">
-                    <div class="ovic-plate">
-                        <div class="ovic-plate__inside"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+ -->

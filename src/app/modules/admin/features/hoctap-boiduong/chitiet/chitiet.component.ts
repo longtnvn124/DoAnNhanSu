@@ -8,6 +8,7 @@ import { NotificationService } from '@core/services/notification.service';
 import { ActivatedRoute } from '@angular/router';
 import { FileService } from '@core/services/file.service';
 import { OvicFile } from '@core/models/file';
+import { NsPermissions } from '@modules/shared/models/nhan-su';
 
 @Component({
   selector: 'app-chitiet',
@@ -17,7 +18,7 @@ import { OvicFile } from '@core/models/file';
 export class ChitietComponent implements OnInit {
 
   ht_id: string = '';
-  data_keHoacHocTapBoiTuong:KeHoacHocTapBoiTuong[];
+  data_keHoacHocTapBoiTuong: KeHoacHocTapBoiTuong[];
   keHoacHocTapBoiTuong: KeHoacHocTapBoiTuong;
 
   private OBSERVER_SEARCH_DATA = new Subject<string>();
@@ -33,12 +34,23 @@ export class ChitietComponent implements OnInit {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
 
   }
+
+  permission: NsPermissions = {
+    isExpert: false,
+    canAdd: false,
+    canEdit: false,
+    canDelete: false,
+  }
+
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'chuyen_vien', false);
+    this.permission.canAdd = this.permission.isExpert;
+    this.permission.canEdit = this.permission.isExpert;
+    this.permission.canDelete = this.permission.isExpert;
+
     this.activatedRoute.queryParams
       .subscribe(params => {
-        console.log(params); // { ns_id: "price" }
         this.ht_id = this.auth.decryptData(params['code']);
-        console.log(this.ht_id);
       }
       );
     this.loadData();
@@ -51,8 +63,6 @@ export class ChitietComponent implements OnInit {
       next: dsKeHoach => {
         this.data_keHoacHocTapBoiTuong = dsKeHoach;
         this.notificationService.isProcessing(false);
-        console.log(dsKeHoach);
-
       },
       error: () => {
         this.notificationService.isProcessing(false);
@@ -77,7 +87,9 @@ export class ChitietComponent implements OnInit {
 
 
   display: boolean = false;
-  btnRegister(){
+  btnRegister() {
     this.display = true;
   }
+
+
 }

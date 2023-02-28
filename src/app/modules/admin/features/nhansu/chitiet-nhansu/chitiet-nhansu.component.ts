@@ -15,6 +15,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./chitiet-nhansu.component.css']
 })
 export class ChitietNhansuComponent implements OnInit {
+  
   ns_id: string = '';
   data_ns: NhanSu[];
   nhanSu: NhanSu;

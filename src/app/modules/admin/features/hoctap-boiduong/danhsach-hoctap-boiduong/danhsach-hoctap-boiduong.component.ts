@@ -1,6 +1,7 @@
+import { NsPermissions } from './../../../../shared/models/nhan-su';
 import { HtBdDanhsachService } from '@modules/shared/services/ht-bd-danhsach.service';
 import { HoSoHocTap } from './../../../../shared/models/hoctap-boiduong';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
@@ -14,7 +15,7 @@ import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
   styleUrls: ['./danhsach-hoctap-boiduong.component.css']
 })
 export class DanhsachHoctapBoiduongComponent implements OnInit {
-
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false }
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
   search: string = '';
   param_id: string = '';
@@ -30,20 +31,42 @@ export class DanhsachHoctapBoiduongComponent implements OnInit {
       formTitle: '',
       object: null
     }
+
+  trangthai = [
+    { label: 'Đang chờ duyệt', value: 0 },
+    { label: 'Đã phê duyệt', value: 1 },
+  ]
+  showStatus(data) {
+    data.forEach((f, key) => {
+      if(f.trangthai === 1){
+        f['bg_trangthai'] = 'bg-green-500';
+        f['trangthai_label'] = 'Đã phê duyệt';
+
+      }
+      else{
+        f['bg_trangthai'] = 'bg-yellow-500';
+        f['trangthai_label'] = 'Chờ duyệt';
+      }
+    })
+
+  }
+
   formData: FormGroup = this.formBuilder.group({
     ma_kehoach: ['', [Validators.required]],
     hoten: ['', [Validators.required]],
     ngaysinh: ['', [Validators.required]],
     phongban: ['', [Validators.required]],
-    trangthai: ['', [Validators.required]],
+    trangthai: 0,
   });
+
+
   private OBSERVER_SEARCH_DATA = new Subject<string>();
 
   constructor(
     private formBuilder: FormBuilder,
     private htBdDanhsachService: HtBdDanhsachService,
     private notificationService: NotificationService,
-    private helperService: HelperService,
+
     private activatedRoute: ActivatedRoute,
     private auth: AuthService,
   ) { this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData()); }
@@ -64,7 +87,6 @@ export class DanhsachHoctapBoiduongComponent implements OnInit {
         this.hoSoHocTap = dsDoiTuong;
         this.notificationService.isProcessing(false);
 
-        // console.log(dsQuatrinhHopdong);
       },
       error: () => {
         this.notificationService.isProcessing(false);
@@ -108,7 +130,7 @@ export class DanhsachHoctapBoiduongComponent implements OnInit {
           hoten: '',
           ngaysinh: '',
           phongban: '',
-          trangthai: '',
+          trangthai: 0,
         }
       )
     } else {
@@ -143,11 +165,7 @@ export class DanhsachHoctapBoiduongComponent implements OnInit {
             this.loadData();
             this.formData.reset(
               {
-                ma_ns: this.param_id,
-                hoten: '',
-                ngaysinh: '',
-                phongban: '',
-                trangthai: '',
+                ma_ns: this.param_id
               }
             )
           }, error: () => {
@@ -179,5 +197,5 @@ export class DanhsachHoctapBoiduongComponent implements OnInit {
     this.notificationService.closeSideNavigationMenu();
   }
 
- 
+
 }
