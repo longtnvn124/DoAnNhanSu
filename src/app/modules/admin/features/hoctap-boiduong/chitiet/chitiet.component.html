@@ -49,28 +49,17 @@
       </div>
       <br>
       <div class="flex justify-content-end">
-        <button pButton pRipple type="button" label="Đăng ký" class="p-button-success" (click)="btnRegister()"></button>
+        <button pButton pRipple type="button" label="Đăng ký" class="p-button-success"
+          (click)="child.btnAdd()"></button>
       </div>
     </div>
 
   </div>
-  <div *ngIf="permission.isExpert" class="col container-right m-1">
+  <div class="col container-right m-1" >
     <div class="card p-4">
       <div class="text-2xl font-medium mb-3 border-bottom-1 ">Danh sách đăng ký </div>
       <!-- <app-doituong-quyhoach></app-doituong-quyhoach> -->
-      <app-danhsach-hoctap-boiduong></app-danhsach-hoctap-boiduong>
+      <app-danhsach-hoctap-boiduong #child [permission]="permission"></app-danhsach-hoctap-boiduong>
     </div>
   </div>
 </div>
-
-
-<p-dialog [(visible)]="display" [modal]="true" [style]="{width: '80vw'}" [maximizable]="true" [draggable]="false">
-  <div *ngFor="let data of data_keHoacHocTapBoiTuong">
-
-    <div class="flex justify-content-center font-bold"> {{data.ten_kehoach}}</div>
-  </div>
-  <div class="col">
-    <input type="text">
-  </div>
-
-</p-dialog>

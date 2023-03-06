@@ -21,7 +21,7 @@ import { MenuLanguageComponent } from '@modules/admin/dashboard/menu-language/me
 import { TranslateModule } from '@ngx-translate/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
-
+import {ChartModule} from 'primeng/chart';
 @NgModule( {
 	declarations : [
 		DashboardComponent ,
@@ -45,7 +45,8 @@ import { FormsModule } from '@angular/forms';
 		OverlayPanelModule ,
 		TranslateModule ,
 		DropdownModule ,
-		FormsModule
+		FormsModule,
+		ChartModule
 	]
 } )
 export class AdminModule {}

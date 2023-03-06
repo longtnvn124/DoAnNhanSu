@@ -1,35 +1,40 @@
 <div class="p-card intro-x">
   <div class="danh-sach__head p-3 ">
 
-    <button pButton pRipple class="p-button-outlined mr-2" label="Thêm đối tượng" styleClass="p-button-link "
-      icon="pi pi-plus " (click)="btnAdd()"></button>
-      <button pButton pRipple type="button" label="Huỷ duyệt" class="p-button-raised p-button-warning mr-2"></button>
-      <button pButton pRipple type="button" label="Duyệt" class="p-button-raised p-button-success"></button>
+    <button *ngIf="permission.canAdd" pButton pRipple class="p-button-outlined mr-2" label="Thêm đối tượng"
+      styleClass="p-button-link " icon="pi pi-plus " (click)="btnAdd()"></button>
+    <button *ngIf="permission.isExpert" [disabled]="hoSo_backup && hoSo_backup.length? false: true" pButton pRipple
+      type="button" label="Huỷ duyệt" class="p-button-raised p-button-warning mr-2 w-8rem" (click)="backupRove()"></button>
+    <button *ngIf="permission.isExpert" [disabled]="hoSo_backup && hoSo_backup.length? false: true" pButton pRipple
+      type="button" label="Duyệt" class="p-button-raised p-button-success w-8rem" (click)="appRove()"></button>
   </div>
   <div class="danh-sach-ho-so__body">
-    <p-table [value]="hoSoHocTap">
+    <p-table [value]="hoSoHocTap" selectionMode="multiple" [(selection)]='hoSo_backup'
+      styleClass="p-datatable-customers" [selectionPageOnly]="true" [rowHover]="true">
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 4rem">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-          </th>
-          <th class="text-center">Họ và tên</th>
-          <th class="text-center">Ngày sinh</th>
-          <th class="text-center">Phòng ban</th>
-          <th class="text-center">Trang thái</th>
-          <th class="text-center">Thao tác</th>
+          <th class="table_request text-center"> <p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+          <th class="table_request text-center" pSortableColumn="hoten">Họ và tên</th>
+          <th class="table_request text-center" pSortableColumn="ngaysinh">Ngày sinh</th>
+          <th class="table_request text-center" pSortableColumn="phongban">Phòng ban</th>
+          <th class="table_request text-center" pSortableColumn="trangthai">Trạng thái</th>
+          <th class="table_request text-center">Thao tác</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-hoSoHocTap>
         <tr>
           <td style="width: 4rem">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            <p-tableCheckbox [value]="hoSoHocTap"></p-tableCheckbox>
           </td>
           <td class="text-center">{{hoSoHocTap.hoten}}</td>
-          <td class="text-center">{{hoSoHocTap.ngaysinh}}</td>
+          <td class="text-center">{{hoSoHocTap.ngaysinh | date: "dd/MM/yyyy"}}</td>
           <td class="text-center">{{hoSoHocTap.phongban}}</td>
-          <td class="text-center">{{hoSoHocTap.trangthai}}</td>
           <td class="text-center">
+            <div class="border-round-md p-2 " [ngClass]="hoSoHocTap['bg_trangthai']"> {{hoSoHocTap['trangthai_label']}}
+            </div>
+          </td>
+          <td class="text-center">
+
             <button pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
               (click)="btnEdit(hoSoHocTap)">
@@ -62,16 +67,15 @@
           </div>
           <div class="col">
             <label class="txt-label" for="">Ngày sinh:</label>
-            <p-inputMask mask="99/99/9999" placeholder="dd/mm/yyyy" slotChar="dd/mm/yyyy" formControlName="ngaysinh"
-              [style]="{'minWidth':'100%'}"></p-inputMask>
+            <input type="date" [style]="{'minWidth':'100%'}" pInputText formControlName="ngaysinh">
           </div>
         </div>
         <div class="row mb-2">
 
           <div class="col">
             <label class="txt-label" for="">Phòng ban:</label>
-            <input type="text" pinputtext="" placeholder="Phòng ban" class="p-inputtext p-component p-element w-full"
-              formControlName="phongban">
+            <p-dropdown [options]="dmPhongban" optionValue="ten_phongban" optionLabel="ten_phongban"
+              placeholder="Chọn..." [style]="{'minWidth':'100%'}" formControlName="phongban"></p-dropdown>
           </div>
         </div>
 

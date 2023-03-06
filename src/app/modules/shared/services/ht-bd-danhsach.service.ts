@@ -6,6 +6,7 @@ import { HttpParamsHeplerService } from '@core/services/http-params-hepler.servi
 import { getRoute } from '@env';
 import { Observable, map } from 'rxjs';
 import { HoSoHocTap, KeHoacHocTapBoiTuong } from '../models/hoctap-boiduong';
+import { DmPhongban } from '../models/danh-muc';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { HoSoHocTap, KeHoacHocTapBoiTuong } from '../models/hoctap-boiduong';
 export class HtBdDanhsachService {
 
   private readonly api = getRoute('danhsach-hoctap-boiduong/');
+  private readonly api_dmphongban = getRoute('danhmuc-phongban/');
 
   constructor(
     private http: HttpClient,
@@ -49,5 +51,9 @@ export class HtBdDanhsachService {
 
   add(data: any): Observable<any> {
     return this.http.post<Dto>(this.api, data);
+  }
+
+  getdata_phongban(): Observable<DmPhongban[]> {
+    return this.http.get<Dto>(this.api_dmphongban).pipe(map(res => res.data));
   }
 }

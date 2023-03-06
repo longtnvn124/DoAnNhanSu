@@ -2,7 +2,7 @@
   <div class="danh-sach-ho-so__head p-3 ">
     <!-- <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
       class="p-inputtext p-component p-element" /> -->
-    <button pButton pRipple class="p-button-outlined" label="Thêm danh hiệu thi đua" styleClass="p-button-link"
+    <button  pButton pRipple class="p-button-outlined" label="Thêm danh hiệu thi đua" styleClass="p-button-link"
       icon="pi pi-plus" (click)="addDanhHieu()"></button>
 
   </div>
@@ -24,18 +24,16 @@
           <td class="text-center">{{nsDanhhieuThidua.cap}}</td>
           <td class="text-center">{{nsDanhhieuThidua.thoigian | date:"dd/MM/yyyy"}}</td>
           <td class="text-center">
-            <ng-container *ngIf="permission.isExpert; else showLable">
+            <ng-container *ngIf="permission.isExpert;else showLable">
               <button pRipple pButton type="button"
                 class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
                 (click)="editDanhHieu(nsDanhhieuThidua)">
-
               </button>
               <button pRipple pButton type="button"
                 class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
                 (click)="deleteDanhhieu(nsDanhhieuThidua)"></button>
             </ng-container>
-            <ng-template #showLable>
-
+             <ng-template #showLable>
               <button pRipple pButton type="button"
                 class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary" icon="pi pi-file-edit">
               </button>

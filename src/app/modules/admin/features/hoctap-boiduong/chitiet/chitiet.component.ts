@@ -1,6 +1,6 @@
 import { FormBuilder } from '@angular/forms';
 import { KeHoacHocTapBoiTuong } from './../../../../shared/models/hoctap-boiduong';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subject, distinctUntilChanged, debounceTime } from 'rxjs';
 import { HtBdKehoachService } from '@modules/shared/services/ht-bd-kehoach.service';
 import { AuthService } from '@core/services/auth.service';
@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FileService } from '@core/services/file.service';
 import { OvicFile } from '@core/models/file';
 import { NsPermissions } from '@modules/shared/models/nhan-su';
+import { DanhsachHoctapBoiduongComponent } from '../danhsach-hoctap-boiduong/danhsach-hoctap-boiduong.component';
 
 @Component({
   selector: 'app-chitiet',
@@ -16,7 +17,7 @@ import { NsPermissions } from '@modules/shared/models/nhan-su';
   styleUrls: ['./chitiet.component.css']
 })
 export class ChitietComponent implements OnInit {
-
+  @ViewChild('child') child:DanhsachHoctapBoiduongComponent;
   ht_id: string = '';
   data_keHoacHocTapBoiTuong: KeHoacHocTapBoiTuong[];
   keHoacHocTapBoiTuong: KeHoacHocTapBoiTuong;
@@ -43,11 +44,10 @@ export class ChitietComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'chuyen_vien', false);
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'dans_lanh_dao', false);
     this.permission.canAdd = this.permission.isExpert;
     this.permission.canEdit = this.permission.isExpert;
     this.permission.canDelete = this.permission.isExpert;
-
     this.activatedRoute.queryParams
       .subscribe(params => {
         this.ht_id = this.auth.decryptData(params['code']);
@@ -86,9 +86,10 @@ export class ChitietComponent implements OnInit {
   }
 
 
-  display: boolean = false;
+  // display: boolean = false;
   btnRegister() {
-    this.display = true;
+    console.log('parent');
+    this.child.btnAdd();
   }
 
 

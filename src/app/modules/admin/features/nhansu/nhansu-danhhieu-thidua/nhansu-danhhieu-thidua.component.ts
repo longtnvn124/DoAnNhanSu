@@ -21,7 +21,7 @@ import { AuthService } from '@core/services/auth.service';
 export class NhansuDanhhieuThiduaComponent implements OnInit {
   @ViewChild("nsFormEdit") nsFormEdit: TemplateRef<any>;
 
-  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false}
+  @Input() permission: NsPermissions = { isExpert: false, canAdd: false, canEdit: false, canDelete: false }
 
   param_id: string = '';
   search: string = '';
@@ -64,6 +64,10 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
   ) { this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData()); }
 
   ngOnInit(): void {
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'dans_lanh_dao', false);
+    this.permission.canAdd = this.permission.isExpert;
+    this.permission.canDelete = this.permission.isExpert;
+    this.permission.canEdit = this.permission.isExpert;
     this.activatedRoute.queryParams
       .subscribe(params => {
         // console.log(params);
@@ -73,6 +77,7 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
       );
     this.loadData();
     this.getDanhmuc();
+    console.log(this.auth.roles);
 
   }
 
@@ -101,6 +106,8 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
       this.nsDanhhieuThiduaService.delete_danhhieu(nsDanhhieuThidua.id).subscribe({
         next: () => {
           this.notificationService.isProcessing(false);
+          this.notificationService.toastSuccess('Xoá thành công');
+
           this.loadData();
         },
         error: () => {

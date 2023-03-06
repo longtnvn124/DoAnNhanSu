@@ -223,7 +223,7 @@ export class DanhsachNhansuComponent implements OnInit {
 
   ngOnInit(): void {
     this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
-    const isStaffExpert = this.auth.roles.reduce((collector, role) => collector || role === 'chuyen_vien', false);
+    const isStaffExpert = this.auth.roles.reduce((collector, role) => collector || role === 'dans_lanh_dao', false);
     this.permission.isExpert = isStaffExpert;
     this.permission.canAdd = isStaffExpert;
     this.permission.canEdit = isStaffExpert;

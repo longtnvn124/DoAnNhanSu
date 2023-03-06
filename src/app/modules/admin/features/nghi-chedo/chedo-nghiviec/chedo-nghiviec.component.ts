@@ -81,7 +81,7 @@ export class ChedoNghiviecComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role ==='chuyen_vien',false);
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role ==='dans_lanh_dao',false);
     this.permission.canAdd  = this.permission.isExpert;
     this.permission.canEdit  = this.permission.isExpert;
     this.permission.canDelete  = this.permission.isExpert;

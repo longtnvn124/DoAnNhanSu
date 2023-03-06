@@ -26,6 +26,11 @@ export class HomeComponent implements OnInit {
   data_age: any;
   sum_nghihuu: any;
 
+  basicOptions: any;
+  basicData: any;
+  chartOptions: any;
+  data: any;
+
   countPersonByAges = { thirtyYld: 0, fromThirtyToFortyFiveYld: 0, fromFortyFiveToSixtyYld: 0 };
   datanhansu: NhanSu[];
   cdNghiviec: CheDo_NghiViec[];
@@ -35,12 +40,58 @@ export class HomeComponent implements OnInit {
     private notificationService: NotificationService,
     private helperService: HelperService,
     private cdNghiviecService: CdNghiviecService,
-    private router :Router,
-  ) { }
+    private router: Router,
+  ) {
+
+
+  }
 
   ngOnInit(): void {
     this.loaddata();
 
+    console.log(this.countPersonByAges);
+
+    this.basicData = {
+      labels: ['Nhỏ hơn 30 tuổi', 'Từ 30 đến 45 tuổi', 'Từ 45 đến 60 tuổi'],
+      datasets: [
+        {
+          label: 'Độ tuổi',
+          backgroundColor: '#42A5F5',
+          data: [3, 4, 2]
+
+        },
+        {
+          label: 'Nam',
+          backgroundColor: '#fcb045',
+          data: [1, 1, 1]
+        },
+        {
+          label: 'Nữ',
+          backgroundColor: '#ffdde1',
+          data: [1, 1, 1]
+        }
+      ]
+
+    };
+    this.data = {
+      labels: ['Nhỏ hơn 30 tuổi', 'Từ 30 đến 45 tuổi', 'Từ 45 đến 60 tuổi'],
+      datasets: [
+        {
+          data: [1, 1, 1],
+          backgroundColor: [
+            "#42A5F5",
+            "#66BB6A",
+            "#FFA726"
+          ],
+          hoverBackgroundColor: [
+            "#64B5F6",
+            "#81C784",
+            "#FFB74D"
+          ]
+        }
+      ]
+
+    }
   }
 
   loaddata(): void {
@@ -48,14 +99,8 @@ export class HomeComponent implements OnInit {
     const cDate = new Date();
 
     const currentTime = cDate.getTime() + 111600000; // ngày hiện tại + thêm 1 ngày
-
-    // //new Date(year, monthIndex, day)
+    //new Date(year, monthIndex, day)
     // const lastThirtyYear = new Date(cDate.getFullYear() - 30, cDate.getMonth(), cDate.getDate() - 1, cDate.getHours());
-
-
-    // console.log(cDate.toDateString())
-    // console.log(lastThirtyYear.toDateString())
-    // console.log(cDate.getTime() - lastThirtyYear.getTime());
 
     this.notificationService.isProcessing(true);
 
@@ -88,13 +133,15 @@ export class HomeComponent implements OnInit {
           return collector;
         }, { thirtyYld: 0, fromThirtyToFortyFiveYld: 0, fromFortyFiveToSixtyYld: 0 });
 
+
       },
       error: () => {
         this.notificationService.isProcessing(false);
         this.notificationService.toastError('Lỗi không load được nội dung');
       }
-    });
 
+
+    });
 
     this.cdNghiviecService.list().subscribe(
       {
@@ -107,18 +154,19 @@ export class HomeComponent implements OnInit {
         }
       }
     )
-
-
-
   }
 
-  btnGetNhansu(){
+  btnGetNhansu() {
     this.router.navigate(['/admin/nhansu/danhsach-nhansu'])
   }
-  btnGetQuyhoach(){
+  btnGetQuyhoach() {
     this.router.navigate(['/admin/quyhoach/danhsach-quyhoach'])
   }
-  btnGetNghichedo(){
+  btnGetNghichedo() {
     this.router.navigate(['/admin/nghi-chedo/chedo-nghiphep'])
   }
+
+
+
+
 }

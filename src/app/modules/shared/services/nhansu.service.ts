@@ -58,52 +58,6 @@ export class NhansuService {
         );
       }
 
-      // const conditions: OvicConditionParam[] = [
-      //   {
-      //     conditionName: 'hoten',
-      //     condition: OvicQueryCondition.like,
-      //     value: '%' + filter.search + '%',
-      //     orWhere: 'or'
-      //   },
-      //   // {
-      //   //   conditionName: 'ma_ns',
-      //   //   condition: OvicQueryCondition.equal,
-      //   //   value: filter.search,
-      //   //   orWhere: 'or'
-      //   // },
-      //   // {
-      //   //   conditionName: 'phongban',
-      //   //   condition: OvicQueryCondition.like,
-      //   //   value: '%' + filter.search + '%',
-      //   //   orWhere: 'or'
-      //   // },
-      //   // {
-      //   //   conditionName: 'chucvu',
-      //   //   condition: OvicQueryCondition.like,
-      //   //   value: '%' + filter.search + '%',
-      //   //   orWhere: 'or'
-      //   // },
-      //   // {
-      //   //   conditionName: 'chucdanh',
-      //   //   condition: OvicQueryCondition.like,
-      //   //   value: '%' + filter.search + '%',
-      //   //   orWhere: 'or'
-      //   // },
-      //   // {
-      //   //   conditionName: 'dantoc',
-      //   //   condition: OvicQueryCondition.equal,
-      //   //   value: '%' + filter.search + '%',
-      //   //   orWhere: 'or'
-      //   // },
-      //   // {
-      //   //   conditionName: 'tongiao',
-      //   //   condition: OvicQueryCondition.equal,
-      //   //   value: '%' + filter.search + '%',
-      //   //   orWhere: 'or'
-      //   // },
-
-      // ]
-
     }
     params = this.httpParamsHeplerService.paramsConditionBuilder(conditions);
     return this.http.get<Dto>(this.api, { params }).pipe(map(res => res.data));
