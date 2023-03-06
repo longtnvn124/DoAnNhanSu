@@ -4,3 +4,9 @@
   overflow-x:hidden;
   overflow-y:auto;
 }
+
+@media (min-width: 740px) and (max-width:1023px){
+  .container-scroll{
+    max-height: 450px;
+  }
+}

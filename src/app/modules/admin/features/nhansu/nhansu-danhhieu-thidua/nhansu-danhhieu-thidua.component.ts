@@ -64,10 +64,6 @@ export class NhansuDanhhieuThiduaComponent implements OnInit {
   ) { this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData()); }
 
   ngOnInit(): void {
-    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'dans_lanh_dao', false);
-    this.permission.canAdd = this.permission.isExpert;
-    this.permission.canDelete = this.permission.isExpert;
-    this.permission.canEdit = this.permission.isExpert;
     this.activatedRoute.queryParams
       .subscribe(params => {
         // console.log(params);

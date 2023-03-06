@@ -3,7 +3,7 @@
     <div>
       <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
         class="p-inputtext p-component p-element" />
-      <p-button *ngIf="permission.canAdd" label="Thêm Kế hoạch" styleClass="p-button-link" icon="pi pi-plus" (click)="btnAdd()"></p-button>
+      <p-button label="Thêm Kế hoạch" styleClass="p-button-link" icon="pi pi-plus" (click)="btnAdd()"></p-button>
     </div>
 
     <div *ngIf="permission.isExpert" class="flex justify-content-center text-center">
@@ -38,16 +38,13 @@
               class="p-button p-button-icon p-button-text p-button-rounded p-button-success" icon="pi pi-file"
               (click)="btnDetail(DanhSach)">
             </button>
-            <ng-container *ngIf="permission.isExpert">
-              <button pRipple pButton type="button"
+            <button pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
               (click)="btnEdit(DanhSach)">
             </button>
-            <button pRipple pButton type="button"
+            <button *ngIf="permission.canDelete" pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
               (click)="btnDelete(DanhSach)"></button>
-            </ng-container>
-
 
           </td>
         </tr>

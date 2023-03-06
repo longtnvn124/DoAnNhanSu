@@ -23,7 +23,7 @@
           <td class="text-center">{{nsQuatrinhHopdong.ngay_hethan|date:"dd/MM/yyyy"}}</td>
           <td class="text-center">{{nsQuatrinhHopdong.thoihan_hopdong}}</td>
           <td class="text-center">
-            <ng-container *ngIf="permission.isExpert; else showLable">
+
               <button pRipple pButton type="button"
                 class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
                 (click)="btnEdit(nsQuatrinhHopdong)">
@@ -32,16 +32,8 @@
               <button pRipple pButton type="button"
                 class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
                 (click)="btnDelete(nsQuatrinhHopdong)"></button>
-            </ng-container>
-            <ng-template #showLable>
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary" icon="pi pi-file-edit">
 
-              </button>
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary"
-                icon="pi pi-trash"></button>
-            </ng-template>
+
 
 
           </td>

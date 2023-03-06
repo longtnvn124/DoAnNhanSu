@@ -3,7 +3,8 @@
     <div>
       <input type="text" pInputText [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
         class="p-inputtext p-component p-element" />
-      <p-button *ngIf="permission.canAdd" label="Thêm quyết định" styleClass="p-button-link" icon="pi pi-plus" (click)="btnAdd()"></p-button>
+      <p-button label="Thêm quyết định" styleClass="p-button-link" icon="pi pi-plus"
+        (click)="btnAdd()"></p-button>
     </div>
     <div class="inline-block">
       <span class="text-base "> Nhiệm kỳ: </span>
@@ -11,8 +12,8 @@
         [style]="{'min-Width':'200px'}" placeholder="Chọn..."></p-dropdown>
     </div>
     <div class="flex justify-content-center text-center">
-      <p-button *ngIf="permission.canAdd" label="Xuất excel" styleClass="p-button-link" class="flex justify-content-center text-center"
-        icon="pi pi-file-export" (click)="exportExcel()"></p-button>
+      <p-button *ngIf="permission.canAdd" label="Xuất excel" styleClass="p-button-link"
+        class="flex justify-content-center text-center" icon="pi pi-file-export" (click)="exportExcel()"></p-button>
 
     </div>
   </div>
@@ -41,7 +42,7 @@
               class="p-button p-button-icon p-button-text p-button-rounded p-button-success" icon="pi pi-file"
               (click)="btnDetail(DanhSach)">
             </button>
-            <button *ngIf="permission.canEdit" pRipple pButton type="button"
+            <button pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
               (click)="btnEdit(DanhSach)">
             </button>
@@ -56,93 +57,88 @@
 </div>
 
 <ng-template #nsFormEdit let-c="close">
-  <div class="container-scroll">
-    <div class="model-header container mt-2">
-      <h4 class="modal-title">{{formState.formTitle}}</h4>
+  <div class="model-header container p-2 bg-green-500 text-0">
+    <h4 class="modal-title">{{formState.formTitle}}</h4>
 
-    </div>
-    <div class="modal-body ovic-modal-body">
-      <div class="card" style="padding: 20px;">
-        <form [formGroup]="formData">
+  </div>
 
-          <div class="row ">
-            <div class="col">
-              <label class="txt-label" for="">Quyết định số:</label>
-              <input type="text" placeholder="Mã số quyết định" class="p-inputtext p-component p-element w-full"
-                formControlName="ma_quyhoach">
-            </div>
-          </div>
-          <div class=" row mb-2">
+  <div class="container-scroll modal-body ovic-modal-body">
+    <div class="card" style="padding: 20px;">
+      <form [formGroup]="formData">
 
-            <div class="col">
-              <label class="txt-label" for="">Quyết định Quy hoạch:</label>
-              <input type="text" pInputText placeholder="Quyết định Quy hoạch"
-                class="p-inputtext p-component p-element w-full" formControlName="ten_quyhoach">
-            </div>
+        <div class="row ">
+          <div class="col">
+            <label class="txt-label" for="">Quyết định số:</label>
+            <input type="text" placeholder="Mã số quyết định" class="p-inputtext p-component p-element w-full"
+              formControlName="ma_quyhoach">
           </div>
-          <div class=" row mb-2">
-            <div class="col">
-              <label class="txt-label" for="">Nội dung:</label>
-              <!-- <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"
-                class="p-inputtext p-component p-element w-full" type="text" placeholder="Nội dung"
-                formControlName="noidung_quyhoach"></textarea> -->
+        </div>
+        <div class=" row mb-2">
 
-              <textarea class="p-inputtextarea p-inputtext p-component p-element w-full" [rows]="5" [cols]="30"
-                formControlName="noidung_quyhoach"></textarea>
-            </div>
+          <div class="col">
+            <label class="txt-label" for="">Quyết định Quy hoạch:</label>
+            <input type="text" pInputText placeholder="Quyết định Quy hoạch"
+              class="p-inputtext p-component p-element w-full" formControlName="ten_quyhoach">
           </div>
-          <div class="row flex">
-            <div class="col">
-              <label class="txt-label" for="">Người ký:</label>
-              <input type="text" pInputText placeholder="Người ký" class="p-inputtext p-component p-element w-full"
-                formControlName="nguoi_ky">
-            </div>
-            <div class="col">
-              <label class="txt-label" for="">Ngày ban hành:</label>
-              <input type="date" [style]="{'minWidth':'100%'}" pInputText formControlName="ngay_banhanh">
-            </div>
+        </div>
+        <div class=" row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Nội dung:</label>
+            <textarea class="p-inputtextarea p-inputtext p-component p-element w-full" [rows]="5" [cols]="30"
+              formControlName="noidung_quyhoach"></textarea>
           </div>
-          <div class="row mb-2">
-            <div class="col">
-              <label class="txt-label" for="">Nhiệm kỳ::</label>
-              <!-- <input type="text" pInputText placeholder="Nhiệm kỳ" class="p-inputtext p-component p-element w-full"
+        </div>
+        <div class="row flex">
+          <div class="col">
+            <label class="txt-label" for="">Người ký:</label>
+            <input type="text" pInputText placeholder="Người ký" class="p-inputtext p-component p-element w-full"
+              formControlName="nguoi_ky">
+          </div>
+          <div class="col">
+            <label class="txt-label" for="">Ngày ban hành:</label>
+            <input type="date" [style]="{'minWidth':'100%'}" pInputText formControlName="ngay_banhanh">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <label class="txt-label" for="">Nhiệm kỳ::</label>
+            <!-- <input type="text" pInputText placeholder="Nhiệm kỳ" class="p-inputtext p-component p-element w-full"
                 formControlName="nhiem_ky"> -->
-              <p-inputMask mask="9999 - 9999" placeholder="yyyy - yyyy" slotChar="yyyy - yyyy"
-                [style]="{'minWidth':'100%'}" formControlName="nhiem_ky"></p-inputMask>
-            </div>
-            <div class="col">
-              <label class="txt-label" for="">Đợt:</label>
-              <input type="text" pinputtext placeholder="Đợt" class="p-inputtext p-component p-element w-full"
-                formControlName="dot">
-            </div>
+            <p-inputMask mask="9999 - 9999" placeholder="yyyy - yyyy" slotChar="yyyy - yyyy"
+              [style]="{'minWidth':'100%'}" formControlName="nhiem_ky"></p-inputMask>
           </div>
-          <div class="row mb-2">
-            <label class="txt-label" for="">File quyết định:</label>
+          <div class="col">
+            <label class="txt-label" for="">Đợt:</label>
+            <input type="text" pinputtext placeholder="Đợt" class="p-inputtext p-component p-element w-full"
+              formControlName="dot">
           </div>
-          <div class="field form-name flex flex-column pb-1" style="flex: 1;">
-            <button (click)="myUploader()" class="btn btn-primary"><i class="pi pi-upload"></i> Upload</button>
-            <input class="d-none" #fileChooser type="file" multiple="true" (change)="fileChnages($event)">
-            <br>
-            <div class="onShowFile flex justify-content-between" *ngFor="let f of fileUploaded">
-              <div class="">
-                <label class="txt-label align-items-center">{{f.title}}</label>
-              </div>
-              <div class="inline">
-                <button pButton pRipple (click)="downloadFile(f)" type="button" icon="pi pi-download"
-                  class="p-button-rounded p-button-primary p-button-text"></button>
-                <button pButton pRipple type="button" icon="pi pi-times" (click)="deleteFile(f)"
-                  class="p-button-rounded p-button-danger p-button-text"></button>
-              </div>
+        </div>
+        <div class="row mb-2">
+          <label class="txt-label" for="">File quyết định:</label>
+        </div>
+        <div class="field form-name flex flex-column pb-1" style="flex: 1;">
+          <button (click)="myUploader()" class="btn btn-primary"><i class="pi pi-upload"></i> Upload</button>
+          <input class="d-none" #fileChooser type="file" multiple="true" (change)="fileChnages($event)">
+          <div class="onShowFile flex justify-content-between" *ngFor="let f of fileUploaded">
+            <div class="">
+              <label class="txt-label align-items-center">{{f.title}}</label>
+            </div>
+            <div class="inline">
+              <button pButton pRipple (click)="downloadFile(f)" type="button" icon="pi pi-download"
+                class="p-button-rounded p-button-primary p-button-text"></button>
+              <button pButton pRipple type="button" icon="pi pi-times" (click)="deleteFile(f)"
+                class="p-button-rounded p-button-danger p-button-text"></button>
             </div>
           </div>
-        </form>
-      </div>
-      <div class="flex p-1">
-        <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
-          class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
-        <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
-          (click)="btnCancel()"></button>
-      </div>
+        </div>
+      </form>
+    </div>
+    <div class="flex ml-3 mt-3 ">
+      <button (click)="updateForm()" [disabled]="formData.invalid" pButton pRipple
+        class=" mr-2 max-w-10rem p-button-success" icon="pi pi-save" label="Xác nhận"></button>
+      <button pRipple pButton type="button" class="p-button p-button-danger" icon="pi pi-times"
+        (click)="btnCancel()"></button>
     </div>
   </div>
+
 </ng-template>

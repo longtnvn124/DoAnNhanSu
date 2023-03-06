@@ -27,24 +27,15 @@
           <td class="text-center">{{nsQuaTrinhDaoTao.hoc_vi}}</td>
           <td class="text-center">{{nsQuaTrinhDaoTao.ketqua}}</td>
           <td class="text-center">
-            <ng-container *ngIf="permission.isExpert; else showLable">
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
-                (click)="editQtDaoTao(nsQuaTrinhDaoTao)">
-              </button>
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
-                (click)="deleteDanhhieu(nsQuaTrinhDaoTao)"></button>
-            </ng-container>
-            <ng-template #showLable>
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary" icon="pi pi-file-edit"
-               >
-              </button>
-              <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-secondary" icon="pi pi-trash"
-                ></button>
-            </ng-template>
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+              (click)="editQtDaoTao(nsQuaTrinhDaoTao)">
+            </button>
+            <button pRipple pButton type="button"
+              class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+              (click)="deleteDanhhieu(nsQuaTrinhDaoTao)"></button>
+
+
           </td>
         </tr>
       </ng-template>
