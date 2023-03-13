@@ -1,15 +1,14 @@
 <div class="p-card intro-y">
-  <div class="danh-sach-ho-so__head p-3 flex flex-wrap justify-content-between">
-    <div>
-      <!-- <input type="text" [(ngModel)]="search" placeholder="Tìm kiếm" (ngModelChange)="searchData()"
-        class="p-inputtext p-component p-element" /> -->
-      <!-- <p-button label="Thêm nhân sự " styleClass="p-button-link" icon="pi pi-user-plus" (click)="btnAdd()"></p-button> -->
-
+  <div class="p-3 flex justify-content-center align-items-center">
+    <div class="w-50">
+      <span class="p-input-icon-left flex">
+        <i class="pi pi-search"></i>
+        <input type="text" [(ngModel)]="search_ip.search" pInputText placeholder="Tìm kiếm" class="w-100" (ngModelChange)="searchData()">
+      </span>
     </div>
-
   </div>
   <div class="danh-sach-ho-so__body" id="excel-table">
-    <p-table [value]="dataNhansu" [rows]="10" [paginator]="true">
+    <p-table [value]="dataNhansu" [rows]="10" [paginator]="true" styleClass="p-datatable-gridlines">
       <ng-template pTemplate="header">
         <tr>
           <th class="text-center">STT</th>
@@ -92,11 +91,11 @@
 
             <td class="text-center">
               <button pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-primary"
-                icon="pi pi-file-edit" (click)="btnEdit(data_CheDo_NghiPhep)"></button>
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-file-edit"
+                (click)="btnEdit(data_CheDo_NghiPhep)"></button>
               <button *ngIf="permission.canDelete" pRipple pButton type="button"
-                class="p-button p-button-icon p-button-text p-button-rounded p-button-danger"
-                icon="pi pi-trash" (click)="btnDelete(data_CheDo_NghiPhep)"></button>
+                class="p-button p-button-icon p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"
+                (click)="btnDelete(data_CheDo_NghiPhep)"></button>
             </td>
           </tr>
         </ng-template>

@@ -77,7 +77,7 @@ export class DanhmucPhongbanComponent implements OnInit {
     })
   }
   changeInputMode(formType: 'add' | 'edit', object: DmPhongban | null = null) {
-    this.formState.formTitle = formType === 'add' ? 'Thêm Phòng ban' : 'Cập nhật Phong ban';
+    this.formState.formTitle = formType === 'add' ? 'Thêm Phòng ban' : 'Cập nhật Phòng ban';
     this.notificationService.isProcessing(true);
     this.formState.formType = formType;
     if (formType === 'add') {

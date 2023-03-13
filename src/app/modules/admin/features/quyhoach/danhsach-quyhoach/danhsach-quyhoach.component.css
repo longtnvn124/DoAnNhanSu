@@ -1,12 +1,81 @@
-.container-scroll{
-  width:100%;
-  height:850px;
-  overflow-x:hidden;
-  overflow-y:auto;
+.container-scroll {
+  width: 100%;
+  height: 850px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-@media (min-width: 740px) and (max-width:1023px){
-  .container-scroll{
+@media (min-width: 740px) and (max-width:1023px) {
+  .container-scroll {
     max-height: 450px;
   }
+}
+
+/* updatecode */
+
+.form-label {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.dropzone {
+  border: 2px dashed #dee2e6;
+  background: var(--ct-input-bg);
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 150px;
+  padding: 20px;
+}
+
+#tenproject:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0056b3 !important;
+}
+
+#tenproject {
+  word-break: break-all;
+}
+
+.card_list {
+  top: 0;
+  position: relative;
+  width: 100%;
+  padding-right: 7px;
+  padding-left: 7px;
+  transition: all 0.25s ease-out;
+}
+
+.card_list:hover {
+  top: -12px;
+  box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+}
+
+@media (min-width: 576px) {
+  .card_list {
+    flex: 0 0 100%;
+    max-width: 20%;
+  }
+}
+
+
+.set-width {
+  width: 20%;
+
+}
+
+.headding-card{
+  display: -webkit-box;
+  height: 60px;
+  line-height: 1.5;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
+.text_hover:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0056b3 !important;
 }

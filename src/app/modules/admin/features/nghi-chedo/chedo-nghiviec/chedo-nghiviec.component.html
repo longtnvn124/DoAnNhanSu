@@ -1,11 +1,20 @@
 <div class="p-card intro-y">
+  <div class="p-3 flex justify-content-center align-items-center">
+    <div class="w-50">
+      <span class="p-input-icon-left flex">
+        <i class="pi pi-search"></i>
+        <input type="text" [(ngModel)]="search_ip.search" pInputText placeholder="Tìm kiếm" class="w-100"
+          (ngModelChange)="searchData()">
+      </span>
+    </div>
+  </div>
   <div class="danh-sach-ho-so__body" id="excel-table">
-    <p-table [value]="dataNhansu" [rows]="10" [paginator]="true">
+    <p-table [value]="dataNhansu" [rows]="10" [paginator]="true" styleClass="p-datatable-gridlines">
       <ng-template pTemplate="header">
         <tr>
           <th class="text-center">STT</th>
 
-          <th class="text-left" style="width: 10rem;">Họ và tên</th>
+          <th class="text-center" style="width: 10rem;">Họ và tên</th>
           <th class="text-center">Ngày sinh</th>
           <th class="text-center">Phòng ban</th>
           <th class="text-center">Chi tiết</th>

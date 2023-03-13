@@ -70,6 +70,11 @@ export class ChedoNghiphepComponent implements OnInit {
 
   private OBSERVER_SEARCH_DATA = new Subject<string>();
 
+  search_ip = {
+    search: '',
+    value: '',
+    key: ''
+  }
   constructor(
     private formBuilder: FormBuilder,
     private cdNghiphepService: CdNghiphepService,
@@ -77,11 +82,8 @@ export class ChedoNghiphepComponent implements OnInit {
     private fileService: FileService,
     private auth: AuthService,
     private nhansuService: NhansuService,
-
-
-
   ) {
-    this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
+
   }
   permission: NsPermissions = {
     isExpert: false,
@@ -90,6 +92,7 @@ export class ChedoNghiphepComponent implements OnInit {
     canDelete: false,
   }
   ngOnInit(): void {
+    this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
     this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'dans_lanh_dao', false);
     this.permission.canAdd = this.permission.isExpert;
     this.permission.canDelete = this.permission.isExpert;
@@ -98,12 +101,15 @@ export class ChedoNghiphepComponent implements OnInit {
     this.load_data_CdNghiPhep();
 
   }
+  searchData() {
+    this.OBSERVER_SEARCH_DATA.next(this.search_ip.search);
+  }
   loadData() {
     const filter = this.search ? { search: this.search.trim() } : null;
     this.notificationService.isProcessing(true);
     let index = 0;
     forkJoin([
-      this.cdNghiphepService.getdata_nhansu(),
+      this.nhansuService.list(this.search_ip),
       this.cdNghiphepService.list(filter),
     ]).subscribe({
       next: ([data, _count]) => {
@@ -174,8 +180,8 @@ export class ChedoNghiphepComponent implements OnInit {
       this.loadData();
     }
   }
-  load_data_nhansu(){
-    const param_ns = this.ma_ns_param ? { key : 'ma_ns' ,value: this.ma_ns_param.trim() } : null;
+  load_data_nhansu() {
+    const param_ns = this.ma_ns_param ? { key: 'ma_ns', value: this.ma_ns_param.trim() } : null;
     this.nhansuService.list(param_ns).subscribe({
       next: dt_nhansu_param => {
         this.dt_ds_nhansu = dt_nhansu_param;

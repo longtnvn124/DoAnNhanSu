@@ -77,21 +77,21 @@ export class DanhmucDanhhieuthiduaComponent implements OnInit {
     })
   }
   changeInputMode(formType: 'add' | 'edit', object: DmDanhhieu | null = null) {
-    this.formState.formTitle = formType === 'add' ? 'Thêm chức danh' : 'Cập nhật chức danh';
+    this.formState.formTitle = formType === 'add' ? 'Thêm danh hiệu thi đua' : 'Cập nhật danh hiệu thi đua';
     this.notificationService.isProcessing(true);
     this.formState.formType = formType;
     if (formType === 'add') {
       this.notificationService.isProcessing(false);
       this.formData.reset(
         {
-          ten_chucdanh: '',
+          ten_danhhieu: '',
         }
       )
     } else {
       this.notificationService.isProcessing(false);
       this.formState.object = object;
       this.formData.reset({
-        ten_chucdanh: object?.ten_danhhieu,
+        ten_danhhieu: object?.ten_danhhieu,
       })
     }
   }

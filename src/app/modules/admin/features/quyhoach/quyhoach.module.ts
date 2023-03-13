@@ -15,6 +15,10 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { PaginatorModule } from 'primeng/paginator';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { HttpClientModule } from '@angular/common/http';
     DropdownModule,
     InputTextareaModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    MatListModule,
+    MatIconModule,
+    PaginatorModule,
+    MatPaginatorModule
   ]
 })
 export class QuyhoachModule { }

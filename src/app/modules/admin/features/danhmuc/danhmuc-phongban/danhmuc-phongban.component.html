@@ -1,6 +1,6 @@
 <div class="p-card intro-x w-6 mx-auto">
   <div class="card-head p-3">
-    <button pButton pRipple class="p-button-outlined" label="Thêm chức danh" styleClass="p-button-link"
+    <button pButton pRipple class="p-button-outlined" label="Thêm phòng ban" styleClass="p-button-link"
       icon="pi pi-pencil" (click)="btnAdd()"></button>
   </div>
 
@@ -8,13 +8,13 @@
     <p-table [value]="dmPhongban" [rows]="10" [paginator]="true" style="cursor: pointer;">
       <ng-template pTemplate="header">
         <tr>
-          <th class="text-center">Dân tộc </th>
+          <th class="text-center">Phòng ban </th>
           <th class="text-center" style="width: 15rem">Thao tác</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-dmPhongban>
         <tr>
-          <td class="text-left pl-8">{{dmPhongban.ten_Phongban}}</td>
+          <td class="text-left pl-8">{{dmPhongban.ten_phongban}}</td>
           <td class="text-center" >
             <button pRipple pButton type="button"
               class="p-button p-button-icon p-button-text p-button-rounded p-button-primary" icon="pi pi-user-edit"
@@ -43,9 +43,9 @@
         <div class=" row mb-2">
 
           <div class="col">
-            <label class="txt-label" for="">Dân tộc:</label>
-            <input type="text" pinputtext="" placeholder="Dân tộc" class="p-inputtext p-component p-element w-full"
-              formControlName="ten_dantoc">
+            <label class="txt-label" for="">Phòng ban</label>
+            <input type="text" pinputtext="" placeholder="Phòng ban" class="p-inputtext p-component p-element w-full"
+              formControlName="ten_phongban">
           </div>
         </div>
 

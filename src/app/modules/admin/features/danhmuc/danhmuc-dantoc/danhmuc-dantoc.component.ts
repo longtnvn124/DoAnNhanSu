@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NotificationService } from '@core/services/notification.service';
 import { DmDantoc } from '@modules/shared/models/danh-muc';
 import { DmDantocService } from '@modules/shared/services/dm-dantoc.service';
+import { distinctUntilChanged, debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-danhmuc-dantoc',
@@ -12,6 +13,8 @@ import { DmDantocService } from '@modules/shared/services/dm-dantoc.service';
 export class DanhmucDantocComponent implements OnInit {
 
   @ViewChild('FormEdit') FormEdit: TemplateRef<any>;
+  private OBSERVER_SEARCH_DATA = new Subject<string>();
+
   search: string = '';
   dmDantoc: DmDantoc[];
   formState: {
@@ -37,6 +40,7 @@ export class DanhmucDantocComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
     this.loadData();
   }
 
@@ -54,7 +58,9 @@ export class DanhmucDantocComponent implements OnInit {
       }
     });
   }
-
+  searchData() {
+    this.OBSERVER_SEARCH_DATA.next(this.search);
+  }
 
   async btnDelete(dmDantoc: DmDantoc) {
     const xacNhanXoa = await this.notificationService.confirmDelete();

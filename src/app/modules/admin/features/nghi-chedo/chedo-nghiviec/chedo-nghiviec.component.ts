@@ -33,7 +33,11 @@ export class ChedoNghiviecComponent implements OnInit {
 
   data_CheDo_NghiViec: CheDo_NghiViec[];
 
-
+  search_ip = {
+    search: '',
+    value: '',
+    key: ''
+  }
   formState: {
     formType: 'add' | 'edit',
     showForm: boolean,
@@ -67,12 +71,11 @@ export class ChedoNghiviecComponent implements OnInit {
     private notificationService: NotificationService,
     private fileService: FileService,
     private auth: AuthService,
-    private nhansuService : NhansuService
+    private nhansuService: NhansuService
 
 
-  ) {
-    this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
-  }
+  ) { }
+
   permission: NsPermissions = {
     isExpert: false,
     canAdd: false,
@@ -81,10 +84,12 @@ export class ChedoNghiviecComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role ==='dans_lanh_dao',false);
-    this.permission.canAdd  = this.permission.isExpert;
-    this.permission.canEdit  = this.permission.isExpert;
-    this.permission.canDelete  = this.permission.isExpert;
+    this.OBSERVER_SEARCH_DATA.asObservable().pipe(distinctUntilChanged(), debounceTime(500)).subscribe(() => this.loadData());
+
+    this.permission.isExpert = this.auth.roles.reduce((isExpert, role) => isExpert || role === 'dans_lanh_dao', false);
+    this.permission.canAdd = this.permission.isExpert;
+    this.permission.canEdit = this.permission.isExpert;
+    this.permission.canDelete = this.permission.isExpert;
     this.loadData();
     this.load_data_CdNghiPhep();
 
@@ -94,7 +99,7 @@ export class ChedoNghiviecComponent implements OnInit {
     this.notificationService.isProcessing(true);
     let index = 0;
     forkJoin([
-      this.cdNghiviecService.getdata_nhansu(),
+      this.nhansuService.list(this.search_ip),
       this.cdNghiviecService.list(filter),
     ]).subscribe({
       next: ([data, _count]) => {
@@ -106,8 +111,6 @@ export class ChedoNghiviecComponent implements OnInit {
             return r;
           }
         )
-        console.log(data);
-        console.log(_count);
 
       },
       error: () => {
@@ -117,7 +120,9 @@ export class ChedoNghiviecComponent implements OnInit {
     })
 
   }
-
+  searchData() {
+    this.OBSERVER_SEARCH_DATA.next(this.search_ip.search);
+  }
 
   async btnDelete(cheDo_NghiViec: CheDo_NghiViec) {
     const xacNhanXoa = await this.notificationService.confirmDelete();
@@ -170,7 +175,7 @@ export class ChedoNghiviecComponent implements OnInit {
     }
   }
   load_data_nhansu() {
-    const param_ns = this.ma_ns_param ? { key : 'ma_ns'  , value: this.ma_ns_param.trim() } : null;
+    const param_ns = this.ma_ns_param ? { key: 'ma_ns', value: this.ma_ns_param.trim() } : null;
     this.nhansuService.list(param_ns).subscribe({
       next: dt_nhansu_param => {
         this.dt_ds_nhansu = dt_nhansu_param;

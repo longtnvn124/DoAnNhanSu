@@ -24,10 +24,13 @@ export class DanhsachQuyhoachComponent implements OnInit {
   uploadedFiles: any[] = [];
 
   ma_ns_auto: string = '';
-
   search: string = '';
+  pageIndex = 0;
+  pageSize = 4;
+  pageNumber = 1;
 
   danhSachQuyHoach: DanhSachQuyHoach[];
+  danhSachQuyHoach_bu: DanhSachQuyHoach[];
 
   formState: {
     formType: 'add' | 'edit',
@@ -90,8 +93,13 @@ export class DanhsachQuyhoachComponent implements OnInit {
     this.notificationService.isProcessing(true);
     this.qhDanhsachService.list(1, filter).subscribe({
       next: danhSachquyhoach => {
-        this.danhSachQuyHoach = danhSachquyhoach;
         this.notificationService.isProcessing(false);
+        this.danhSachQuyHoach = danhSachquyhoach;
+        this.pageNumber = danhSachquyhoach.length;
+        this.pageIndex = 0;
+        this.danhSachQuyHoach_bu=[];
+        this.danhSachQuyHoach_bu = [...this.danhSachQuyHoach].splice(this.pageIndex, this.pageSize)
+
       },
       error: () => {
         this.notificationService.isProcessing(false);
@@ -282,9 +290,14 @@ export class DanhsachQuyhoachComponent implements OnInit {
   ]
   exportExcel() {
     this.exportExcelService.exportAsExcelFile('Danh sách Quy hoạch', '', this.columns,
-    this.danhSachQuyHoach.map(({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky }) => ({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky })), 'dsQuyHoach', 'Sheet1');
+      this.danhSachQuyHoach.map(({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky }) => ({ id, ma_quyhoach, ten_quyhoach, noidung_quyhoach, nguoi_ky, ngay_banhanh, dot, nhiem_ky })), 'dsQuyHoach', 'Sheet1');
   }
+  // new pagginner;
+  changesPage(event) {
+    this.danhSachQuyHoach_bu = [];
 
+    this.danhSachQuyHoach_bu = [...this.danhSachQuyHoach].splice(event.pageIndex * this.pageSize, this.pageSize)
+  }
 
 
 }
